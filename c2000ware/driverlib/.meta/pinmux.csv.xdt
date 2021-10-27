@@ -1,0 +1,67 @@
+%%{
+var deviceData = system.deviceData
+let pinmuxContent = system.getTemplate("/driverlib/pinmux/pinmux.board.c.xdt");
+var replaceCommaWith = "/"
+//console.log(deviceData)
+var output = ""
+for (var devicePinIndex in deviceData.devicePins){
+    var devicePin = deviceData.devicePins[devicePinIndex]
+    if (!isNaN(devicePin.designSignalName)){
+        continue
+    }
+    output += devicePin.name.replace(/,/g, replaceCommaWith)
+    output += "," + devicePin.designSignalName.replace(/,/g, replaceCommaWith)
+    if (devicePin.mux == null)
+    {
+        output += "," + devicePin.designSignalName.replace(/,/g, replaceCommaWith) + "\n"
+        continue
+    }
+    var muxSetting = devicePin.mux.muxSetting
+    if (muxSetting.length > 0)
+    {        
+        if (devicePin.designSignalName.includes("GPIO"))
+        {
+            output += "," + pinmuxContent("function", devicePin.designSignalName).replace("\n", "").replace("\r", "").replace(/,/g, replaceCommaWith)
+        }
+        else
+        {
+            for (var muxSettingIndex in muxSetting)
+            {
+                var muxSettingMode = muxSetting[muxSettingIndex].mode;
+                if ("ALT" == muxSettingMode && muxSetting[muxSettingIndex].peripheralPin.name.includes("AIO"))
+                {
+                    var muxSettingName = muxSetting[muxSettingIndex].peripheralPin.name;
+                    output += "," + pinmuxContent("function", muxSettingName).replace("\n", "").replace("\r", "").replace(/,/g, replaceCommaWith)
+                    output += "," + muxSettingName.replace(/,/g, replaceCommaWith)
+                }
+            }
+        }
+        for (var mode = 0; mode < 16; mode++)
+        {
+            var modeFound = false
+            for (var muxSettingIndex in muxSetting)
+            {
+                var muxSettingMode = muxSetting[muxSettingIndex].mode;
+                if (mode.toString() == muxSettingMode)
+                {
+                    modeFound = true
+                    var muxSettingName = muxSetting[muxSettingIndex].peripheralPin.name;
+                    output += "," + muxSettingName.replace(/,/g, replaceCommaWith)
+                }
+            }
+            if (!modeFound)
+            {
+                output += ","
+            }
+        }
+    }
+    else
+    {
+        output += "," + devicePin.designSignalName.replace(/,/g, replaceCommaWith)
+    }
+    output += "\n"
+}
+%%}
+All device pins and their pinmux options
+Pin,Name,Selected Mode,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+`output`

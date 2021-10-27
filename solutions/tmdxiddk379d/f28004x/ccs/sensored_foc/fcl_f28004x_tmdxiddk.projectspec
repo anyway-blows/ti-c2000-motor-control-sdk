@@ -1,0 +1,123 @@
+<projectSpec>
+  <project
+        name="fcl_f28004x_tmdxiddk"
+        device="Generic C28xx Device"
+        cgtVersion="20.2.2.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+
+    <configuration
+        name="F28004x_RAM"
+        compilerBuildOptions="-v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 -O4 --opt_for_speed=5 --fp_mode=relaxed
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+							-I${C2000WARE_DLIB_ROOT}
+							-I${SFRA_INSTALL_ROOT}/include/
+							-I${SFRA_INSTALL_ROOT}/gui/include/
+							-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/
+							-I${SDK_ROOT}/libraries/utilities/datalog/include/
+							-I${SDK_ROOT}/libraries/fcl/include -I${SDK_ROOT}/libraries/position_sensing/qep/include
+							-I${SDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/
+							-I${SDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/
+							-I${SDK_ROOT}/solutions/tmdxiddk379d/f28004x/include
+							-I${SDK_ROOT}/libraries/position_sensing/tformat/include
+							-I${SDK_ROOT}/libraries/observers/speed_observer/include
+							--define=_DEBUG --define=_DUAL_HEADERS --define=LARGE_MODEL 
+              -g --diag_warning=225 --diag_suppress=10063 
+              --quiet -k --asm_listing 
+              --gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x380
+							-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+							-I${C2000WARE_LIB_ROOT}/dsp/VCU/c28/lib
+							-I${SDK_ROOT}/libraries/position_sensing/tformat/lib
+							-lPM_tformat_lib_f28004x.lib
+							--define=CLA_C
+							--reread_libs
+							-llibc.a"
+		/>
+    <configuration
+        name="F28004x_FLASH"
+        compilerBuildOptions="-v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 -O4 --opt_for_speed=5 --fp_mode=relaxed
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+							-I${C2000WARE_DLIB_ROOT}
+							-I${SFRA_INSTALL_ROOT}/include/
+							-I${SFRA_INSTALL_ROOT}/gui/include/
+							-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/
+							-I${SDK_ROOT}/libraries/utilities/datalog/include/
+							-I${SDK_ROOT}/libraries/fcl/include -I${SDK_ROOT}/libraries/position_sensing/qep/include
+							-I${SDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/
+							-I${SDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/
+							-I${SDK_ROOT}/solutions/tmdxiddk379d/f28004x/include
+							-I${SDK_ROOT}/libraries/position_sensing/tformat/include
+							-I${SDK_ROOT}/libraries/observers/speed_observer/include
+							--define=_DEBUG --define=_FLASH --define=_DUAL_HEADERS --define=LARGE_MODEL 
+              -g --diag_warning=225 --diag_suppress=10063 
+              --quiet -k --asm_listing 
+              --gen_func_subsections=on  --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x380
+							-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+							-I${C2000WARE_LIB_ROOT}/dsp/VCU/c28/lib
+							-I${SDK_ROOT}/libraries/position_sensing/tformat/lib
+							-lPM_tformat_lib_f28004x.lib	
+							--define=CLA_C									
+							--reread_libs 
+							-llibc.a" 
+		/>
+
+    <pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f28004x" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f28004x/driverlib" scope="project" />
+    <pathVariable name="C2000WARE_LIB_ROOT" path="../../../../../c2000ware/libraries" scope="project" />
+    <pathVariable name="FCL_LIB_INSTALL_ROOT" path="../../../../../libraries/fcl/lib" scope="project" />
+    <pathVariable name="SFRA_INSTALL_ROOT" path="../../../../../libraries/sfra" scope="project" />
+    <pathVariable name="SDK_ROOT" path="../../../../.." scope="project" />
+
+	  <file action="link" path="SDK_ROOT/libraries/fcl/source/fcl_cla_code.cla" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/libraries/fcl/source/fcl_cpu_code.c" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/libraries/observers/speed_observer/source/speed_observer.c" targetDirectory="sources" />
+
+    <file action="link" path="SFRA_INSTALL_ROOT/lib/sfra.lib" targetDirectory="" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/debug/fcl_f28004x_tmdxiddk_vars.txt" targetDirectory="" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/debug/fcl_f28004x_tmdxiddk_graph1.graphProp" targetDirectory="" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/debug/fcl_f28004x_tmdxiddk_graph2.graphProp" targetDirectory="" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F280049C.ccxml" targetDirectory="" />
+
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/cmd/iddk_servo_28004x_flash_lnk.cmd" targetDirectory="src_device" applicableConfigurations="F28004x_FLASH" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/cmd/iddk_servo_28004x_ram_lnk.cmd" targetDirectory="src_device" applicableConfigurations="F28004x_RAM" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/cmd/f28004x_headers_nonbios_eabi.cmd" targetDirectory="src_device" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/device.c" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/f28004x_globalvariabledefs.c" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/f28004x_codestartbranch.asm" targetDirectory="src_device" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/adc.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cla.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/clb.c" targetDirectory="src_driver" applicableConfigurations="" />    
+    <file action="link" path="C2000WARE_DLIB_ROOT/cmpss.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cputimer.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/dac.c" targetDirectory="src_driver" applicableConfigurations="" />   
+    <file action="link" path="C2000WARE_DLIB_ROOT/eqep.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/flash.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/fsi.c" targetDirectory="src_driver" applicableConfigurations="" />    
+    <file action="link" path="C2000WARE_DLIB_ROOT/gpio.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/interrupt.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/memcfg.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sci.c" targetDirectory="src_driver" applicableConfigurations="" />
+	  <file action="link" path="C2000WARE_DLIB_ROOT/spi.c" targetDirectory="src_driver" applicableConfigurations="" />	
+    <file action="link" path="C2000WARE_DLIB_ROOT/sdfm.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sysctl.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/xbar.c" targetDirectory="src_driver" applicableConfigurations="" />
+
+    <file action="link" path="SDK_ROOT/libraries/utilities/datalog/source/dlog_4ch_f.c" targetDirectory="sources" />
+    <file action="link" path="SFRA_INSTALL_ROOT/gui/source/sfra_gui_scicomms_driverlib.c" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/source/fcl_f28004x_sfra_gui.c" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/source/fcl_f28004x_tmdxiddk.c" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/source/fcl_f28004x_tmdxiddk_cla_tasks.cla" targetDirectory="sources" />
+	<file action="link" path="SDK_ROOT/solutions/tmdxiddk379d/f28004x/source/fcl_tformat_f28004x_config.c" targetDirectory="sources" />
+
+  </project>
+</projectSpec>

@@ -1,0 +1,23 @@
+% let Common   = system.getScript("/driverlib/Common.js");
+% var module = system.modules['/driverlib/gpio.js'];
+void `module.peripheralName`_init(){
+%if (module != null)
+%{
+	%console.log()
+	% for(var i = 0; i < module.$instances.length; i++) {
+		% var instance = module.$instances[i];
+		
+	//`instance.$name` initialization
+		% if (instance.analogMode == "GPIO_ANALOG_ENABLED"){
+	GPIO_setAnalogMode(`instance.$name`, `instance.analogMode`);
+		%} else {
+	GPIO_setDirectionMode(`instance.$name`, `instance.direction`);
+	GPIO_setPadConfig(`instance.$name`, GPIO_PIN_TYPE_`instance.padConfig`);
+		% if (!["F28002x"].includes(Common.getDeviceName())) {
+	GPIO_setMasterCore(`instance.$name`, `instance.masterCore`);
+		% }
+	GPIO_setQualificationMode(`instance.$name`, `instance.qualMode`);
+		%}
+	%}
+%}
+}

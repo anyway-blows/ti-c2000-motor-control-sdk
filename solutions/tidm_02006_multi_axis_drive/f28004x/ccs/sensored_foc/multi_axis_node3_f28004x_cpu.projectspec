@@ -1,0 +1,293 @@
+<projectSpec>
+  <project
+        name="multi_axis_node3_f28004x_cpu"
+        device="TMS320F280049C"
+        cgtVersion="20.2.2.LTS"
+        outputFormat="ELF"		
+        launchWizard="False"	
+        linkerCommandFile=""
+        enableSysConfigTool="true"      
+        sysConfigBuildOptions="--product ${C2000WARE_ROOT}/.metadata/sdk.json --device F28004x --package F28004x_100PZ --part F28004x_100PZ"
+        >
+
+    <configuration name="F28004x_RAM"
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --cla_support=cla2 --tmu_support=tmu0 --vcu_support=vcu0 -O4 --opt_for_speed=5 --fp_mode=relaxed
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+			-I${C2000WARE_DLIB_ROOT}
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/
+		    -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/
+			-I${SFRA_INSTALL_ROOT}/include/
+			-I${SFRA_INSTALL_ROOT}/gui/include/
+			-I${MCSDK_ROOT}/libraries/utilities/datalog/include/ 
+			-I${MCSDK_ROOT}/libraries/fcl/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/qep/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/include 							
+			-I${MCSDK_ROOT}/libraries/observers/speed_observer/include			
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/ 
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/ 		
+			-I${MCSDK_ROOT}/solutions/common/sensored_foc/include/ 			
+			-I${MCSDK_ROOT}/solutions/tidm_02006_multi_axis_drive/f28004x/include/ 
+			--define=LARGE_MODEL 
+			--define=_DUAL_HEADERS --define=F28004x_DEVICE --define=_LAUNCHXL_F280049C
+			--define=BOOSTXL_3PHGAN             
+            --define=FSI_SKEW_COMP_ENABLE
+			--define=DLOG_ENABLE --define=DACOUT_EN --define=TEST_ENABLE
+			-g --diag_warning=225 --diag_suppress=10063
+			--quiet -k --asm_listing
+			--gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x180
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/lib
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/lib
+			-lrts2800_fpu64_fast_supplement.lib
+            -lrts2800_fpu32_fast_supplement_eabi.lib
+			-lPM_tformat_lib_f28004x.lib
+			--define=CLA_C
+			--reread_libs -llibc.a"
+        />
+    <configuration name="F28004x_FLASH"
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --cla_support=cla2 --tmu_support=tmu0 --vcu_support=vcu0 -O4 --opt_for_speed=5 --fp_mode=relaxed
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+			-I${C2000WARE_DLIB_ROOT}
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/
+			-I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/
+			-I${SFRA_INSTALL_ROOT}/include/
+			-I${SFRA_INSTALL_ROOT}/gui/include/
+			-I${MCSDK_ROOT}/libraries/utilities/datalog/include/ 
+			-I${MCSDK_ROOT}/libraries/fcl/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/qep/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/include 							
+			-I${MCSDK_ROOT}/libraries/observers/speed_observer/include				
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/ 
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/ 					
+			-I${MCSDK_ROOT}/solutions/common/sensored_foc/include/ 				
+			-I${MCSDK_ROOT}/solutions/tidm_02006_multi_axis_drive/f28004x/include/ 
+			--define=_FLASH --define=LARGE_MODEL  
+			--define=_DUAL_HEADERS --define=F28004x_DEVICE --define=_LAUNCHXL_F280049C
+			--define=BOOSTXL_3PHGAN             
+            --define=FSI_SKEW_COMP_ENABLE
+			--define=DLOG_ENABLE --define=DACOUT_EN --define=TEST_ENABLE
+			-g --diag_warning=225  --diag_suppress=10063
+			--quiet -k --asm_listing
+			--gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x180
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/lib
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/lib	
+            -lrts2800_fpu64_fast_supplement.lib
+            -lrts2800_fpu32_fast_supplement_eabi.lib
+			-lPM_tformat_lib_f28004x.lib
+			--define=CLA_C
+			--reread_libs -llibc.a"
+        />
+
+    <configuration  name="F28004x_CLB_RAM"
+		postBuildStep="mkdir &quot;${BuildDirectory}/simulation&quot;
+			;${CLB_SIM_COMPILER}/g++  -c -DCLB_SIM -I${SYSTEMC_INSTALL}/src 
+			-I${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/include/type2 
+			-I${PROJECT_ROOT} -I${CLB_SIM_COMPILER}/include 
+			-Og -g -gdwarf-3 -gstrict-dwarf -Wall -MMD -MP -MF${BuildDirectory}/simulation/clb_sim.d 
+			-MT${BuildDirectory}/simulation/clb_sim.o 
+			-I${BuildDirectory}/syscfg   -fno-threadsafe-statics  
+			-o${BuildDirectory}/simulation/clb_sim.o ${BuildDirectory}/syscfg/clb_sim.cpp
+			;${CLB_SIM_COMPILER}/g++ -DCLB_SIM -Og -g -gdwarf-3 -gstrict-dwarf -Wall -Wl,-Map,${BuildDirectory}/simulation/simulation_output.map 
+			-L${SYSTEMC_INSTALL}/build/src 
+			-o${BuildDirectory}/simulation/simulation_output.exe ${BuildDirectory}/simulation/clb_sim.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_FSM_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_HLC_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_LUT4_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_OutputLUT_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_counter_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_counter_top_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_FSM_top_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_LUT4_top_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_OutputLUT_top_SC_model.o  
+			-Wl,--start-group -lsystemc -Wl,--end-group;./simulation/simulation_output.exe
+			;${NODE_TOOL} &quot;${CLB_SYSCFG_ROOT}/dot_file_libraries/clbDotUtility.js&quot;  
+			&quot;${CLB_SYSCFG_ROOT}&quot; 
+			&quot;${BuildDirectory}/syscfg&quot; 
+			&quot;${BuildDirectory}/syscfg/clb.dot&quot;"			
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --cla_support=cla2 --tmu_support=tmu0 --vcu_support=vcu0 
+		    -O4 --opt_for_speed=5 --fp_mode=relaxed 
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+			-I${C2000WARE_DLIB_ROOT} 
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/ 
+		    -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/ 				
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/			
+			-I${SFRA_INSTALL_ROOT}/include/ 
+			-I${SFRA_INSTALL_ROOT}/gui/include/ 		
+			-I${MCSDK_ROOT}/libraries/utilities/datalog/include/ 
+			-I${MCSDK_ROOT}/libraries/fcl/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/qep/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/include 							
+			-I${MCSDK_ROOT}/libraries/observers/speed_observer/include			
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/ 
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/ 		
+			-I${MCSDK_ROOT}/solutions/common/sensored_foc/include/ 			
+			-I${MCSDK_ROOT}/solutions/tidm_02006_multi_axis_drive/f28004x/include/ 
+			--define=LARGE_MODEL  
+			--define=CLB_PWM_SYNC
+			--define=_DUAL_HEADERS --define=F28004x_DEVICE --define=_LAUNCHXL_F280049C
+			--define=BOOSTXL_3PHGAN             
+            --define=FSI_SKEW_COMP_ENABLE 
+			--define=DLOG_ENABLE --define=DACOUT_EN --define=TEST_ENABLE
+			-g --diag_warning=225 --diag_suppress=10063 
+			--quiet -k --asm_listing 
+			--gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x180 
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib 	
+            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/lib			
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/lib
+			-lrts2800_fpu64_fast_supplement.lib
+            -lrts2800_fpu32_fast_supplement_eabi.lib
+			-lPM_tformat_lib_f28004x.lib	
+			--define=CLA_C				
+			--reread_libs -llibc.a"
+        />
+
+    <configuration name="F28004x_CLB_FLASH"
+		postBuildStep="mkdir &quot;${BuildDirectory}/simulation&quot;
+			;${CLB_SIM_COMPILER}/g++  -c -DCLB_SIM -I${SYSTEMC_INSTALL}/src 
+			-I${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/include/type2 
+			-I${PROJECT_ROOT} -I${CLB_SIM_COMPILER}/include 
+			-Og -g -gdwarf-3 -gstrict-dwarf -Wall -MMD -MP -MF${BuildDirectory}/simulation/clb_sim.d 
+			-MT${BuildDirectory}/simulation/clb_sim.o 
+			-I${BuildDirectory}/syscfg   -fno-threadsafe-statics  
+			-o${BuildDirectory}/simulation/clb_sim.o ${BuildDirectory}/syscfg/clb_sim.cpp
+			;${CLB_SIM_COMPILER}/g++ -DCLB_SIM -Og -g -gdwarf-3 -gstrict-dwarf -Wall -Wl,-Map,${BuildDirectory}/simulation/simulation_output.map 
+			-L${SYSTEMC_INSTALL}/build/src 
+			-o${BuildDirectory}/simulation/simulation_output.exe ${BuildDirectory}/simulation/clb_sim.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_FSM_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_HLC_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_LUT4_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_OutputLUT_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_counter_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_counter_top_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_FSM_top_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_LUT4_top_SC_model.o 
+			${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/systemc/src/type2/CLB_OutputLUT_top_SC_model.o  
+			-Wl,--start-group -lsystemc -Wl,--end-group;./simulation/simulation_output.exe
+			;${NODE_TOOL} &quot;${CLB_SYSCFG_ROOT}/dot_file_libraries/clbDotUtility.js&quot;  
+			&quot;${CLB_SYSCFG_ROOT}&quot; 
+			&quot;${BuildDirectory}/syscfg&quot; 
+			&quot;${BuildDirectory}/syscfg/clb.dot&quot;"	
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --cla_support=cla2 --tmu_support=tmu0 --vcu_support=vcu0 -O4 --opt_for_speed=5 --fp_mode=relaxed
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+			-I${C2000WARE_DLIB_ROOT} 
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/ 
+			-I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/ 			
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/				
+			-I${SFRA_INSTALL_ROOT}/include/ 
+			-I${SFRA_INSTALL_ROOT}/gui/include/ 			
+			-I${MCSDK_ROOT}/libraries/utilities/datalog/include/ 
+			-I${MCSDK_ROOT}/libraries/fcl/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/qep/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/include 							
+			-I${MCSDK_ROOT}/libraries/observers/speed_observer/include				
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/ 
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/ 					
+			-I${MCSDK_ROOT}/solutions/common/sensored_foc/include/ 				
+			-I${MCSDK_ROOT}/solutions/tidm_02006_multi_axis_drive/f28004x/include/ 
+			--define=_FLASH --define=LARGE_MODEL  
+			--define=CLB_PWM_SYNC
+			--define=_DUAL_HEADERS --define=F28004x_DEVICE --define=_LAUNCHXL_F280049C
+			--define=BOOSTXL_3PHGAN             
+            --define=FSI_SKEW_COMP_ENABLE 
+			--define=DLOG_ENABLE --define=DACOUT_EN --define=TEST_ENABLE
+			-g --diag_warning=225  --diag_suppress=10063 
+			--quiet -k --asm_listing 
+			--gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x180 
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib 
+            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/lib				
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/lib	
+            -lrts2800_fpu64_fast_supplement.lib
+            -lrts2800_fpu32_fast_supplement_eabi.lib
+			-lPM_tformat_lib_f28004x.lib	
+			--define=CLA_C	
+			--reread_libs -llibc.a"
+        />
+
+    <pathVariable name="C2000WARE_ROOT" path="../../../../../c2000ware" scope="project" />
+    <pathVariable name="CLB_SYSCFG_ROOT" path="../../../../../c2000ware/utilities/clb_tool/clb_syscfg/" scope="project" />
+    <pathVariable name="SYSTEMC_INSTALL" path="../../../../../c2000ware/utilities/clb_tool/clb_syscfg/systemc-2.3.3" scope="project" />
+    <pathVariable name="CLB_SIM_COMPILER" path="C:/TDM-GCC-64/bin" scope="project" />
+
+    <pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f28004x" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f28004x/driverlib" scope="project" />
+    <pathVariable name="C2000WARE_LIB_ROOT" path="../../../../../c2000ware/libraries" scope="project" />   
+    <pathVariable name="SFRA_INSTALL_ROOT" path="../../../../../libraries/sfra" scope="project" />
+    <pathVariable name="MCSDK_ROOT" path="../../../../.." scope="project" />
+
+    <file action="link" path="SFRA_INSTALL_ROOT/lib/sfra.lib" targetDirectory="libraries" />
+    <file action="link" path="SFRA_INSTALL_ROOT/gui/source/sfra_gui_scicomms_driverlib.c" targetDirectory="libraries" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F280049C_LaunchPad.ccxml" targetDirectory="" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/device.c" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/f28004x_codestartbranch.asm" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/f28004x_globalvariabledefs.c" targetDirectory="src_device" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/adc.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cla.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/clb.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cmpss.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cputimer.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/dac.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/eqep.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/flash.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/fsi.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/gpio.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/interrupt.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/memcfg.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sci.c" targetDirectory="src_driver" applicableConfigurations="" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/spi.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sdfm.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sysctl.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/xbar.c" targetDirectory="src_driver" applicableConfigurations="" />
+
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_PI_C1.asm" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_PI_C4.asm" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_error.c" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/include/DCLF32.h" targetDirectory="libraries" />
+
+    <file action="link" path="MCSDK_ROOT/libraries/fcl/source/fcl_foc_cpu.c" targetDirectory="libraries" />
+    <file action="link" path="MCSDK_ROOT/libraries/fcl/include/fcl_foc_cpu.h" targetDirectory="libraries" />
+
+    <file action="link" path="MCSDK_ROOT/libraries/utilities/datalog/source/dlog_4ch_f.c" targetDirectory="libraries" />
+
+	<file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/debug/multi_axis_node_vars.txt" targetDirectory="" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/debug/multi_axis_graph1.graphProp" targetDirectory="" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/debug/multi_axis_graph2.graphProp" targetDirectory="" />
+
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/sfra_gui.c" targetDirectory="sources" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/fsi_optimal_delay.c" targetDirectory="sources" />
+	
+	<file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/multi_axis_node_main.c" targetDirectory="sources" />
+	<file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/multi_axis_node_drive.c" targetDirectory="sources" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/multi_axis_node_drive_tasks.cla" targetDirectory="sources" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/multi_axis_node_user.c" targetDirectory="sources" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/multi_axis_node_comms.c" targetDirectory="sources" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/multi_axis_node3.c" targetDirectory="sources" />
+
+	<file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/include/motor_drive_settings.h" targetDirectory="sources" />
+	<file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/include/motor_drive_user.h" targetDirectory="sources" />
+    <file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/include/multi_axis_node_hal.h" targetDirectory="sources" />
+
+	<file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/source/multi_axis_node_hal.c" targetDirectory="sources" />
+
+    <file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/cmd/multi_axis_node_f28004x_flash_lnk.cmd" targetDirectory="src_cmd" applicableConfigurations="F28004x_FLASH, F28004x_CLB_FLASH" />
+    <file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/cmd/multi_axis_node_f28004x_ram_lnk.cmd" targetDirectory="src_cmd" applicableConfigurations="F28004x_RAM, F28004x_CLB_RAM" />
+    <file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/cmd/f28004x_headers_nonbios_eabi.cmd" targetDirectory="src_cmd" />
+
+	<file action="link" path="MCSDK_ROOT/solutions/tidm_02006_multi_axis_drive/f28004x/source/multi_axis_node.syscfg" targetDirectory="" />
+
+  </project>
+</projectSpec>

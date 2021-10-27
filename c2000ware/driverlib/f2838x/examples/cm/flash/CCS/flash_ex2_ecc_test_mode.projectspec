@@ -1,0 +1,25 @@
+<projectSpec>
+  <project
+        name="flash_ex2_ecc_test_mode"
+        device="Cortex M.TMS320F28388D"
+        cgtVersion="20.2.1.LTS"
+        endianness="little"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <configuration name="CM_RAM" compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT}/device -I${C2000WARE_DLIB_ROOT} -I${FlashAPI_INCLUDE_ROOT} --define=DEBUG --float_support=none -mv7M4 -me --diag_warning=225 " linkerBuildOptions="-I${FlashAPI_LIB_ROOT} --stack_size=512 --heap_size=1024  --library=libc.a --define RAM" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../../driverlib/f2838x/driverlib_cm/" scope="project" />
+    <pathVariable name="FlashAPI_INCLUDE_ROOT" path="../../../../../../libraries/flash_api/f2838x/cm/include/FlashAPI/" scope="project" />
+    <pathVariable name="FlashAPI_LIB_ROOT" path="../../../../../../libraries/flash_api/f2838x/cm/lib/" scope="project" />
+    <file action="copy" path="../../../../../../libraries/flash_api/f2838x/cm/lib/F2838x_CM_FlashAPI.lib" targetDirectory="" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/driverlib_cm.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/cm.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/cm.c" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/targetConfigs/TMS320F28388D.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/cmd/2838x_RAM_lnk_cm.cmd" targetDirectory="" />
+    <file action="copy" path="../../../../../../driverlib/f2838x/driverlib_cm/" targetDirectory="device" excludeFromBuild="True" />
+    <file action="link" path="../../../../../../driverlib/f2838x/driverlib_cm/ccs/Debug/driverlib_cm.lib" targetDirectory="" />
+    <file action="copy" path="../flash_ex2_ecc_test_mode.c" targetDirectory="" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/startup_cm.c" targetDirectory="" />
+  </project>
+</projectSpec>

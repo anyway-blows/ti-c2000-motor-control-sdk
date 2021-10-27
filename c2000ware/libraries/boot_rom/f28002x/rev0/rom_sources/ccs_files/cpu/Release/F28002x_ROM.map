@@ -1,0 +1,1159 @@
+******************************************************************************
+             TMS320C2000 Linker PC v18.1.2                     
+******************************************************************************
+>> Linked Tue Jan 29 20:18:22 2019
+
+OUTPUT FILE NAME:   <F28002x_ROM.out>
+ENTRY POINT SYMBOL: "InitBoot"  address: 003f6023
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  CPU1_BROM_STATUS      00000002   00000002  00000002  00000000  RWIX
+  CPU1_BROM_BOOTMODE    00000004   00000002  00000002  00000000  RWIX
+  CPU1_PBIST_STATUS     00000006   00000002  00000002  00000000  RWIX
+  BSS                   00000008   00000020  0000001c  00000004  RWIX
+  STACK                 00000028   000000e0  000000e0  00000000  RWIX
+  FLASHAPI_EBSS         00000108   00000020  00000006  0000001a  RWIX
+  DCSM_BANK0_Z1         0005f000   00000030  00000024  0000000c  RWIX
+  DCSM_BANK0_Z2         0005f040   00000030  00000024  0000000c  RWIX
+  DCSM_COMMON           0005f070   00000010  00000010  00000000  RWIX
+  DCSM_COMMON2          0005f080   00000008  00000008  00000000  RWIX
+  Z1_SCC_ROM_SFW        003e8000   00002000  00000000  00002000  RWIX
+  Z1_SCC_ROM            003ea000   00000800  0000045f  000003a1  RWIX
+  Z2_SCC_ROM            003ea800   00000800  00000418  000003e8  RWIX
+  Z1_SECURE_ROM         003eb000   00004ff0  00000000  00004ff0  RWIX
+  RESERVED              003efff0   00000010  00000000  00000010  RWIX
+  ROM_SIGNATURE         003f0000   00000002  00000002  00000000  RWIX
+  AES_TABLES_TE0        003f0002   00000200  00000200  00000000  RWIX
+  AES_TABLES_TE1        003f0202   00000200  00000200  00000000  RWIX
+  AES_TABLES_TE2        003f0402   00000200  00000200  00000000  RWIX
+  AES_TABLES_TE3        003f0602   00000200  00000200  00000000  RWIX
+  AES_TABLES_TE4        003f0802   00000200  00000200  00000000  RWIX
+  AES_TABLES_TD0        003f0a02   00000200  00000200  00000000  RWIX
+  AES_TABLES_TD1        003f0c02   00000200  00000200  00000000  RWIX
+  AES_TABLES_TD2        003f0e02   00000200  00000200  00000000  RWIX
+  AES_TABLES_TD3        003f1002   00000200  00000200  00000000  RWIX
+  AES_TABLES_TD4        003f1202   00000200  00000200  00000000  RWIX
+  IQMATH                003f1402   0000166d  0000166d  00000000  RWIX
+  FPU32_FAST_TABLES     003f2a70   0000081a  0000081a  00000000  RWIX
+  FPU32_TWIDDLE_TABLES  003f328a   00000df8  00000df8  00000000  RWIX
+  BOOT                  003f4082   00003fd0  00002103  00001ecd  RWIX
+  INTERRUPT_HANDLERS    003f8052   000001ae  0000013c  00000072  RWIX
+  CPU_FAST_DATA_ROM     003f8200   00000100  00000000  00000100  RWIX
+  BOOT_PBIST_CHECKSUM   003f8300   00000042  00000042  00000000  RWIX
+  RESERVED_01           003f8342   0000003e  00000000  0000003e  RWIX
+  CHECKSUM              003f8380   00000042  00000042  00000000  RWIX
+  FLASHAPI_IN_ROM       003f83c2   00000b00  00000acd  00000033  RWIX
+  FLASHAPI_APITABLE     003f8ec2   00000028  00000028  00000000  RWIX
+  CRCTABLE_ROM          003f8eea   00000008  00000008  00000000  RWIX
+  VERSION               003f8ef2   00000002  00000002  00000000  RWIX
+  RESERVED_02           003f8ef4   000070ca  00000000  000070ca  RWIX
+  VECS                  003fffbe   00000042  00000042  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+BootStatusVariable 
+*          0    00000002    00000002     UNINITIALIZED
+                  00000002    00000002     cpubrom_boot.obj (BootStatusVariable)
+
+UserBootModeVariable 
+*          0    00000004    00000002     UNINITIALIZED
+                  00000004    00000002     cpubrom_boot.obj (UserBootModeVariable)
+
+PBISTStatusVariable 
+*          0    00000006    00000002     UNINITIALIZED
+                  00000006    00000002     cpubrom_boot.obj (PBISTStatusVariable)
+
+.bss       0    00000008    0000001c     UNINITIALIZED
+                  00000008    00000008     cpubrom_dcsm.obj (.bss)
+                  00000010    00000006     cpubrom_boot.obj (.bss)
+                  00000016    00000004     SCI_Boot.obj (.bss)
+                  0000001a    00000004     cpu1brom_pll.obj (.bss)
+                  0000001e    00000002     Parallel_Boot.obj (.bss)
+                  00000020    00000002     Shared_Boot.obj (.bss)
+                  00000022    00000002     cpubrom_interrupts.obj (.bss)
+
+.stack     0    00000028    000000e0     UNINITIALIZED
+                  00000028    000000e0     --HOLE--
+
+FLASHAPI_EBSS 
+*          0    00000108    00000006     UNINITIALIZED
+                  00000108    00000006     FlashAPI_F28002x_FPU32.lib : Init.obj (.bss)
+
+DcsmBank0Z1RegsFile 
+*          0    0005f000    00000024     UNINITIALIZED
+                  0005f000    00000024     f28002x_globalvariabledefs.obj (DcsmBank0Z1RegsFile)
+
+DcsmBank0Z2RegsFile 
+*          0    0005f040    00000024     UNINITIALIZED
+                  0005f040    00000024     f28002x_globalvariabledefs.obj (DcsmBank0Z2RegsFile)
+
+DcsmCommonRegsFile 
+*          0    0005f070    00000010     UNINITIALIZED
+                  0005f070    00000010     f28002x_globalvariabledefs.obj (DcsmCommonRegsFile)
+
+DcsmCommon2RegsFile 
+*          0    0005f080    00000008     UNINITIALIZED
+                  0005f080    00000008     f28002x_globalvariabledefs.obj (DcsmCommon2RegsFile)
+
+SCCLZ1     0    003ea000    0000045f     
+                  003ea000    00000434     ti_internal.obj (SCCLZ1)
+                  003ea434    0000002b     SafeCRCCalc.obj (SCCLZ1)
+
+SCCLZ2     0    003ea800    00000418     
+                  003ea800    000003ed     ti_internal.obj (SCCLZ2)
+                  003eabed    0000002b     SafeCRCCalc.obj (SCCLZ2)
+
+.test_signature1 
+*          0    003f0000    00000002     
+                  003f0000    00000002     cpubrom_Init_Boot.obj (.test_signature1)
+
+IQmathTables 
+*          0    003f1402    0000166d     
+                  003f1402    00000b50     IQmath_fpu32_eabi.lib : IQmathTables.obj (IQmathTables)
+                  003f1f52    0000009d                           : IQ20log.obj (IQmath)
+                  003f1fef    0000009d                           : IQ24log.obj (IQmath)
+                  003f208c    0000008c                           : IQNexpTable.obj (IQmathTablesRam)
+                  003f2118    0000007e                           : IQ15atan2.obj (IQmath)
+                  003f2196    0000007b                           : IQ20atan2.obj (IQmath)
+                  003f2211    0000007b                           : IQ24atan2.obj (IQmath)
+                  003f228c    0000007b                           : IQ29atan2.obj (IQmath)
+                  003f2307    00000060                           : IQ15mag.obj (IQmath)
+                  003f2367    00000060                           : IQ20mag.obj (IQmath)
+                  003f23c7    00000060                           : IQ24mag.obj (IQmath)
+                  003f2427    00000060                           : IQ29mag.obj (IQmath)
+                  003f2487    00000047                           : IQ15div.obj (IQmath)
+                  003f24ce    00000047                           : IQ20div.obj (IQmath)
+                  003f2515    00000047                           : IQ24div.obj (IQmath)
+                  003f255c    00000047                           : IQ29div.obj (IQmath)
+                  003f25a3    00000046                           : IQ15isqrt.obj (IQmath)
+                  003f25e9    00000045                           : IQ20isqrt.obj (IQmath)
+                  003f262e    00000045                           : IQ24isqrt.obj (IQmath)
+                  003f2673    00000045                           : IQ29isqrt.obj (IQmath)
+                  003f26b8    00000042                           : IQ15sqrt.obj (IQmath)
+                  003f26fa    00000042                           : IQ20sqrt.obj (IQmath)
+                  003f273c    00000042                           : IQ24sqrt.obj (IQmath)
+                  003f277e    00000042                           : IQ29sqrt.obj (IQmath)
+                  003f27c0    0000003d                           : IQ20exp.obj (IQmath)
+                  003f27fd    0000003d                           : IQ24exp.obj (IQmath)
+                  003f283a    00000032                           : IQ29sin.obj (IQmath)
+                  003f286c    00000031                           : IQ15sin.obj (IQmath)
+                  003f289d    00000031                           : IQ20sin.obj (IQmath)
+                  003f28ce    00000031                           : IQ24sin.obj (IQmath)
+                  003f28ff    00000030                           : IQ29cos.obj (IQmath)
+                  003f292f    0000002f                           : IQ15cos.obj (IQmath)
+                  003f295e    0000002f                           : IQ20cos.obj (IQmath)
+                  003f298d    0000002f                           : IQ24cos.obj (IQmath)
+                  003f29bc    00000029                           : IQ24sinPU.obj (IQmath)
+                  003f29e5    00000027                           : IQ24cosPU.obj (IQmath)
+                  003f2a0c    00000016                           : IQ24toF.obj (IQmath)
+                  003f2a22    00000016                           : IQ30toF.obj (IQmath)
+                  003f2a38    00000015                           : IQ29rsmpy.obj (IQmath)
+                  003f2a4d    00000015                           : IQ30rsmpy.obj (IQmath)
+                  003f2a62    0000000d                           : IQ24rmpy.obj (IQmath)
+
+FPUmathTables 
+*          0    003f2a70    0000081a     
+                  003f2a70    0000068c     FPUmathTables.obj (FPUmathTables)
+                  003f30fc    000000d0     logtable_f32.obj (FPUmathTables)
+                  003f31cc    000000be     exptable_f32.obj (FPUmathTables)
+
+FPUfftTables 
+*          0    003f328a    00000df8     
+                  003f328a    000007f8     RFFT_f32_twiddleFactors.obj (FPUfftTables)
+                  003f3a82    00000600     CFFT_f32_twiddleFactors.obj (FPUfftTables)
+
+.text      0    003f4082    00001866     
+                  003f4082    000006db     cpubrom_boot.obj (.text)
+                  003f475d    00000212     I2C_Boot.obj (.text)
+                  003f496f    0000020a     SPI_Boot.obj (.text)
+                  003f4b79    00000201     SelectMode_Boot.obj (.text)
+                  003f4d7a    000001e9     DCAN_Boot.obj (.text)
+                  003f4f63    000001c0     Parallel_Boot.obj (.text)
+                  003f5123    000001bd     SCI_Boot.obj (.text)
+                  003f52e0    000001a5     cpu1brom_pll.obj (.text)
+                  003f5485    00000152     cpu1brom_pbist.obj (.text)
+                  003f55d7    00000121     cpubrom_dcsm.obj (.text)
+                  003f56f8    0000004d     i2c.obj (.text:I2C_initMaster)
+                  003f5745    00000048     gpio.obj (.text:GPIO_setPadConfig)
+                  003f578d    00000046     Shared_Boot.obj (.text)
+                  003f57d3    00000037     gpio.obj (.text:GPIO_setPinConfig)
+                  003f580a    0000002c     gpio.obj (.text:GPIO_setQualificationMode)
+                  003f5836    00000029     spi.obj (.text:SPI_setConfig)
+                  003f585f    00000028     gpio.obj (.text:GPIO_setAnalogMode)
+                  003f5887    00000027     gpio.obj (.text:GPIO_setDirectionMode)
+                  003f58ae    00000025     spi.obj (.text:SPI_getInterruptStatus)
+                  003f58d3    0000000a     cpubrom_interrupts.obj (.text)
+                  003f58dd    00000008     cpubrom_checksum.obj (.text)
+                  003f58e5    00000003     cpubrom_utility_funcs.obj (.text)
+
+.CKSUMFUNCS 
+*          0    003f58e8    0000073b     
+                  003f58e8    0000073b     cpubrom_checksum.obj (.CKSUMFUNCS)
+
+.InitBoot 
+*          0    003f6023    0000009e     
+                  003f6023    0000009e     cpubrom_Init_Boot.obj (.InitBoot)
+
+.const     0    003f60c2    00000078     
+                  003f60c2    0000003c     cpubrom_dcsm.obj (.const:dcsm_default_keys_z1)
+                  003f60fe    0000003c     cpubrom_dcsm.obj (.const:dcsm_default_keys_z2)
+
+.cinit     0    003f613c    0000004c     
+                  003f613c    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  003f6140    00000004     (.cinit.BootStatusVariable.load) [load image, compression = zero_init]
+                  003f6144    00000004     (.cinit.DcsmBank0Z1RegsFile.load) [load image, compression = zero_init]
+                  003f6148    00000004     (.cinit.DcsmBank0Z2RegsFile.load) [load image, compression = zero_init]
+                  003f614c    00000004     (.cinit.DcsmCommon2RegsFile.load) [load image, compression = zero_init]
+                  003f6150    00000004     (.cinit.DcsmCommonRegsFile.load) [load image, compression = zero_init]
+                  003f6154    00000004     (.cinit.FLASHAPI_EBSS.load) [load image, compression = zero_init]
+                  003f6158    00000004     (.cinit.PBISTStatusVariable.load) [load image, compression = zero_init]
+                  003f615c    00000004     (.cinit.UserBootModeVariable.load) [load image, compression = zero_init]
+                  003f6160    00000002     (__TI_handler_table)
+                  003f6162    00000002     --HOLE-- [fill = 0]
+                  003f6164    00000024     (__TI_cinit_table)
+
+CPU1BROM_DEFAULT_HANDLER 
+*          0    003f8052    00000000     UNINITIALIZED
+
+CPU1BROM_PIE_MISMATCH_HANDLER 
+*          0    003f8052    00000048     
+                  003f8052    00000048     cpubrom_interrupts.obj (CPU1BROM_PIE_MISMATCH_HANDLER:retain)
+
+CPU1BROM_NMI_HANDLER 
+*          0    003f809a    000000c7     
+                  003f809a    000000c7     cpubrom_interrupts.obj (CPU1BROM_NMI_HANDLER:retain)
+
+CPU1BROM_ITRAP_HANDLER 
+*          0    003f8161    0000002d     
+                  003f8161    0000002d     cpubrom_interrupts.obj (CPU1BROM_ITRAP_HANDLER:retain)
+
+.PBIST_CKSUMLOC 
+*          0    003f8300    00000042     
+                  003f8300    00000042     cpubrom_checksum.obj (.PBIST_CKSUMLOC)
+
+.CKSUMLOC 
+*          0    003f8380    00000042     
+                  003f8380    00000042     cpubrom_checksum.obj (.CKSUMLOC)
+
+FLASHAPI_IN_ROM 
+*          0    003f83c2    00000acd     
+                  003f83c2    000002f6     FlashAPI_F28002x_FPU32.lib : FlashStateMachine.obj (.text:_Fapi_setupFlashStateMachine)
+                  003f86b8    000001ab                                : Program.obj (.text:Fapi_issueProgrammingCommand)
+                  003f8863    00000082                                : BlankCheck.obj (.text:Fapi_doBlankCheck)
+                  003f88e5    0000007e                                : Read.obj (.text:_Fapi_checkRegionForValue)
+                  003f8963    0000007c                                : Read.obj (.text:_Fapi_checkRegionForValueBy16bits)
+                  003f89df    00000070                                : Read.obj (.text:_Fapi_loopRegionForValue)
+                  003f8a4f    00000068                                : Psa.obj (.text:_Fapi_loopRegionForPsaValue)
+                  003f8ab7    00000058                                : Psa.obj (.text:_Fapi_checkRegionForPsaValue)
+                  003f8b0f    00000053                                : FlashStateMachine.obj (.text:_Fapi_issueFsmCommand)
+                  003f8b62    0000004a                                : Init.obj (.text:Fapi_initializeAPI)
+                  003f8bac    0000003d                                : FlashStateMachine.obj (.text:Fapi_remapEccAddress)
+                  003f8be9    00000039                                : Psa.obj (.text:Fapi_calculatePsa)
+                  003f8c22    00000038                                : Async.obj (.text:Fapi_issueAsyncCommandWithAddress)
+                  003f8c5a    00000033                                : FlashStateMachine.obj (.text:Fapi_issueFsmSuspendCommand)
+                  003f8c8d    00000031                                : FlashStateMachine.obj (.text:Fapi_setupBankSectorEnable)
+                  003f8cbe    0000002f                                : FlashStateMachine.obj (.text:Fapi_setActiveFlashBank)
+                  003f8ced    0000002f                                : Read.obj (.text:_Fapi_loopRegionForValueBy16bits)
+                  003f8d1c    0000002c                                : Utilities.obj (.text:Fapi_calculateFletcherChecksum)
+                  003f8d48    0000002a                                : Utilities.obj (.text:_Fapi_divideUnsignedLong)
+                  003f8d72    00000022                                : FlashStateMachine.obj (.text:Fapi_isAddressEcc)
+                  003f8d94    0000001f                                : Utilities.obj (.text:Fapi_calculateEcc)
+                  003f8db3    0000001e                                : Info.obj (.text:Fapi_getLibraryInfo)
+                  003f8dd1    0000001c                                : FlashStateMachine.obj (.text:_Fapi_setupSectorsForWrite)
+                  003f8ded    00000017                                : Async.obj (.text:Fapi_issueAsyncCommand)
+                  003f8e04    00000015                                : Read.obj (.text:Fapi_flushPipeline)
+                  003f8e19    00000015                                : Program.obj (.text:Fapi_issueProgrammingCommandForEccAddresses)
+                  003f8e2e    0000000f                                : Verify.obj (.text:Fapi_doVerify)
+                  003f8e3d    0000000f                                : Verify.obj (.text:Fapi_doVerifyBy16bits)
+                  003f8e4c    0000000e                                : FlashStateMachine.obj (.text:Fapi_checkFsmForReady)
+                  003f8e5a    0000000d                                : Psa.obj (.text:Fapi_doPsaVerify)
+                  003f8e67    0000000b                                : Utilities.obj (.text:_Fapi_calculateOtpChecksum)
+                  003f8e72    0000000b                                : Utilities.obj (.text:_Fapi_scaleCycleValues)
+                  003f8e7d    00000007                                : FlashStateMachine.obj (.text:Fapi_getFsmStatus)
+                  003f8e84    0000000b     rts2800_fpu32_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset)
+
+.romFlashApiTable 
+*          0    003f8ec2    00000028     
+                  003f8ec2    00000028     cpubrom_flash_api_table.obj (.romFlashApiTable)
+
+.bootrom_func 
+*          0    003f8eea    00000008     
+                  003f8eea    00000008     SafeCRCCalc.obj (.bootrom_func)
+
+.CPU1Version 
+*          0    003f8ef2    00000002     
+                  003f8ef2    00000002     cpubrom_Init_Boot.obj (.CPU1Version)
+
+.BootVecs 
+*          0    003fffbe    00000042     
+                  003fffbe    00000042     Vectors_Boot.obj (.BootVecs)
+
+AES_TABLE_TE0 
+*          0    003f0002    00000200     
+                  003f0002    00000200     aes_tables.obj (AES_TABLE_TE0)
+
+AES_TABLE_TE1 
+*          0    003f0202    00000200     
+                  003f0202    00000200     aes_tables.obj (AES_TABLE_TE1)
+
+AES_TABLE_TE2 
+*          0    003f0402    00000200     
+                  003f0402    00000200     aes_tables.obj (AES_TABLE_TE2)
+
+AES_TABLE_TE3 
+*          0    003f0602    00000200     
+                  003f0602    00000200     aes_tables.obj (AES_TABLE_TE3)
+
+AES_TABLE_TE4 
+*          0    003f0802    00000200     
+                  003f0802    00000200     aes_tables.obj (AES_TABLE_TE4)
+
+AES_TABLE_TD0 
+*          0    003f0a02    00000200     
+                  003f0a02    00000200     aes_tables.obj (AES_TABLE_TD0)
+
+AES_TABLE_TD1 
+*          0    003f0c02    00000200     
+                  003f0c02    00000200     aes_tables.obj (AES_TABLE_TD1)
+
+AES_TABLE_TD2 
+*          0    003f0e02    00000200     
+                  003f0e02    00000200     aes_tables.obj (AES_TABLE_TD2)
+
+AES_TABLE_TD3 
+*          0    003f1002    00000200     
+                  003f1002    00000200     aes_tables.obj (AES_TABLE_TD3)
+
+AES_TABLE_TD4 
+*          0    003f1202    00000200     
+                  003f1202    00000200     aes_tables.obj (AES_TABLE_TD4)
+
+MODULE SUMMARY
+
+       Module                           code    ro data   rw data
+       ------                           ----    -------   -------
+    .\bootROM\source\
+       cpubrom_checksum.obj             1859    132       0      
+       cpubrom_boot.obj                 1755    0         12     
+       I2C_Boot.obj                     530     0         0      
+       SPI_Boot.obj                     522     0         0      
+       SelectMode_Boot.obj              513     0         0      
+       DCAN_Boot.obj                    489     0         0      
+       Parallel_Boot.obj                448     0         2      
+       SCI_Boot.obj                     445     0         4      
+       cpu1brom_pll.obj                 421     0         4      
+       cpubrom_dcsm.obj                 289     120       8      
+       cpu1brom_pbist.obj               338     0         0      
+       cpubrom_interrupts.obj           326     0         2      
+       cpubrom_Init_Boot.obj            158     4         0      
+       Shared_Boot.obj                  70      0         2      
+       Vectors_Boot.obj                 66      0         0      
+       cpubrom_flash_api_table.obj      40      0         0      
+       cpubrom_utility_funcs.obj        3       0         0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           8272    256       34     
+                                                                 
+    .\bootROM\source\tables\
+       aes_tables.obj                   0       5120      0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           0       5120      0      
+                                                                 
+    .\bootROM\source\tables\fpu32_math\
+       FPUmathTables.obj                0       1676      0      
+       logtable_f32.obj                 0       208       0      
+       exptable_f32.obj                 0       190       0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           0       2074      0      
+                                                                 
+    .\bootROM\source\tables\fpu32_twiddle\
+       RFFT_f32_twiddleFactors.obj      0       2040      0      
+       CFFT_f32_twiddleFactors.obj      0       1536      0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           0       3576      0      
+                                                                 
+    .\driverlib\
+       gpio.obj                         250     0         0      
+       spi.obj                          78      0         0      
+       i2c.obj                          77      0         0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           405     0         0      
+                                                                 
+    .\secureROM\
+       ti_internal.obj                  2081    0         0      
+       f28002x_globalvariabledefs.obj   0       0         96     
+       SafeCRCCalc.obj                  86      8         0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           2167    8         96     
+                                                                 
+    C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/lib/rts2800_fpu32_eabi.lib
+       copy_zero_init.c.obj             11      0         0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           11      0         0      
+                                                                 
+    D:/Projects/Boot_ROM/bootrom_f28002x/F28002x_ROM_dev_PG1.0/F28002x_ROM/bootROM/source/IQmath/IQmath_fpu32_eabi.lib
+       IQmathTables.obj                 0       2896      0      
+       IQ20log.obj                      157     0         0      
+       IQ24log.obj                      157     0         0      
+       IQNexpTable.obj                  0       140       0      
+       IQ15atan2.obj                    126     0         0      
+       IQ20atan2.obj                    123     0         0      
+       IQ24atan2.obj                    123     0         0      
+       IQ29atan2.obj                    123     0         0      
+       IQ15mag.obj                      96      0         0      
+       IQ20mag.obj                      96      0         0      
+       IQ24mag.obj                      96      0         0      
+       IQ29mag.obj                      96      0         0      
+       IQ15div.obj                      71      0         0      
+       IQ20div.obj                      71      0         0      
+       IQ24div.obj                      71      0         0      
+       IQ29div.obj                      71      0         0      
+       IQ15isqrt.obj                    70      0         0      
+       IQ20isqrt.obj                    69      0         0      
+       IQ24isqrt.obj                    69      0         0      
+       IQ29isqrt.obj                    69      0         0      
+       IQ15sqrt.obj                     66      0         0      
+       IQ20sqrt.obj                     66      0         0      
+       IQ24sqrt.obj                     66      0         0      
+       IQ29sqrt.obj                     66      0         0      
+       IQ20exp.obj                      61      0         0      
+       IQ24exp.obj                      61      0         0      
+       IQ29sin.obj                      50      0         0      
+       IQ15sin.obj                      49      0         0      
+       IQ20sin.obj                      49      0         0      
+       IQ24sin.obj                      49      0         0      
+       IQ29cos.obj                      48      0         0      
+       IQ15cos.obj                      47      0         0      
+       IQ20cos.obj                      47      0         0      
+       IQ24cos.obj                      47      0         0      
+       IQ24sinPU.obj                    41      0         0      
+       IQ24cosPU.obj                    39      0         0      
+       IQ24toF.obj                      22      0         0      
+       IQ30toF.obj                      22      0         0      
+       IQ29rsmpy.obj                    21      0         0      
+       IQ30rsmpy.obj                    21      0         0      
+       IQ24rmpy.obj                     13      0         0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           2705    3036      0      
+                                                                 
+    D:/Projects/Boot_ROM/bootrom_f28002x/F28002x_ROM_dev_PG1.0/F28002x_ROM/bootROM/source/flash_api/FlashAPI_F28002x_FPU32.lib
+       FlashStateMachine.obj            1132    0         0      
+       Program.obj                      448     0         0      
+       Read.obj                         430     0         0      
+       Psa.obj                          262     0         0      
+       Utilities.obj                    139     0         0      
+       BlankCheck.obj                   130     0         0      
+       Init.obj                         74      0         6      
+       Async.obj                        79      0         0      
+       Info.obj                         30      0         0      
+       Verify.obj                       30      0         0      
+    +--+--------------------------------+-------+---------+---------+
+       Total:                           2754    0         6      
+                                                                 
+       Stack:                           0       0         224    
+       Linker Generated:                0       74        0      
+    +--+--------------------------------+-------+---------+---------+
+       Grand Total:                     16314   14144     360    
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 003f6164 records: 9, size/record: 4, table size: 36
+	.bss: load addr=003f613c, load size=00000004 bytes, run addr=00000008, run size=0000001c bytes, compression=zero_init
+	BootStatusVariable: load addr=003f6140, load size=00000004 bytes, run addr=00000002, run size=00000002 bytes, compression=zero_init
+	DcsmBank0Z1RegsFile: load addr=003f6144, load size=00000004 bytes, run addr=0005f000, run size=00000024 bytes, compression=zero_init
+	DcsmBank0Z2RegsFile: load addr=003f6148, load size=00000004 bytes, run addr=0005f040, run size=00000024 bytes, compression=zero_init
+	DcsmCommon2RegsFile: load addr=003f614c, load size=00000004 bytes, run addr=0005f080, run size=00000008 bytes, compression=zero_init
+	DcsmCommonRegsFile: load addr=003f6150, load size=00000004 bytes, run addr=0005f070, run size=00000010 bytes, compression=zero_init
+	FLASHAPI_EBSS: load addr=003f6154, load size=00000004 bytes, run addr=00000108, run size=00000006 bytes, compression=zero_init
+	PBISTStatusVariable: load addr=003f6158, load size=00000004 bytes, run addr=00000006, run size=00000002 bytes, compression=zero_init
+	UserBootModeVariable: load addr=003f615c, load size=00000004 bytes, run addr=00000004, run size=00000002 bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 003f6160 records: 1, size/record: 2, table size: 2
+	index: 0, handler: __TI_zero_init
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000002       0 (00000000)     CPU1BROM_bootStatus
+00000004       0 (00000000)     CPU1BROM_bootMode
+00000006       0 (00000000)     CPU1BROM_pbistStatus
+00000008       0 (00000000)     z1_key1
+0000000a       0 (00000000)     z2_key1
+0000000c       0 (00000000)     Z2_ZSB
+0000000e       0 (00000000)     Z1_ZSB
+00000010       0 (00000000)     CPU1BROM_nmiStatus
+00000012       0 (00000000)     CPU1BROM_flashSingleBitError_lowAddress
+00000014       0 (00000000)     CPU1BROM_flashSingleBitError_highAddress
+00000016       0 (00000000)     SCI_gpioTx
+00000018       0 (00000000)     SCI_gpioTxPinConfig
+00000020       0 (00000000)     GetWordData
+00000022       0 (00000000)     CPU1BROM_itrapAddress
+
+00000108       4 (00000100)     Fapi_GlobalInit
+
+0005f000    17c0 (0005f000)     DcsmBank0Z1Regs
+
+0005f040    17c1 (0005f040)     DcsmBank0Z2Regs
+0005f070    17c1 (0005f040)     DcsmCommonRegs
+
+0005f080    17c2 (0005f080)     DcsmCommon2Regs
+
+003f0002    fc00 (003f0000)     Te0
+
+003f0202    fc08 (003f0200)     Te1
+
+003f0402    fc10 (003f0400)     Te2
+
+003f0602    fc18 (003f0600)     Te3
+
+003f0802    fc20 (003f0800)     Te4
+
+003f0a02    fc28 (003f0a00)     Td0
+
+003f0c02    fc30 (003f0c00)     Td1
+
+003f0e02    fc38 (003f0e00)     Td2
+
+003f1002    fc40 (003f1000)     Td3
+
+003f1202    fc48 (003f1200)     Td4
+
+003f2a70    fca9 (003f2a40)     FPU32sinTable
+003f2a70    fca9 (003f2a40)     FPUsinTable
+
+003f2b70    fcad (003f2b40)     FPU32cosTable
+003f2b70    fcad (003f2b40)     FPUcosTable
+
+003f2e70    fcb9 (003f2e40)     FPU32sinTableEnd
+003f2e70    fcb9 (003f2e40)     FPUsinTableEnd
+
+003f2f72    fcbd (003f2f40)     FPU32atan2HalfPITable
+003f2f72    fcbd (003f2f40)     FPU32cosTableEnd
+003f2f72    fcbd (003f2f40)     FPUatan2HalfPITable
+003f2f72    fcbd (003f2f40)     FPUcosTableEnd
+003f2f76    fcbd (003f2f40)     FPU32atan2Table
+003f2f76    fcbd (003f2f40)     FPUatan2Table
+
+003f30fc    fcc3 (003f30c0)     FPU32LOG2
+003f30fc    fcc3 (003f30c0)     FPU32atan2TableEnd
+003f30fc    fcc3 (003f30c0)     FPUatan2TableEnd
+003f30fe    fcc3 (003f30c0)     FPU32INVLOG10
+
+003f3100    fcc4 (003f3100)     FPU32EXPBIAS
+003f3102    fcc4 (003f3100)     FPU32LOG_TABLE_MASK1
+003f3104    fcc4 (003f3100)     FPU32LOG_TABLE_MASK2
+003f3106    fcc4 (003f3100)     FPU32logTable
+
+003f31cc    fcc7 (003f31c0)     FPU32expTableCoeff
+003f31cc    fcc7 (003f31c0)     FPU32logTableEnd
+003f31d8    fcc7 (003f31c0)     FPU32expTable
+003f31d8    fcc7 (003f31c0)     FPU32expTableCoeffEnd
+
+003f328a    fcca (003f3280)     FPU32RFFTtwiddleFactors
+003f328a    fcca (003f3280)     FPU32expTableEnd
+003f328a    fcca (003f3280)     RFFT_f32_twiddleFactors
+
+003f3a82    fcea (003f3a80)     CFFT_f32_twiddleFactors
+003f3a82    fcea (003f3a80)     FPU32CFFTtwiddleFactors
+
+003f60c2    fd83 (003f60c0)     dcsm_default_keys_z1
+003f60fe    fd83 (003f60c0)     dcsm_default_keys_z2
+
+003f8300    fe0c (003f8300)     pbist_csum_rom
+
+003f8380    fe0e (003f8380)     csum_rom
+
+003f8ef2    fe3b (003f8ec0)     cpu1brom_version
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                                                
+----  -------   ----                                                
+0     003f543a  BROMDCC_verifySingleShotClock                       
+0     003f3a82  CFFT_f32_twiddleFactors                             
+0     00000004  CPU1BROM_bootMode                                   
+0     00000002  CPU1BROM_bootStatus                                 
+0     003f416b  CPU1BROM_configureAPLL                              
+0     003f4ba2  CPU1BROM_decodeBootPins                             
+0     00000014  CPU1BROM_flashSingleBitError_highAddress            
+0     00000012  CPU1BROM_flashSingleBitError_lowAddress             
+0     003f4d0f  CPU1BROM_getEmulationBootMode                       
+0     003f4c69  CPU1BROM_getStandaloneBootMode                      
+0     003f55d7  CPU1BROM_initDCSM                                   
+0     00000022  CPU1BROM_itrapAddress                               
+0     003f8161  CPU1BROM_itrapISR                                   
+0     003f809a  CPU1BROM_nmiHandler                                 
+0     00000010  CPU1BROM_nmiStatus                                  
+0     00000006  CPU1BROM_pbistStatus                                
+0     003f4264  CPU1BROM_performDeviceConfiguration                 
+0     003f8052  CPU1BROM_pieVectorMismatchHandler                   
+0     003f4d63  CPU1BROM_selectBootMode                             
+0     003f4148  CPU1BROM_setIntOscTrims                             
+0     003f4112  CPU1BROM_setPMMTrims                                
+0     003f41c8  CPU1BROM_setupDeviceSystems                         
+0     003f43c0  CPU1BROM_startSystemBoot                            
+0     003f53db  CPU1BROM_switchToPLL                                
+0     003f53ad  CPU1BROM_triggerSysPLLLock                          
+0     003ea434  CRCCalcZ1                                           
+0     003eabed  CRCCalcZ2                                           
+0     003f578d  CopyData                                            
+0     003f4dac  DCAN_Boot                                           
+0     0005f000  DcsmBank0Z1Regs                                     
+0     0005f040  DcsmBank0Z2Regs                                     
+0     0005f080  DcsmCommon2Regs                                     
+0     0005f070  DcsmCommonRegs                                      
+0     003f60a9  ExitBoot                                            
+0     003f60a7  ExitPBISTLoc                                        
+0     003f3a82  FPU32CFFTtwiddleFactors                             
+0     003f3100  FPU32EXPBIAS                                        
+0     003f30fe  FPU32INVLOG10                                       
+0     003f30fc  FPU32LOG2                                           
+0     003f3102  FPU32LOG_TABLE_MASK1                                
+0     003f3104  FPU32LOG_TABLE_MASK2                                
+0     003f328a  FPU32RFFTtwiddleFactors                             
+0     003f2f72  FPU32atan2HalfPITable                               
+0     003f2f76  FPU32atan2Table                                     
+0     003f30fc  FPU32atan2TableEnd                                  
+0     003f2b70  FPU32cosTable                                       
+0     003f2f72  FPU32cosTableEnd                                    
+0     003f31d8  FPU32expTable                                       
+0     003f31cc  FPU32expTableCoeff                                  
+0     003f31d8  FPU32expTableCoeffEnd                               
+0     003f328a  FPU32expTableEnd                                    
+0     003f3106  FPU32logTable                                       
+0     003f31cc  FPU32logTableEnd                                    
+0     003f2a70  FPU32sinTable                                       
+0     003f2e70  FPU32sinTableEnd                                    
+0     003f2f72  FPUatan2HalfPITable                                 
+0     003f2f76  FPUatan2Table                                       
+0     003f30fc  FPUatan2TableEnd                                    
+0     003f2b70  FPUcosTable                                         
+0     003f2f72  FPUcosTableEnd                                      
+0     003f2a70  FPUsinTable                                         
+0     003f2e70  FPUsinTableEnd                                      
+0     00000108  Fapi_GlobalInit                                     
+0     003f8d94  Fapi_calculateEcc                                   
+0     003f8d1c  Fapi_calculateFletcherChecksum                      
+0     003f8be9  Fapi_calculatePsa                                   
+0     003f8e4c  Fapi_checkFsmForReady                               
+0     003f8863  Fapi_doBlankCheck                                   
+0     003f8e5a  Fapi_doPsaVerify                                    
+0     003f8e2e  Fapi_doVerify                                       
+0     003f8e3d  Fapi_doVerifyBy16bits                               
+0     003f8e04  Fapi_flushPipeline                                  
+0     003f8e7d  Fapi_getFsmStatus                                   
+0     003f8db3  Fapi_getLibraryInfo                                 
+0     003f8b62  Fapi_initializeAPI                                  
+0     003f8d72  Fapi_isAddressEcc                                   
+0     003f8ded  Fapi_issueAsyncCommand                              
+0     003f8c22  Fapi_issueAsyncCommandWithAddress                   
+0     003f8c5a  Fapi_issueFsmSuspendCommand                         
+0     003f86b8  Fapi_issueProgrammingCommand                        
+0     003f8e19  Fapi_issueProgrammingCommandForEccAddresses         
+0     003f8bac  Fapi_remapEccAddress                                
+0     003f8cbe  Fapi_setActiveFlashBank                             
+0     003f8c8d  Fapi_setupBankSectorEnable                          
+0     003f585f  GPIO_setAnalogMode                                  
+0     003f5887  GPIO_setDirectionMode                               
+0     003f5745  GPIO_setPadConfig                                   
+0     003f57d3  GPIO_setPinConfig                                   
+0     003f580a  GPIO_setQualificationMode                           
+0     003f5686  Gather_Z1_ZSB                                       
+0     003f56bf  Gather_Z2_ZSB                                       
+0     003f57b1  GetLongData                                         
+0     00000020  GetWordData                                         
+0     003f491c  I2CBOOT_configure_gpio                              
+0     003f488a  I2C_Boot                                            
+0     003f48ef  I2C_GetWord                                         
+0     003f56f8  I2C_initMaster                                      
+0     003f6023  InitBoot                                            
+0     003f5485  PBIST_PORMemoryTest                                 
+0     003f4fb9  Parallel_Boot                                       
+0     003f5089  Parallel_GPIOSelect                                 
+0     003f4fe6  Parallel_GetWordData_8bit                           
+0     003f328a  RFFT_f32_twiddleFactors                             
+0     003f57c3  ReadReservedFn                                      
+0     003f525a  SCIA_GetWordData                                    
+0     003f51db  SCI_Boot                                            
+0     00000016  SCI_gpioTx                                          
+0     00000018  SCI_gpioTxPinConfig                                 
+0     003f4ab4  SPIA_GetWordData                                    
+0     003f4b54  SPIA_Init                                           
+0     003f4a93  SPIA_SetAddress_KeyChk                              
+0     003f4ac2  SPIBOOT_configure_gpio                              
+0     003f4a3e  SPI_Boot                                            
+0     003f58ae  SPI_getInterruptStatus                              
+0     003f5836  SPI_setConfig                                       
+0     003f4a72  SPI_start_Boot                                      
+0     003ea19a  SafeCRCCalcZ1                                       
+0     003ea99c  SafeCRCCalcZ2                                       
+0     003ea000  SafeCopyCodeZ1                                      
+0     003ea800  SafeCopyCodeZ2                                      
+0     003f0a02  Td0                                                 
+0     003f0c02  Td1                                                 
+0     003f0e02  Td2                                                 
+0     003f1002  Td3                                                 
+0     003f1202  Td4                                                 
+0     003f0002  Te0                                                 
+0     003f0202  Te1                                                 
+0     003f0402  Te2                                                 
+0     003f0602  Te3                                                 
+0     003f0802  Te4                                                 
+0     0000000e  Z1_ZSB                                              
+0     0000000c  Z2_ZSB                                              
+0     003f8e67  _Fapi_calculateOtpChecksum                          
+0     003f88e5  _Fapi_checkRegionForValue                           
+0     003f8963  _Fapi_checkRegionForValueBy16bits                   
+0     003f8d48  _Fapi_divideUnsignedLong                            
+0     003f8b0f  _Fapi_issueFsmCommand                               
+0     003f89df  _Fapi_loopRegionForValue                            
+0     003f8ced  _Fapi_loopRegionForValueBy16bits                    
+0     003f8e72  _Fapi_scaleCycleValues                              
+0     003f8dd1  _Fapi_setupSectorsForWrite                          
+0     003f1eda  _IQ10mpyRndSatTable                                 
+0     003f1ece  _IQ11mpyRndSatTable                                 
+0     003f1ec2  _IQ12mpyRndSatTable                                 
+0     003f1eb6  _IQ13mpyRndSatTable                                 
+0     003f1eaa  _IQ14mpyRndSatTable                                 
+0     003f2118  _IQ15atan2                                          
+0     003f292f  _IQ15cos                                            
+0     003f2487  _IQ15div                                            
+0     003f25a3  _IQ15isqrt                                          
+0     003f2307  _IQ15mag                                            
+0     003f1e9e  _IQ15mpyRndSatTable                                 
+0     003f286c  _IQ15sin                                            
+0     003f26b8  _IQ15sqrt                                           
+0     003f1e92  _IQ16mpyRndSatTable                                 
+0     003f1e86  _IQ17mpyRndSatTable                                 
+0     003f1e7a  _IQ18mpyRndSatTable                                 
+0     003f1e6e  _IQ19mpyRndSatTable                                 
+0     003f1f46  _IQ1mpyRndSatTable                                  
+0     003f2196  _IQ20atan2                                          
+0     003f295e  _IQ20cos                                            
+0     003f24ce  _IQ20div                                            
+0     003f27c0  _IQ20exp                                            
+0     003f25e9  _IQ20isqrt                                          
+0     003f1f52  _IQ20log                                            
+0     003f2367  _IQ20mag                                            
+0     003f1e62  _IQ20mpyRndSatTable                                 
+0     003f289d  _IQ20sin                                            
+0     003f26fa  _IQ20sqrt                                           
+0     003f1e56  _IQ21mpyRndSatTable                                 
+0     003f1e4a  _IQ22mpyRndSatTable                                 
+0     003f1e3e  _IQ23mpyRndSatTable                                 
+0     003f2211  _IQ24atan2                                          
+0     003f298d  _IQ24cos                                            
+0     003f29e5  _IQ24cosPU                                          
+0     003f2515  _IQ24div                                            
+0     003f27fd  _IQ24exp                                            
+0     003f262e  _IQ24isqrt                                          
+0     003f1fef  _IQ24log                                            
+0     003f23c7  _IQ24mag                                            
+0     003f1e32  _IQ24mpyRndSatTable                                 
+0     003f2a62  _IQ24rmpy                                           
+0     003f28ce  _IQ24sin                                            
+0     003f29bc  _IQ24sinPU                                          
+0     003f273c  _IQ24sqrt                                           
+0     003f2a0c  _IQ24toF                                            
+0     003f1e26  _IQ25mpyRndSatTable                                 
+0     003f1e1a  _IQ26mpyRndSatTable                                 
+0     003f1e0e  _IQ27mpyRndSatTable                                 
+0     003f1e02  _IQ28mpyRndSatTable                                 
+0     003f228c  _IQ29atan2                                          
+0     003f28ff  _IQ29cos                                            
+0     003f255c  _IQ29div                                            
+0     003f2673  _IQ29isqrt                                          
+0     003f2427  _IQ29mag                                            
+0     003f1df6  _IQ29mpyRndSatTable                                 
+0     003f2a38  _IQ29rsmpy                                          
+0     003f283a  _IQ29sin                                            
+0     003f277e  _IQ29sqrt                                           
+0     003f1f3a  _IQ2mpyRndSatTable                                  
+0     003f1dea  _IQ30mpyRndSatTable                                 
+0     003f2a4d  _IQ30rsmpy                                          
+0     003f2a22  _IQ30toF                                            
+0     003f1f2e  _IQ3mpyRndSatTable                                  
+0     003f1f22  _IQ4mpyRndSatTable                                  
+0     003f1f16  _IQ5mpyRndSatTable                                  
+0     003f1f0a  _IQ6mpyRndSatTable                                  
+0     003f1efe  _IQ7mpyRndSatTable                                  
+0     003f1ef2  _IQ8mpyRndSatTable                                  
+0     003f1ee6  _IQ9mpyRndSatTable                                  
+0     003f1c26  _IQatan2HalfPITable                                 
+0     003f1c64  _IQatan2Table                                       
+0     003f1dea  _IQatan2TableEnd                                    
+0     003f1502  _IQcosTable                                         
+0     003f1904  _IQcosTableEnd                                      
+0     003f1904  _IQdivRoundSatTable                                 
+0     003f1912  _IQdivTable                                         
+0     003f1b14  _IQdivTableEnd                                      
+0     003f208c  _IQexpTable                                         
+0     003f2104  _IQexpTableCoeff                                    
+0     003f2118  _IQexpTableCoeffEnd                                 
+0     003f208c  _IQexpTableMinMax                                   
+0     003f2104  _IQexpTableMinMaxEnd                                
+0     003f1b14  _IQisqrtRoundSatTable                               
+0     003f1b24  _IQisqrtTable                                       
+0     003f1c26  _IQisqrtTableEnd                                    
+0     003f1dea  _IQmpyRndSatTable                                   
+0     003f1f52  _IQmpyRndSatTableEnd                                
+0     003f1402  _IQsinTable                                         
+0     003f1802  _IQsinTableEnd                                      
+0     003f1b14  _IQsqrtRoundSatTable                                
+0     003f1b24  _IQsqrtTable                                        
+0     003f1c26  _IQsqrtTableEnd                                     
+0     003f6164  __TI_CINIT_Base                                     
+0     003f6188  __TI_CINIT_Limit                                    
+0     003f6160  __TI_Handler_Table_Base                             
+0     003f6162  __TI_Handler_Table_Limit                            
+0     00000108  __TI_STACK_END                                      
+abs   000000e0  __TI_STACK_SIZE                                     
+abs   ffffffff  __TI_pprof_out_hndl                                 
+abs   ffffffff  __TI_prof_data_size                                 
+abs   ffffffff  __TI_prof_data_start                                
+0     003f8e84  __TI_zero_init_nomemset                             
+abs   ffffffff  __c_args__                                          
+0     003f8edc  __romApi_Fapi_calculateEcc                          
+0     003f8ede  __romApi_Fapi_calculateFletcherChecksum             
+0     003f8ee6  __romApi_Fapi_calculatePsa                          
+0     003f8ed8  __romApi_Fapi_checkFsmForReady                      
+0     003f8eca  __romApi_Fapi_doBlankCheck                          
+0     003f8ee8  __romApi_Fapi_doPsaVerify                           
+0     003f8ed0  __romApi_Fapi_doVerify                              
+0     003f8ed2  __romApi_Fapi_doVerifyBy16bits                      
+0     003f8ee4  __romApi_Fapi_flushPipeline                         
+0     003f8eda  __romApi_Fapi_getFsmStatus                          
+0     003f8ec2  __romApi_Fapi_getLibraryInfo                        
+0     003f8ec4  __romApi_Fapi_initializeAPI                         
+0     003f8ee0  __romApi_Fapi_isAddressEcc                          
+0     003f8ed4  __romApi_Fapi_issueAsyncCommand                     
+0     003f8ec8  __romApi_Fapi_issueAsyncCommandWithAddress          
+0     003f8ed6  __romApi_Fapi_issueFsmSuspendCommand                
+0     003f8ecc  __romApi_Fapi_issueProgrammingCommand               
+0     003f8ece  __romApi_Fapi_issueProgrammingCommandForEccAddresses
+0     003f8ee2  __romApi_Fapi_remapEccAddress                       
+0     003f8ec6  __romApi_Fapi_setActiveFlashBank                    
+0     003f8eea  _rom_flash_ApiTable_end                             
+0     003f8ec2  _rom_flash_ApiTable_start                           
+0     003f5ade  add_to_bitcolumn_checksum                           
+0     003f59d2  add_to_factorial_sum                                
+0     003f5a58  add_to_row_weight_sum                               
+0     003f5b52  calculate_checksum                                  
+0     003f591a  calculate_composite_checksum_on_rom                 
+0     003f4b91  cbrom_GPIO_ReadPin                                  
+0     003f5e65  compare_two_composite_checksums                     
+0     003f8ef2  cpu1brom_version                                    
+0     003f8380  csum_rom                                            
+0     003f60c2  dcsm_default_keys_z1                                
+0     003f60fe  dcsm_default_keys_z2                                
+0     003f58e5  load_itrap_address                                  
+0     003f8300  pbist_csum_rom                                      
+0     003f58e8  test_reserved_memory                                
+0     003f5fcb  verify_pbist_checksum_onROM                         
+0     00000008  z1_key1                                             
+0     0000000a  z2_key1                                             
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                                                
+----  -------   ----                                                
+0     00000002  CPU1BROM_bootStatus                                 
+0     00000004  CPU1BROM_bootMode                                   
+0     00000006  CPU1BROM_pbistStatus                                
+0     00000008  z1_key1                                             
+0     0000000a  z2_key1                                             
+0     0000000c  Z2_ZSB                                              
+0     0000000e  Z1_ZSB                                              
+0     00000010  CPU1BROM_nmiStatus                                  
+0     00000012  CPU1BROM_flashSingleBitError_lowAddress             
+0     00000014  CPU1BROM_flashSingleBitError_highAddress            
+0     00000016  SCI_gpioTx                                          
+0     00000018  SCI_gpioTxPinConfig                                 
+0     00000020  GetWordData                                         
+0     00000022  CPU1BROM_itrapAddress                               
+0     00000108  Fapi_GlobalInit                                     
+0     00000108  __TI_STACK_END                                      
+0     0005f000  DcsmBank0Z1Regs                                     
+0     0005f040  DcsmBank0Z2Regs                                     
+0     0005f070  DcsmCommonRegs                                      
+0     0005f080  DcsmCommon2Regs                                     
+0     003ea000  SafeCopyCodeZ1                                      
+0     003ea19a  SafeCRCCalcZ1                                       
+0     003ea434  CRCCalcZ1                                           
+0     003ea800  SafeCopyCodeZ2                                      
+0     003ea99c  SafeCRCCalcZ2                                       
+0     003eabed  CRCCalcZ2                                           
+0     003f0002  Te0                                                 
+0     003f0202  Te1                                                 
+0     003f0402  Te2                                                 
+0     003f0602  Te3                                                 
+0     003f0802  Te4                                                 
+0     003f0a02  Td0                                                 
+0     003f0c02  Td1                                                 
+0     003f0e02  Td2                                                 
+0     003f1002  Td3                                                 
+0     003f1202  Td4                                                 
+0     003f1402  _IQsinTable                                         
+0     003f1502  _IQcosTable                                         
+0     003f1802  _IQsinTableEnd                                      
+0     003f1904  _IQcosTableEnd                                      
+0     003f1904  _IQdivRoundSatTable                                 
+0     003f1912  _IQdivTable                                         
+0     003f1b14  _IQdivTableEnd                                      
+0     003f1b14  _IQisqrtRoundSatTable                               
+0     003f1b14  _IQsqrtRoundSatTable                                
+0     003f1b24  _IQisqrtTable                                       
+0     003f1b24  _IQsqrtTable                                        
+0     003f1c26  _IQatan2HalfPITable                                 
+0     003f1c26  _IQisqrtTableEnd                                    
+0     003f1c26  _IQsqrtTableEnd                                     
+0     003f1c64  _IQatan2Table                                       
+0     003f1dea  _IQ30mpyRndSatTable                                 
+0     003f1dea  _IQatan2TableEnd                                    
+0     003f1dea  _IQmpyRndSatTable                                   
+0     003f1df6  _IQ29mpyRndSatTable                                 
+0     003f1e02  _IQ28mpyRndSatTable                                 
+0     003f1e0e  _IQ27mpyRndSatTable                                 
+0     003f1e1a  _IQ26mpyRndSatTable                                 
+0     003f1e26  _IQ25mpyRndSatTable                                 
+0     003f1e32  _IQ24mpyRndSatTable                                 
+0     003f1e3e  _IQ23mpyRndSatTable                                 
+0     003f1e4a  _IQ22mpyRndSatTable                                 
+0     003f1e56  _IQ21mpyRndSatTable                                 
+0     003f1e62  _IQ20mpyRndSatTable                                 
+0     003f1e6e  _IQ19mpyRndSatTable                                 
+0     003f1e7a  _IQ18mpyRndSatTable                                 
+0     003f1e86  _IQ17mpyRndSatTable                                 
+0     003f1e92  _IQ16mpyRndSatTable                                 
+0     003f1e9e  _IQ15mpyRndSatTable                                 
+0     003f1eaa  _IQ14mpyRndSatTable                                 
+0     003f1eb6  _IQ13mpyRndSatTable                                 
+0     003f1ec2  _IQ12mpyRndSatTable                                 
+0     003f1ece  _IQ11mpyRndSatTable                                 
+0     003f1eda  _IQ10mpyRndSatTable                                 
+0     003f1ee6  _IQ9mpyRndSatTable                                  
+0     003f1ef2  _IQ8mpyRndSatTable                                  
+0     003f1efe  _IQ7mpyRndSatTable                                  
+0     003f1f0a  _IQ6mpyRndSatTable                                  
+0     003f1f16  _IQ5mpyRndSatTable                                  
+0     003f1f22  _IQ4mpyRndSatTable                                  
+0     003f1f2e  _IQ3mpyRndSatTable                                  
+0     003f1f3a  _IQ2mpyRndSatTable                                  
+0     003f1f46  _IQ1mpyRndSatTable                                  
+0     003f1f52  _IQ20log                                            
+0     003f1f52  _IQmpyRndSatTableEnd                                
+0     003f1fef  _IQ24log                                            
+0     003f208c  _IQexpTable                                         
+0     003f208c  _IQexpTableMinMax                                   
+0     003f2104  _IQexpTableCoeff                                    
+0     003f2104  _IQexpTableMinMaxEnd                                
+0     003f2118  _IQ15atan2                                          
+0     003f2118  _IQexpTableCoeffEnd                                 
+0     003f2196  _IQ20atan2                                          
+0     003f2211  _IQ24atan2                                          
+0     003f228c  _IQ29atan2                                          
+0     003f2307  _IQ15mag                                            
+0     003f2367  _IQ20mag                                            
+0     003f23c7  _IQ24mag                                            
+0     003f2427  _IQ29mag                                            
+0     003f2487  _IQ15div                                            
+0     003f24ce  _IQ20div                                            
+0     003f2515  _IQ24div                                            
+0     003f255c  _IQ29div                                            
+0     003f25a3  _IQ15isqrt                                          
+0     003f25e9  _IQ20isqrt                                          
+0     003f262e  _IQ24isqrt                                          
+0     003f2673  _IQ29isqrt                                          
+0     003f26b8  _IQ15sqrt                                           
+0     003f26fa  _IQ20sqrt                                           
+0     003f273c  _IQ24sqrt                                           
+0     003f277e  _IQ29sqrt                                           
+0     003f27c0  _IQ20exp                                            
+0     003f27fd  _IQ24exp                                            
+0     003f283a  _IQ29sin                                            
+0     003f286c  _IQ15sin                                            
+0     003f289d  _IQ20sin                                            
+0     003f28ce  _IQ24sin                                            
+0     003f28ff  _IQ29cos                                            
+0     003f292f  _IQ15cos                                            
+0     003f295e  _IQ20cos                                            
+0     003f298d  _IQ24cos                                            
+0     003f29bc  _IQ24sinPU                                          
+0     003f29e5  _IQ24cosPU                                          
+0     003f2a0c  _IQ24toF                                            
+0     003f2a22  _IQ30toF                                            
+0     003f2a38  _IQ29rsmpy                                          
+0     003f2a4d  _IQ30rsmpy                                          
+0     003f2a62  _IQ24rmpy                                           
+0     003f2a70  FPU32sinTable                                       
+0     003f2a70  FPUsinTable                                         
+0     003f2b70  FPU32cosTable                                       
+0     003f2b70  FPUcosTable                                         
+0     003f2e70  FPU32sinTableEnd                                    
+0     003f2e70  FPUsinTableEnd                                      
+0     003f2f72  FPU32atan2HalfPITable                               
+0     003f2f72  FPU32cosTableEnd                                    
+0     003f2f72  FPUatan2HalfPITable                                 
+0     003f2f72  FPUcosTableEnd                                      
+0     003f2f76  FPU32atan2Table                                     
+0     003f2f76  FPUatan2Table                                       
+0     003f30fc  FPU32LOG2                                           
+0     003f30fc  FPU32atan2TableEnd                                  
+0     003f30fc  FPUatan2TableEnd                                    
+0     003f30fe  FPU32INVLOG10                                       
+0     003f3100  FPU32EXPBIAS                                        
+0     003f3102  FPU32LOG_TABLE_MASK1                                
+0     003f3104  FPU32LOG_TABLE_MASK2                                
+0     003f3106  FPU32logTable                                       
+0     003f31cc  FPU32expTableCoeff                                  
+0     003f31cc  FPU32logTableEnd                                    
+0     003f31d8  FPU32expTable                                       
+0     003f31d8  FPU32expTableCoeffEnd                               
+0     003f328a  FPU32RFFTtwiddleFactors                             
+0     003f328a  FPU32expTableEnd                                    
+0     003f328a  RFFT_f32_twiddleFactors                             
+0     003f3a82  CFFT_f32_twiddleFactors                             
+0     003f3a82  FPU32CFFTtwiddleFactors                             
+0     003f4112  CPU1BROM_setPMMTrims                                
+0     003f4148  CPU1BROM_setIntOscTrims                             
+0     003f416b  CPU1BROM_configureAPLL                              
+0     003f41c8  CPU1BROM_setupDeviceSystems                         
+0     003f4264  CPU1BROM_performDeviceConfiguration                 
+0     003f43c0  CPU1BROM_startSystemBoot                            
+0     003f488a  I2C_Boot                                            
+0     003f48ef  I2C_GetWord                                         
+0     003f491c  I2CBOOT_configure_gpio                              
+0     003f4a3e  SPI_Boot                                            
+0     003f4a72  SPI_start_Boot                                      
+0     003f4a93  SPIA_SetAddress_KeyChk                              
+0     003f4ab4  SPIA_GetWordData                                    
+0     003f4ac2  SPIBOOT_configure_gpio                              
+0     003f4b54  SPIA_Init                                           
+0     003f4b91  cbrom_GPIO_ReadPin                                  
+0     003f4ba2  CPU1BROM_decodeBootPins                             
+0     003f4c69  CPU1BROM_getStandaloneBootMode                      
+0     003f4d0f  CPU1BROM_getEmulationBootMode                       
+0     003f4d63  CPU1BROM_selectBootMode                             
+0     003f4dac  DCAN_Boot                                           
+0     003f4fb9  Parallel_Boot                                       
+0     003f4fe6  Parallel_GetWordData_8bit                           
+0     003f5089  Parallel_GPIOSelect                                 
+0     003f51db  SCI_Boot                                            
+0     003f525a  SCIA_GetWordData                                    
+0     003f53ad  CPU1BROM_triggerSysPLLLock                          
+0     003f53db  CPU1BROM_switchToPLL                                
+0     003f543a  BROMDCC_verifySingleShotClock                       
+0     003f5485  PBIST_PORMemoryTest                                 
+0     003f55d7  CPU1BROM_initDCSM                                   
+0     003f5686  Gather_Z1_ZSB                                       
+0     003f56bf  Gather_Z2_ZSB                                       
+0     003f56f8  I2C_initMaster                                      
+0     003f5745  GPIO_setPadConfig                                   
+0     003f578d  CopyData                                            
+0     003f57b1  GetLongData                                         
+0     003f57c3  ReadReservedFn                                      
+0     003f57d3  GPIO_setPinConfig                                   
+0     003f580a  GPIO_setQualificationMode                           
+0     003f5836  SPI_setConfig                                       
+0     003f585f  GPIO_setAnalogMode                                  
+0     003f5887  GPIO_setDirectionMode                               
+0     003f58ae  SPI_getInterruptStatus                              
+0     003f58e5  load_itrap_address                                  
+0     003f58e8  test_reserved_memory                                
+0     003f591a  calculate_composite_checksum_on_rom                 
+0     003f59d2  add_to_factorial_sum                                
+0     003f5a58  add_to_row_weight_sum                               
+0     003f5ade  add_to_bitcolumn_checksum                           
+0     003f5b52  calculate_checksum                                  
+0     003f5e65  compare_two_composite_checksums                     
+0     003f5fcb  verify_pbist_checksum_onROM                         
+0     003f6023  InitBoot                                            
+0     003f60a7  ExitPBISTLoc                                        
+0     003f60a9  ExitBoot                                            
+0     003f60c2  dcsm_default_keys_z1                                
+0     003f60fe  dcsm_default_keys_z2                                
+0     003f6160  __TI_Handler_Table_Base                             
+0     003f6162  __TI_Handler_Table_Limit                            
+0     003f6164  __TI_CINIT_Base                                     
+0     003f6188  __TI_CINIT_Limit                                    
+0     003f8052  CPU1BROM_pieVectorMismatchHandler                   
+0     003f809a  CPU1BROM_nmiHandler                                 
+0     003f8161  CPU1BROM_itrapISR                                   
+0     003f8300  pbist_csum_rom                                      
+0     003f8380  csum_rom                                            
+0     003f86b8  Fapi_issueProgrammingCommand                        
+0     003f8863  Fapi_doBlankCheck                                   
+0     003f88e5  _Fapi_checkRegionForValue                           
+0     003f8963  _Fapi_checkRegionForValueBy16bits                   
+0     003f89df  _Fapi_loopRegionForValue                            
+0     003f8b0f  _Fapi_issueFsmCommand                               
+0     003f8b62  Fapi_initializeAPI                                  
+0     003f8bac  Fapi_remapEccAddress                                
+0     003f8be9  Fapi_calculatePsa                                   
+0     003f8c22  Fapi_issueAsyncCommandWithAddress                   
+0     003f8c5a  Fapi_issueFsmSuspendCommand                         
+0     003f8c8d  Fapi_setupBankSectorEnable                          
+0     003f8cbe  Fapi_setActiveFlashBank                             
+0     003f8ced  _Fapi_loopRegionForValueBy16bits                    
+0     003f8d1c  Fapi_calculateFletcherChecksum                      
+0     003f8d48  _Fapi_divideUnsignedLong                            
+0     003f8d72  Fapi_isAddressEcc                                   
+0     003f8d94  Fapi_calculateEcc                                   
+0     003f8db3  Fapi_getLibraryInfo                                 
+0     003f8dd1  _Fapi_setupSectorsForWrite                          
+0     003f8ded  Fapi_issueAsyncCommand                              
+0     003f8e04  Fapi_flushPipeline                                  
+0     003f8e19  Fapi_issueProgrammingCommandForEccAddresses         
+0     003f8e2e  Fapi_doVerify                                       
+0     003f8e3d  Fapi_doVerifyBy16bits                               
+0     003f8e4c  Fapi_checkFsmForReady                               
+0     003f8e5a  Fapi_doPsaVerify                                    
+0     003f8e67  _Fapi_calculateOtpChecksum                          
+0     003f8e72  _Fapi_scaleCycleValues                              
+0     003f8e7d  Fapi_getFsmStatus                                   
+0     003f8e84  __TI_zero_init_nomemset                             
+0     003f8ec2  __romApi_Fapi_getLibraryInfo                        
+0     003f8ec2  _rom_flash_ApiTable_start                           
+0     003f8ec4  __romApi_Fapi_initializeAPI                         
+0     003f8ec6  __romApi_Fapi_setActiveFlashBank                    
+0     003f8ec8  __romApi_Fapi_issueAsyncCommandWithAddress          
+0     003f8eca  __romApi_Fapi_doBlankCheck                          
+0     003f8ecc  __romApi_Fapi_issueProgrammingCommand               
+0     003f8ece  __romApi_Fapi_issueProgrammingCommandForEccAddresses
+0     003f8ed0  __romApi_Fapi_doVerify                              
+0     003f8ed2  __romApi_Fapi_doVerifyBy16bits                      
+0     003f8ed4  __romApi_Fapi_issueAsyncCommand                     
+0     003f8ed6  __romApi_Fapi_issueFsmSuspendCommand                
+0     003f8ed8  __romApi_Fapi_checkFsmForReady                      
+0     003f8eda  __romApi_Fapi_getFsmStatus                          
+0     003f8edc  __romApi_Fapi_calculateEcc                          
+0     003f8ede  __romApi_Fapi_calculateFletcherChecksum             
+0     003f8ee0  __romApi_Fapi_isAddressEcc                          
+0     003f8ee2  __romApi_Fapi_remapEccAddress                       
+0     003f8ee4  __romApi_Fapi_flushPipeline                         
+0     003f8ee6  __romApi_Fapi_calculatePsa                          
+0     003f8ee8  __romApi_Fapi_doPsaVerify                           
+0     003f8eea  _rom_flash_ApiTable_end                             
+0     003f8ef2  cpu1brom_version                                    
+abs   000000e0  __TI_STACK_SIZE                                     
+abs   ffffffff  __TI_pprof_out_hndl                                 
+abs   ffffffff  __TI_prof_data_size                                 
+abs   ffffffff  __TI_prof_data_start                                
+abs   ffffffff  __c_args__                                          
+
+[283 symbols]

@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>C28x Context Save and Restore</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/tiicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="None" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> C28x Context Save and Restore
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.0.0
+              </div>
+            
+          
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-contextsave">C28x Context Save and Restore</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">C28x Context Save and Restore</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>C28x Context Save and Restore</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound">
+<span id="document-contextsave"></span><div class="section" id="c28x-context-save-and-restore">
+<span id="id1"></span><h1>C28x Context Save and Restore<a class="headerlink" href="#c28x-context-save-and-restore" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This article describes the automatic context save/restore for the C28x CPU. This also applies to devices with the FPU and VCU extensions.</p>
+</div>
+<div class="section" id="other-resources">
+<h2><strong>Other Resources</strong><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The context save and restore is documented in the <a class="reference external" href="http://www.ti.com/lit/pdf/SPRU430">C28x TMS320C28x CPU and Instruction Set Reference Guide.</a></p></li>
+</ul>
+</div>
+<div class="section" id="stack-101">
+<h2><strong>Stack 101</strong><a class="headerlink" href="#stack-101" title="Permalink to this headline">¶</a></h2>
+<p>First a few facts regarding the C28x stack pointer:</p>
+<ul class="simple">
+<li><p>The C28x stack pointer (SP) always points to the first empty address within the stack.</p></li>
+<li><p>The C28x stack grows from low address to high address.</p></li>
+<li><p>The context save performs 32-bit PUSH operations (not 16-bit).</p></li>
+<li><p>The context restore performs 32-bit POP operations (not 16-bit).</p></li>
+<li><p>The stack pointer itself is 16 bits. Therefore the stack must always be in low memory not to exceed address 0xFFFF.</p></li>
+</ul>
+</div>
+<div class="section" id="bit-writes-and-reads">
+<h2><strong>32-bit Writes and Reads</strong><a class="headerlink" href="#bit-writes-and-reads" title="Permalink to this headline">¶</a></h2>
+<p>32-bit writes and reads are always even aligned on the C28x. That is, a 32-bit value uses an even address and the next odd no matter which address the write was to. This is true for all 32-bit reads/writes on the C28x. You will never see a 32-bit value use a odd location and the next even.</p>
+<p>The following image shows a 32-bit PUSH to an even address:</p>
+<div class="figure align-center" id="push-even-address">
+<a class="reference internal image-reference" href="_images/Push_even_address.jpg"><img alt="_images/Push_even_address.jpg" src="_images/Push_even_address.jpg" style="width: 410.5px; height: 261.5px;" /></a>
+</div>
+<p>The following image shows a 32-bit PUSH to an odd address. Notice that the write is even aligned and is the same as if the stack pointer pointed to the previous even address.</p>
+<div class="figure align-center" id="push-odd-address">
+<a class="reference internal image-reference" href="_images/Push_odd_address.jpg"><img alt="_images/Push_odd_address.jpg" src="_images/Push_odd_address.jpg" style="width: 410.5px; height: 261.5px;" /></a>
+</div>
+<p>Note: if there had been data in location 0xC140 before the push, it would have been overwritten!! We will use this knowledge in the next section.</p>
+</div>
+<div class="section" id="automatic-context-save">
+<h2><strong>Automatic Context Save</strong><a class="headerlink" href="#automatic-context-save" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When an interrupt is taken by the CPU, there is no way to know if the stack pointer (SP) is even or odd. As we saw in the previous section, if the SP is odd then the context save has the potential to overwrite a previous value already on the stack.</p>
+<p>In order to account for this, the automatic context save will first increment the stack by 1. This guarantees the data saved will not overwrite something already on the stack.</p>
+<p>After the stack pointer is incremented by 1, a number of registers will automatically be pushed onto the stack. These registers are documented in the <a class="reference external" href="http://www.ti.com/lit/pdf/SPRU430">TMS320C28x CPU and Instruction Set Reference Guide.</a> Each push is a 32-bit write to memory. This is always even aligned on the C28x; a 32-bit word always takes up an even and the next odd.</p>
+<p>The following image shows the save if the stack pointer is odd when the interrupt is taken. Note that adding 1 to SP keeps the first PUSH from overwriting any data in address 0xC140.</p>
+<p>The first instruction within an ISR should always be the ASP instruction. If you are writing in C, then the compiler will automatically add ASP for you. If the SP is odd aligned, the ASP instruction will increment it by one so that it is even aligned. In the case shown below the ASP instruction within the ISR has no effect. It should still be used, however, since there is no way to control whether the SP will be even or odd when an interrupt is taken.</p>
+</div></blockquote>
+<div class="figure align-center" id="stack-start-odd">
+<a class="reference internal image-reference" href="_images/Stack_start_odd.jpg"><img alt="_images/Stack_start_odd.jpg" src="_images/Stack_start_odd.jpg" style="width: 410.5px; height: 261.5px;" /></a>
+</div>
+<p>The following image shows the context save if the stack pointer is even when the interrupt is taken. In this case, adding 1 to SP before the save could have been skipped, but there is no way to know if the interrupt was taken when the SP is even or odd. Adding 1 to SP has no ill effect. Notice in this case the ASP instruction within the ISR will force re-alignment of the stack. This is done so that any values placed on the stack within the ISR will not overwrite part of the context save. Having an even aligned stack is important for the C compiler. Also following this convention can make things easier when programming in assembly.</p>
+<div class="figure align-center" id="stack-start-even">
+<a class="reference internal image-reference" href="_images/Stack_start_even.jpg"><img alt="_images/Stack_start_even.jpg" src="_images/Stack_start_even.jpg" style="width: 410.5px; height: 261.5px;" /></a>
+</div>
+<p>Notice in both cases, each 32-bit push is even aligned. That is it takes up an even address and the next odd no matter which address the SP points to. This is true for all 32-bit reads/writes on the C28x. You will never see a 32-bit value use a odd location and the next even.</p>
+</div>
+<div class="section" id="automatic-context-restore">
+<h2><strong>Automatic Context Restore</strong><a class="headerlink" href="#automatic-context-restore" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When an IRET instruction executes, an automatic context restore will be done before the code returns to the point where the interrupt was taken. The automatic context restore is simply the reverse of the automatic context save.</p>
+<p>Before the IRET instruction, the ISR must execute the NASP instruction. This will un-do any alignment that was performed by the ASP instruction. If you are writing in C, then the compiler will automatically add the ASP and NASP instructions to your interrupt service routine.</p>
+<p>As a last step, the the SP is automatically decremented by 1 and, therefore, ends up back to where it was before the interrupt was taken.</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">2020, Texas Instruments Incorporated</a>, Texas Instruments Incorporated. All rights reserved. <br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+      <span class="lastupdated">
+        Last updated on Feb 12, 2021.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+    <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+
+        $('body').on("mousewheel", function () {
+            // Remove default behavior
+            event.preventDefault();
+            // Scroll without smoothing
+            var wheelDelta = event.wheelDelta;
+            var currentScrollPosition = window.pageYOffset;
+            window.scrollTo(0, currentScrollPosition - wheelDelta);
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

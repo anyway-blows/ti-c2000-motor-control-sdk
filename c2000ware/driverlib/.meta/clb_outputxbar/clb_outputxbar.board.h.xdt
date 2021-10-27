@@ -1,0 +1,12 @@
+% var moduleName = "outputxbar"
+% var module = system.modules['/driverlib/' + moduleName + '.js'];
+%if (module != null)
+%{
+    % for(var i = 0; i < module.$instances.length; i++) {
+        % var instance = module.$instances[i];
+        % let modInst  = instance[moduleName];
+        % let solution    = modInst.$solution;
+        %let peripheral  = system.deviceData.peripherals[solution.peripheralName];
+    % }
+%}
+%

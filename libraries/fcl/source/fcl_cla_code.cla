@@ -1,0 +1,278 @@
+//#############################################################################
+//
+// FILE:    fcl_cla_code.cla
+//
+// TITLE:   FCL motor handler functions from CLA
+//
+// Group:   C2000
+//
+// Target Family: F2837x/F2838x/F28004x
+//
+//#############################################################################
+// $TI Release: MotorControl SDK v3.03.00.00 $
+// $Release Date: Tue Sep 21 16:33:25 CDT 2021 $
+// $Copyright:
+// Copyright (C) 2017-2021 Texas Instruments Incorporated
+//
+//     http://www.ti.com/ ALL RIGHTS RESERVED
+// $
+//#############################################################################
+
+//
+// includes
+//
+
+#include "cpu_cla_shared.h"
+#include "fcl_cla.h"
+
+//
+// pointers to access the peripherals indirectly on the CLA
+// Note that the pointer on CLA side is 16bits hence the same pointers from CPU
+// side cannot be used.
+// additionally these pointers must be assigned address on the CLA side so the
+// correct address is pointed to
+//
+
+//
+// defines
+//
+#define CLA_QEP_FLAG_IEL_EVENT  0x0400
+#define CLA_QEP_FLAG_UTO_EVENT  0x0800
+
+//
+// globals
+//
+
+
+#define CLA_DEBUG   0
+
+#if CLA_DEBUG   // only for debugging
+unsigned long task1_cnt, task2_cnt, task3_cnt, task4_cnt;
+#endif
+
+//
+// function definitions
+//
+
+#if 0  // set to 1 for test
+#define SETGPIO16_HIGH  GpioDataRegs.GPADAT.bit.GPIO16 = 1;
+#define SETGPIO16_LOW   GpioDataRegs.GPADAT.bit.GPIO16 = 0;
+#else
+#define SETGPIO16_HIGH
+#define SETGPIO16_LOW
+#endif
+
+//
+// Task 1 : Calculate QEP
+// Description:
+// POSITION ENCODER
+// - Reads QEP
+// - Angles are normalised to the the range 0 to 0.99999 (1.0)
+//
+__interrupt void Cla1Task1 ( void )
+{
+    SETGPIO16_HIGH; // set HIGH
+
+//  __mdebugstop();
+//  __meallow();
+
+    if(lsw == ENC_CALIBRATION_DONE)
+    {
+        //
+        // QEP UTO and ADCSOC are carefully pre aligned
+        // QEP POSLAT = QEP POSCNT at QEP UTO event that is in sync with ADCSOC
+        // Therefore, read mech angle from QEP POSLAT
+        //
+
+        qep1.MechTheta = (qep1.MechScaler * ClaQep.ptr->QPOSLAT);
+        qep1.ElecTheta = (qep1.PolePairs * qep1.MechTheta);
+        qep1.ElecTheta -= (((int32)(qep1.ElecTheta)));   // Q24 = Q0*Q24
+        pangle = qep1.ElecTheta;
+    }
+    else if(lsw == ENC_WAIT_FOR_INDEX)
+    {
+        //
+        // lsw = ENC_WAIT_FOR_INDEX ---> Waiting for QEP index as  rotor spins
+        //   Detect the offset angle between alpha axis and QEP index location
+        // If QEP index pulse is found :-
+        //   POSILAT captures POSCNT at the first INDEX pulse.
+        //   Load POSINIT with POSILAT, so that at every future INDEX event,
+        //   POSCNT is loaded (reset) with POSINIT
+        //
+
+        __meallow();
+
+        //
+        // Check the index occurrence
+        //
+        if(ClaQep.ptr->QFLG.all & CLA_QEP_FLAG_IEL_EVENT) // QFLG.bit.IEL
+        {
+            __mdebugstop();
+
+            //
+            // QPOSILAT updates on Index edge(IEL) - capture it into QPOSINIT
+            //
+            ClaQep.ptr->QPOSINIT = ClaQep.ptr->QPOSILAT;
+
+            //
+            // make QPOSCNT = QPOSINIT on future Index edge(s)
+            // ClaQep.ptr->QEPCTL.bit.IEI = IEI_RISING;
+            //
+            ClaQep.ptr->QEPCTL.all |= IEI_RISING;
+
+            //
+            // if QEP index pulse is found, change lsw to 'ENC_CALIBRATION_DONE'
+            //
+            lsw = ENC_CALIBRATION_DONE;
+        }
+
+        //
+        //__mdebugstop();
+        //
+
+        //
+        // Compute the mechanical and electrical angles
+        //
+        qep1.MechTheta = (qep1.MechScaler * ClaQep.ptr->QPOSLAT) ;
+        qep1.ElecTheta = (qep1.PolePairs * qep1.MechTheta) ;
+        qep1.ElecTheta -= ((float)((int32)(qep1.ElecTheta)));
+        pangle  = rg1.Out;
+    }
+    else
+    {
+        //
+        // lsw = ENC_ALIGNMENT ---> Alignment Routine
+        // Reset POSCNT to ZERO
+        // during alignment, force current shaft position as ZERO degree
+        //
+        ClaQep.ptr->QPOSCNT = 0;   // Reset position cnt for QEP
+
+        //
+        // write to the entire register - it is more efficient
+        // ClaQep.ptr->QCLR.bit.IEL = 1;
+        //
+        ClaQep.ptr->QCLR.all = CLA_QEP_FLAG_IEL_EVENT;
+
+        //
+        // to restart after stop motor - dont disturb other bits
+        // ClaQep.ptr->QEPCTL.all &= ~IEI_RISING;
+        //
+        ClaQep.ptr->QEPCTL.bit.IEI = 0x0;
+
+        pangle  = 0;
+    }
+
+    SETGPIO16_LOW; // set LOW
+
+#if CLA_DEBUG   // only for debugging
+    task1_cnt++;
+#endif
+
+    return;
+}
+
+//
+// PI controller - Q loop (Torque loop)
+//
+__interrupt void Cla1Task2 ( void )
+{
+    SETGPIO16_HIGH; // set HIGH
+    FCL_PI_MACRO(pi_iq);
+    SETGPIO16_LOW; // set low
+
+#if CLA_DEBUG   // only for debugging
+    task2_cnt++;
+#endif
+
+    return;
+}
+
+//
+// COMPLEX controller - Q loop (Torque loop)
+//
+__interrupt void Cla1Task3 ( void )
+{
+    SETGPIO16_HIGH; // set HIGH
+
+    pi_iq.out += Q_cla.kDirect * (Q_cla.iqErr * Q_cla.cosWTs +
+                                  Q_cla.idErr * Q_cla.sinWTs) + Q_cla.carryOver;
+
+    //
+    //__mmaxf32(__mminf32(pi_iq.out, pi_iq.Umax), pi_iq.Umin);
+    //
+    CLAMP_MACRO(pi_iq);
+
+    SETGPIO16_LOW; // set low
+
+#if CLA_DEBUG   // only for debugging
+    task3_cnt++;
+#endif
+
+
+    return;
+}
+
+//
+// QEP peripheral - clearing flags after previous read
+//
+__interrupt void Cla1Task4 ( void )
+{
+    SETGPIO16_HIGH; // set LOW
+
+    if(lsw != ENC_ALIGNMENT)
+    {
+        //
+        // Check an index occurrence
+        //
+        if(ClaQep.ptr->QFLG.all & CLA_QEP_FLAG_IEL_EVENT)
+        {
+            qep1.IndexSyncFlag = 0x00F0;
+            qep1.QepCountIndex = ClaQep.ptr->QPOSILAT;
+
+            //
+            // Clear interrupt flag
+            // ClaQep.ptr->QCLR.bit.IEL = 1;
+            //
+            ClaQep.ptr->QCLR.all = CLA_QEP_FLAG_IEL_EVENT;
+        }
+
+        //
+        // Check unit Time out-event for speed calculation:
+        // Unit Timer is configured for 100Hz in INIT function
+        //
+        if(ClaQep.ptr->QFLG.all & CLA_QEP_FLAG_UTO_EVENT)
+        {
+            ClaQep.ptr->QCLR.all = CLA_QEP_FLAG_UTO_EVENT;
+
+            //
+            // Low Speed Calculation
+            //
+            if(ClaQep.ptr->QEPSTS.all & 0x000C)   //QEPSTS.(COEF || CDEF)
+            {
+                //
+                // Capture Counter overflowed, hence do no compute speed
+                //
+                ClaQep.ptr->QEPSTS.all = 0x000C;
+            }
+            else if(ClaQep.ptr->QCPRDLAT != 0xffff)
+            {
+                //
+                // Compute low speed using capture counter value
+                //
+                qep1.QepPeriod = ClaQep.ptr->QCPRDLAT;
+            }
+        }
+    }
+
+   SETGPIO16_LOW;  // set LOW
+
+#if CLA_DEBUG  // only for debugging
+    task4_cnt++;
+#endif
+
+    return;
+}
+
+//
+// End of file
+//

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExportImportMemento.1>
+<VarMeta IMemento.internal.id="enableFlag"/>
+<VarMeta IMemento.internal.id="VdTesting"/>
+<VarMeta IMemento.internal.id="VqTesting"/>
+<VarMeta IMemento.internal.id="motorVars.isrTicker"/>
+<VarMeta IMemento.internal.id="motorVars.runMotor"/>
+<VarMeta IMemento.internal.id="fclVars.lsw"/>
+<VarMeta IMemento.internal.id="motorVars.speedRef"/>
+<VarMeta IMemento.internal.id="motorVars.speedWe"/>
+<VarMeta IMemento.internal.id="fclVars.pangle"/>
+<VarMeta IMemento.internal.id="motorVars.posElecTheta"/>
+<VarMeta IMemento.internal.id="motorVars.posMechTheta"/>
+<VarMeta IMemento.internal.id="motorVars.FCL_params.Vdcbus"/>
+<VarMeta IMemento.internal.id="motorVars.rc.TargetValue"/>
+<VarMeta IMemento.internal.id="motorVars.rc.SetpointValue"/>
+<VarMeta IMemento.internal.id="fclVars.rg.Out"/>
+<VarMeta IMemento.internal.id="motorVars.curLimit"/>
+<VarMeta IMemento.internal.id="motorVars.tripFlagDMC"/>
+<VarMeta IMemento.internal.id="motorVars.clearTripFlagDMC"/>
+<VarMeta IMemento.internal.id="motorVars.maxModIndex"/>
+<VarMeta IMemento.internal.id="motorVars.FCL_params.wccD"/>
+<VarMeta IMemento.internal.id="motorVars.FCL_params.wccQ"/>
+<VarMeta IMemento.internal.id="motorVars.fclUpdateLatency_us"/>
+<VarMeta IMemento.internal.id="motorVars.fclClrCntr"/>
+<VarMeta IMemento.internal.id="motorVars.focExecutionTime_us"/>
+<VarMeta IMemento.internal.id="motorVars.focClrCntr"/>
+<VarMeta IMemento.internal.id="motorVars.IdRef_run"/>
+<VarMeta IMemento.internal.id="motorVars.IqRef"/>
+<VarMeta IMemento.internal.id="motorVars.lsw2EntryFlag"/>
+<VarMeta IMemento.internal.id="motorVars.ctrlSpdOut"/>
+<VarMeta IMemento.internal.id="motorVars.ctrlPosRef"/>
+<VarMeta IMemento.internal.id="motorVars.ctrlSpeedRef"/>
+<VarMeta IMemento.internal.id="motorVars.cmplx_Id.fbk"/>
+<VarMeta IMemento.internal.id="fclVars.cmplx_Iq.fbk"/>
+<VarMeta IMemento.internal.id="motorVars.cmplx_Id.ref"/>
+<VarMeta IMemento.internal.id="fclVars.cmplx_Iq.ref"/>
+<VarMeta IMemento.internal.id="motorVars.FCL_params.wccD/(2*3.14)"/>
+<VarMeta IMemento.internal.id="motorVars.FCL_params.wccQ/(2*3.14)"/>
+<VarMeta IMemento.internal.id="motorVars.FCL_params.Vdcbus"/>
+<VarMeta IMemento.internal.id="motorVars"/>
+<VarMeta IMemento.internal.id="motorVars.pwmUpdateMode"/>
+<VarMeta IMemento.internal.id="motorVars.offsetDoneFlag"/>
+<VarMeta IMemento.internal.id="motorVars.offset_currentAs"/>
+<VarMeta IMemento.internal.id="motorVars.offset_currentBs"/>
+<VarMeta IMemento.internal.id="motorVars.offset_currentCs"/>
+</ExportImportMemento.1>

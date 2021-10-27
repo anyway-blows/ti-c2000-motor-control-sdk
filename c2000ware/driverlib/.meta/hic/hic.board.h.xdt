@@ -1,0 +1,11 @@
+% var module = system.modules['/driverlib/hic.js'];
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% let hic        	= instance.hic;
+	% let solution    		= hic.$solution;
+	%let peripheral 	 	= system.deviceData.peripherals[solution.peripheralName];
+% }
+%}
+%

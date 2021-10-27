@@ -1,0 +1,57 @@
+<projectSpec>
+  <project
+        name="aci_motor_benchmark_f2837x"
+        device="TMS320F28377D"
+        cgtVersion="20.2.1.LTS"
+        outputFormat="COFF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <configuration name="SignalChain_RAM_TMU" compilerBuildOptions="-O2 --opt_for_speed=5 -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device -I${C2000WARE_DLIB_ROOT} -I${C2000WARE_ROOT}\device_support\f2837xd\headers\include -I${C2000WARE_ROOT}\libraries\math\FPUfastRTS\c28\include -v28 -ml -mt --float_support=fpu32 --idiv_support=none --tmu_support=tmu0 --vcu_support=vcu0 --fp_mode=relaxed --define=SIGNAL_CHAIN=1 --define=FLASH_WS=3 --define=USE_FAST_TRIG_LIB=0 -g --define=CPU1 --diag_warning=225 --diag_suppress=10063 --display_error_number --abi=coffabi -k --asm_listing --src_interlist --preproc_with_compile" linkerBuildOptions="--entry_point code_start --stack_size=0x200 --heap_size=0x800 --define RAM" />
+    <configuration name="SignalChain_FLASH_TMU" compilerBuildOptions="-O2 --opt_for_speed=5 -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device -I${C2000WARE_DLIB_ROOT} -I${C2000WARE_ROOT}\device_support\f2837xd\headers\include -I${C2000WARE_ROOT}\libraries\math\FPUfastRTS\c28\include -v28 -ml -mt --float_support=fpu32 --idiv_support=none --tmu_support=tmu0 --vcu_support=vcu0 --fp_mode=relaxed --define=SIGNAL_CHAIN=1 --define=FLASH_WS=3 --define=USE_FAST_TRIG_LIB=0 --define=CPU1 --define=_FLASH -g --diag_warning=225  --diag_suppress=10063 --display_error_number --abi=coffabi -k --asm_listing --src_interlist --preproc_with_compile" linkerBuildOptions="--entry_point code_start --stack_size=0x200 --heap_size=0x800 --define RAM" />
+    
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../../driverlib/f2837xd/driverlib/" scope="project" />
+    <pathVariable name="C2000WARE_ROOT" path="../../../../../../" scope="project" />
+    <file action="copy" path="${C2000WARE_ROOT}/device_support/f2837xd/common/include/driverlib.h" targetDirectory="device" />
+    <file action="copy" path="${C2000WARE_ROOT}/device_support/f2837xd/common/targetConfigs/TMS320F28377D.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="${C2000WARE_ROOT}/device_support/f2837xd/common/source/f2837xd_codestartbranch.asm" targetDirectory="device" />
+    <file action="link" path="${C2000WARE_ROOT}/driverlib/f2837xd/driverlib/ccs/Debug/driverlib.lib" targetDirectory="" />
+    
+    <file action="link" path="${C2000WARE_ROOT}/libraries/math/FPUfastRTS/c28/source/fpu32/atan2_f32.asm" targetDirectory="device" applicableConfigurations="SignalChain_RAM_FastRTS,SignalChain_FLASH_FastRTS" />
+    <file action="link" path="${C2000WARE_ROOT}/libraries/math/FPUfastRTS/c28/source/fpu32/sincos_f32.asm" targetDirectory="device" applicableConfigurations="SignalChain_RAM_FastRTS,SignalChain_FLASH_FastRTS" />
+    <file action="link" path="${C2000WARE_ROOT}/libraries/math/FPUfastRTS/c28/source/fpu32/FPUmathTables.asm" targetDirectory="device"  applicableConfigurations="SignalChain_RAM_FastRTS,SignalChain_FLASH_FastRTS" />
+    
+    <file action="copy" path="../../device_support/f2837xd/cmd/2837xD_RAM_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="SignalChain_RAM_TMU" />
+    <file action="copy" path="../../device_support/f2837xd/cmd/2837xD_FLASH_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="SignalChain_FLASH_TMU" />
+    
+    <file action="copy" path="../../device_support/f2837xd/source/device.c" targetDirectory="device" />
+    <file action="copy" path="../../device_support/f2837xd/source/device_profile.c" targetDirectory="device" />
+    <file action="copy" path="../../device_support/f2837xd/include/device.h" targetDirectory="device" />
+    <file action="copy" path="../../device_support/f2837xd/include/device_profile.h" targetDirectory="device" />
+    
+    <file action="copy" path="../../common/include/aci.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/aci_const.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/aci_fe.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/aci_fe_const.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/aci_main.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/aci_se.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/aci_se_const.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/clarke.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/FastFPUTrigLib.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/iclarke.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/ipark.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/IQmathLib.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/parameter.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/park.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/pid_reg3.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/profile.h" targetDirectory="" />
+    <file action="copy" path="../../common/include/svgen.h" targetDirectory="" />
+    
+    <file action="copy" path="../../common/source/aci_const.c" targetDirectory="" />
+    <file action="copy" path="../../common/source/aci_fe_const.c" targetDirectory="" />
+    <file action="copy" path="../../common/source/aci_main.c" targetDirectory="" />
+    <file action="copy" path="../../common/source/aci_se_const.c" targetDirectory="" />
+    <file action="copy" path="../../common/source/profile.c" targetDirectory="" />
+    
+  </project>
+</projectSpec>

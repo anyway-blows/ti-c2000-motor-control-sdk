@@ -1,0 +1,17 @@
+% var module = system.modules['/driverlib/mcbsp.js'];
+% let Common   = system.getScript("/driverlib/Common.js");
+% var nameOfModule = "mcbsp";
+% var nameOfPeripheral = module.peripheralName;
+void `nameOfPeripheral`_init(){
+%if (module != null)
+%{
+	% for(var i = 0; i < module.$instances.length; i++) {
+	    % var instance = module.$instances[i];
+	//`instance.$name` initialization
+	    
+		% let instancePinmux = instance[nameOfModule];
+		% let solution    = instancePinmux.$solution;
+		% let peripheral  = system.deviceData.peripherals[solution.peripheralName];
+	%}
+%}
+}

@@ -1,0 +1,14 @@
+% var moduleName = "spi"
+% var module = system.modules['/driverlib/' + moduleName + '.js'];
+%if (module != null)
+%{
+    % for(var i = 0; i < module.$instances.length; i++) {
+        % var instance = module.$instances[i];
+        % let modInst  = instance[moduleName];
+        % let solution    = modInst.$solution;
+        %let peripheral  = system.deviceData.peripherals[solution.peripheralName];
+#define `instance.$name`_BASE `peripheral.name`_BASE
+#define `instance.$name`_BITRATE `parseInt(instance.bitRate)`
+    % }
+%}
+%

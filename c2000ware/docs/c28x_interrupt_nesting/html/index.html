@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>C28x Interrupt Nesting</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/tiicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="None" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> C28x Interrupt Nesting
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.0.0
+              </div>
+            
+          
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-interruptnesting">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#id1">Interrupt Prioritization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">C28x Interrupt Nesting</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>C28x Interrupt Nesting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound" id="interrupt-nesting-on-c28x">
+<span id="document-interruptnesting"></span><div class="section" id="introduction">
+<span id="interrupt-prioritization"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>A common question is whether C28x interrupts can be nested. This article explains how interrupt nesting can be achieved with simple changes to the interrupt service routine (ISR) code.</p>
+<p>This article assumes the reader is already familiar with the following:</p>
+<ul class="simple">
+<li><p>C28x PIE module: control registers, vector table, PIE groups</p></li>
+<li><p>C28x interrupt control registers: IER, IFR, INTM in particular.</p></li>
+</ul>
+<p>For more information on these topics please refer to the following:</p>
+<ul class="simple">
+<li><p>Interrupts at the CPU level and how the CPU responds to an interrupt is documented in the <a class="reference external" href="http://www.ti.com/lit/pdf/SPRU430">TMS320C28x CPU and Instruction Set Reference Guide (spru430)</a></p></li>
+<li><p>The <a class="reference external" href="https://training.ti.com/c2000-mcu-device-workshops">Workshop material</a> contains information on C28x interrupts.</p></li>
+<li><p>The peripheral interrupt expansion block (PIE) is described in the PIE section of the Technical Reference Manual (TRM) for a particular device family.</p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h1>Interrupt Prioritization<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hardware-prioritization">
+<h2><strong>Hardware Prioritization</strong><a class="headerlink" href="#hardware-prioritization" title="Permalink to this headline">¶</a></h2>
+<p>Interrupts are automatically prioritized by the C28x hardware. Prioritization for all interrupts can be found in the System Control guide specific to the particular device family. The following table shows the priority for multiplexed interrupts. Group 1, which corresponds to CPU INT1, has the highest priority. Within each group there are 8 interrupts with INTx.1 being the highest priority and INTx.8 having the lowest.</p>
+<table class="colwidths-given docutils align-default" id="hardware-interrupt-priority">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Hardware Interrupt Priority</span><a class="headerlink" href="#hardware-interrupt-priority" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Priority</p></th>
+<th class="head"><p>Group</p></th>
+<th class="head"><p>Interrupt</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Highest</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Group 1</p></td>
+<td><p>INT1.1</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Group 1</p></td>
+<td><p>INT1.2</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Group 1</p></td>
+<td><p>INT1.8</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Group 2</p></td>
+<td><p>INT2.1</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Group 2</p></td>
+<td><p>INT2.2</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Group 12</p></td>
+<td><p>INT12.1</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Group 12</p></td>
+<td><p>INT12.2</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Lowest</p></td>
+<td><p>Group 12</p></td>
+<td><p>INT12.8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pie-interrupt-organization">
+<h2><strong>PIE Interrupt Organization</strong><a class="headerlink" href="#pie-interrupt-organization" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The PIE block is organized such that the interrupts are in a logical order. Interrupts that typically require higher priority, are organized higher up in the table and will thus be serviced with a higher priority by default.</p>
+<p>The interrupts in a 28x system can be categorized as follows (ordered highest to lowest priority):</p>
+</div></blockquote>
+<ul>
+<li><dl>
+<dt>Non-Periodic, Fast Response</dt><dd><p>These are interrupts that can happen at any time and when they occur, they must be serviced as quickly as possible. Typically these interrupts monitor an external event.</p>
+<p>Such interrupts are allocated to the first few interrupts within PIE Group 1 and PIE Group 2. This position gives them the highest priority within the PIE group. In addition, Group 1 is multiplexed into the CPU interrupt INT1. CPU INT1 has the highest hardware priority. PIE Group 2 is multiplexed into the CPU INT2 which is the 2nd highest hardware priority.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Periodic, Fast Response</dt><dd><p>These interrupts occur at a known period, and when they do occur, they must be serviced as quickly as possible to minimize latency. The A/D converter is one good example of this. The A/D sample must be processed with minimum latency. Such interrupts are allocated to the group 1 in the PIE table. Group 1 is multiplexed into the CPU INT1. CPU INT1 has the highest hardware priority.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Periodic</dt><dd><p>These interrupts occur at a known period and must be serviced before the next interrupt. Some of the PWM interrupts are an example of this. Many of the registers are shadowed, so the user has the full period to update the register values. Such interrupts are mapped to group 2 - group 5. These groups are multiplexed into CPU INT3 to INT5 (the ePWM, eCAP and eQEP), which are the next lowest hardware priority.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Periodic, Buffered</dt><dd><p>These interrupts occur at periodic events, but are buffered and hence the processor need only service such interrupts when the buffers are ready to filled/emptied. All of the serial ports (SCI / SPI / I2C / CAN) either have FIFO’s or multiple mailboxes such that the CPU has plenty of time to respond to the events without fear of losing data. Such interrupts are mapped to INT6, INT8, and INT9, which are the next lowest hardware priority.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="c28x-interrupt-response-no-nesting-default-behavior">
+<h2><strong>C28x Interrupt Response - No Nesting (Default Behavior)</strong><a class="headerlink" href="#c28x-interrupt-response-no-nesting-default-behavior" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The remainder of this article describes how the C28x CPU responds to an interrupt request. It is assumed that the interrupt was enabled at the (a) peripheral level, the (b) PIE level and the (c) CPU level (IER and INTM) and now the CPU is ready to begin the interrupt service routine. :The following table shows the steps taken when an interrupt is serviced .</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Hardware: Items are performed by the silicon itself.  No action is required on the part of the software.</p></li>
+<li><p>Software: Items are performed in software.  When using the compiler these steps are handled by the compiler for any interrupt.  If the interrupt is in assembly, then these items must be taken care of by the user.</p></li>
+</ul>
+<p>Notice the following:</p>
+<ul class="simple">
+<li><p>Interrupts are automatically disabled when an interrupt service routine begins.</p></li>
+<li><p>Steps 1-3 are protected from interrupts by the hardware.</p></li>
+<li><p>Step 4 disables interrupts by setting the INTM and DBGM (global interrupt mask) bits. This prevents new interrupts from being serviced during the ISR.</p></li>
+<li><p>INTM and DBGM will stay set unless the software re-enables interrupts or the CPU returns from the ISR.</p></li>
+<li><p>The automatic context restore includes the INTM and DBGM bits.</p></li>
+</ul>
+<table class="colwidths-given docutils align-default" id="c28x-isr-without-nesting">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">C28x Interrupt Service Routine Without Nesting</span><a class="headerlink" href="#c28x-isr-without-nesting" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Hardware</p></th>
+<th class="head"><p>Software</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Empty the pipeline Automatic context Save</p></td>
+<td></td>
+<td><p>Protected from interrupts
+Context save is documented in <a class="reference external" href="http://www.ti.com/lit/pdf/spru430">C28x CPU Ref Guide (SPRU430)</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Clear corresponding IFRx bit</p></td>
+<td></td>
+<td><p>Protected from interrupts</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Clear corresponding IERx bit</p></td>
+<td></td>
+<td><p>Protected from interrupts</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Set INTM/DBGM and Clear LOOP, EALLOW, IDLESTAT</p></td>
+<td></td>
+<td><p>INTM=1 means maskable interrupts are now disabled
+These bits are in ST1 which was saved on the stack in step 1.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Request interrupt vector from PIE</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>PC = Vector</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td></td>
+<td><p>Execute the ASP instruction</p></td>
+<td><p>In C/C++ the compiler takes care of this. Makes sure the stack is even aligned
+INTM=1 so maskable interrupts are still disabled.</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td></td>
+<td><p>Manual context save (if needed)</p></td>
+<td><p>In C/C++ the compiler takes care of this.  Depends on what registers are used in the ISR.</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td></td>
+<td><p>Execute ISR routine
+Clear any required flags (ex: peripheral level)
+Acknowledge PIE group (PIEACK)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td></td>
+<td><p>Manual context restore (if needed)</p></td>
+<td><p>In C/C++ the compiler takes care of this</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td></td>
+<td><p>Execute the NASP instruction</p></td>
+<td><p>In C/C++ the compiler takes care of this. Reverses any alignment made by ASP</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td></td>
+<td><p>Execute IRET instruction</p></td>
+<td><p>Interrupt return</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>Automatic context restore</p></td>
+<td></td>
+<td><p>This will restore INTM to its previous state (enable interrupts). DBGM and IER</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>PC = return address</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td></td>
+<td><p>Continues execution</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="global-and-group-priority">
+<h2><strong>Global and Group Priority</strong><a class="headerlink" href="#global-and-group-priority" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The application software is in control of when interrupts are re-enabled within a interrupt service routine. This might be at the beginning of the routine or after some time-critical code has completed.</p>
+<p>There are two controls the software has:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Global Priority:
+This priority can be managed by manipulating the CPU IER register. This register controls the 16 maskable CPU interrupts (INT1 - INT16).</p></li>
+<li><p>Group Priority:
+This can be managed by manipulating the PIE block interrupt enable registers (PIEIERx). It is very important that only the PIEIERx register for the same group be changed.</p></li>
+</ul>
+<dl>
+<dt><strong>CAUTION</strong></dt><dd><p>Do not modify PIEIER registers outside of an ISR for that group. For example, PIEIER1 should only be modified within an ISR from group 1. Likewise PIEIER2 should only be modified within a group 2 ISR.</p>
+<p>This modification should be done while the PIEACK bit for the group is still set and therefore no interrupts will be sent to the CPU while the modification is being done.</p>
+<p>If this rule is violated, then spurious INTx.1 interrupts can be triggered. If this is required for an application, then the procedure outlined in section Peripherals Interrupts-&gt; Disabling Interrupts under System Control chapter in device TRM must be followed to avoid these spurious interrupts</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="adding-simple-software-prioritization-nesting">
+<h2><strong>Adding Simple Software Prioritization (Nesting)</strong><a class="headerlink" href="#adding-simple-software-prioritization-nesting" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Therefore, the steps required to nest interrupts are:</p>
+<dl>
+<dt><strong>Step 1</strong>: Set the global priority:</dt><dd><ul class="simple">
+<li><p>Modify the IER register to allow CPU interrupts with a higher user priority to be serviced.</p></li>
+<li><p>Note: at this time IER has already been saved on the stack.</p></li>
+</ul>
+</dd>
+<dt><strong>Step 2</strong>: Set the group priority: (optional)</dt><dd><ul class="simple">
+<li><p>Modify the appropriate PIEIERx register to allow group interrupts with a higher user set priority to be serviced.</p></li>
+<li><p>Do NOT clear PIEIER register bits from another group other than that being serviced by this ISR. Doing so can cause erroneous interrupts to occur.</p></li>
+</ul>
+</dd>
+<dt><strong>Step 3</strong>: Enable interrupts:</dt><dd><ul>
+<li><p>There are three steps to do this:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Clear the PIEACK bits</p></li>
+<li><p>Wait at least one cycle</p></li>
+<li><p>Clear the INTM bit. Use the assembly statement asm(” CLRC INTM”); or TI examples use #define EINT asm(” CLRC INTM”)</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt><strong>Step 4</strong>:</dt><dd><p>Run the main part of the ISR</p>
+</dd>
+<dt><strong>Step 5</strong>:</dt><dd><p>Set INTM to disable interrupts. Use asm(” SETC INTM”); or TI examples use #define DINT asm(” SETC INTM”)</p>
+</dd>
+<dt><strong>Step 6</strong>:</dt><dd><p>Restore PIEIERx (optional depending on step 2)</p>
+</dd>
+<dt><strong>Step 7</strong>: Return from ISR</dt><dd><ul class="simple">
+<li><p>This will restore INTM and IER automatically.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<div class="section" id="example-code">
+<h3>Example code<a class="headerlink" href="#example-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// // C28x ISR Code // // Enable nested interrupts // // interrupt</span>
+<span class="kt">void</span> <span class="nf">EPWM1_TZINT_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="kt">uint16_t</span> <span class="n">TempPIEIER</span><span class="p">;</span>
+        <span class="n">TempPIEIER</span> <span class="o">=</span> <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEIER2</span><span class="p">.</span><span class="n">all</span><span class="p">;</span> <span class="c1">// Save PIEIER register for later</span>
+        <span class="n">IER</span> <span class="o">|=</span> <span class="mh">0x002</span><span class="p">;</span>                         <span class="c1">// Set global priority by adjusting IER</span>
+        <span class="n">IER</span> <span class="o">&amp;=</span> <span class="mh">0x002</span><span class="p">;</span>
+        <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEIER2</span><span class="p">.</span><span class="n">all</span> <span class="o">&amp;=</span> <span class="mh">0x0002</span><span class="p">;</span>    <span class="c1">// Set group priority by adjusting PIEIER2 to allow INT2.2 to interrupt current ISR</span>
+        <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEACK</span><span class="p">.</span><span class="n">all</span> <span class="o">=</span> <span class="mh">0xFFFF</span><span class="p">;</span>      <span class="c1">// Enable PIE interrupts</span>
+        <span class="k">asm</span><span class="p">(</span><span class="s">&quot;       NOP&quot;</span><span class="p">);</span>                    <span class="c1">// Wait one cycle</span>
+        <span class="n">EINT</span><span class="p">;</span>                                 <span class="c1">// Clear INTM to enable interrupts</span>
+        <span class="c1">//</span>
+        <span class="c1">// Insert ISR Code here.......</span>
+        <span class="c1">// for now just insert a delay</span>
+        <span class="c1">//</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{}</span>
+        <span class="c1">//</span>
+        <span class="c1">// Restore registers saved:</span>
+        <span class="c1">//</span>
+        <span class="n">DINT</span><span class="p">;</span>
+        <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEIER2</span><span class="p">.</span><span class="n">all</span> <span class="o">=</span> <span class="n">TempPIEIER</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-using-mask-values-to-manage-the-prioritization">
+<h2><strong>Example: Using Mask Values to Manage the Prioritization</strong><a class="headerlink" href="#example-using-mask-values-to-manage-the-prioritization" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In most cases a system will only require one or two interrupts to be nested. This is easily handled by the example shown previously.
+There is, however, an example provided by which covers possibilities for every single interrupt in the group. This example provides a method for managing the global and group priorities using simple mask values that are configured during compile time. This allows the priorities to be managed easily.
+This scheme is included in C2000Ware. Refer to the software prioritization example in the device support for your particular device.</p>
+</div></blockquote>
+<div class="section" id="example-configuration">
+<h3>Example Configuration<a class="headerlink" href="#example-configuration" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The configuration used by the example is done in the DSP280x_SWPrioritizedIsrLevels.h file. To configure the prioritization:
+* Assign global priority levels</p>
+<blockquote>
+<div><p>INT1PL - INT16PL</p>
+<p>These values are used to assign a priority level to each of the 16 interrupts controlled by the CPU IER register. A value of 1 is the highest priority while a value of 16 is the lowest. More then one interrupt can be assigned the same priority level. In this case the default hardware priority would determine which would be serviced first. A priority of 0 is used to indicate that the interrupt is not used.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Assign PIE group priority levels
+GxyPL (where x = PIE group number 1 - 12 and y = interrupt number 1 - 8)
+These values are used to assign a priority level to each of the 8 interrupts within a PIE group. A value of 1 is the highest priority while a value of 8 is the lowest. More then one interrupt can be assigned the same priority level. In this case the default hardware priority would determine which would be serviced first. A priority of 0 is used to indicate that the interrupt is not used.</p></li>
+</ul>
+<p>The compiler will use the assigned global and group priority levels to generate mask values that can be used to change the IER and PIEIERx registers.  The application uses these mask values within each ISR to specify which interrupts are allowed to be serviced within an ISR.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mask-values-generated">
+<h3>MASK Values Generated<a class="headerlink" href="#mask-values-generated" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The masks that are generated at compile time are:
+* IER mask values:</p>
+<blockquote>
+<div><p>MINT1 - MINT16</p>
+<p>The user assigned INT1PL - INT16PL values are used at compile time to calculate an IER mask for each CPU interrupt. This mask value will be used within an ISR to allowCPU interrupts with a higher priority to interrupt the current ISR and thus be serviced at a higher priority level.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>PIEIERxy mask values:
+MGxy (where x = PIE group number 1 - 12 and y = interrupt number 1 - 8)
+The assigned group priority levels (GxyPL) are used at compile time to calculate PIEIERx masks for each PIE group. This mask value will be used within an ISR to allow interrupts within the same group that have a higher assigned priority to interrupt the current ISR and thus be serviced at a higher priority level.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="using-the-mask-values">
+<h3>Using the MASK Values<a class="headerlink" href="#using-the-mask-values" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Within an interrupt service routine, the global and group priority can be changed by software to allow other interrupts to be serviced. The steps are the same as described before. The only difference is the mask values for IER and PIEIERx have been managed in the DSP28_SWPrioritizedIsrLevels.h file.</p>
+</div></blockquote>
+<dl>
+<dt><strong>Step 1</strong>: Set the global priority</dt><dd><ul class="simple">
+<li><p>Modify IER to allow CPU interrupts from the same PIE group as the current ISR.</p></li>
+<li><p>Modify IER to allow CPU interrupts with a higher user defined priority to be serviced.</p></li>
+</ul>
+</dd>
+<dt><strong>Step 2</strong>: Set the group priority</dt><dd><ul class="simple">
+<li><p>Save the current PIEIERx value to a temporary register.</p></li>
+<li><p>The PIEIER register is then set to allow interrupts with a higher priority within a PIE group to be serviced.</p></li>
+</ul>
+</dd>
+<dt><strong>Step 3</strong>: Enable interrupts</dt><dd><ul>
+<li><p>This requires 3 steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Enable all PIE interrupt groups by writing all 1’s to the PIEACK register</p></li>
+<li><p>Wait at least one cycle</p></li>
+<li><p>Enable global interrupts by clearing INTM</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt><strong>Step 4</strong>: Execute ISR.</dt><dd><p>Interrupts that were enabled in steps 1-3 (those with a higher software priority) will be allowed to interrupt the current ISR and thus be serviced first.</p>
+</dd>
+<dt><strong>Step 5</strong> :</dt><dd><p>Disable interrupts</p>
+</dd>
+<dt><strong>Step 6</strong>:</dt><dd><p>Restore the PIEIERx register</p>
+</dd>
+<dt><strong>Step 7</strong>:</dt><dd><p>Exit</p>
+</dd>
+</dl>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// // C28x ISR Code // // Enable nested interrupts using masks defined // in the software prioritization example code // // Connected to PIEIER2_1 (use MINT2 and MG21 masks) //</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">G21PL</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">interrupt</span> <span class="kt">void</span> <span class="n">EPWM1_TZINT_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="c1">// EPWM1 Trip Zone</span>
+<span class="p">{</span>
+        <span class="kt">uint16_t</span> <span class="n">TempPIEIER</span><span class="p">;</span>
+        <span class="n">TempPIEIER</span> <span class="o">=</span> <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEIER2</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+        <span class="n">IER</span> <span class="o">|=</span> <span class="n">M_INT2</span><span class="p">;</span>
+        <span class="n">IER</span> <span class="o">&amp;=</span> <span class="n">MINT2</span><span class="p">;</span>                         <span class="c1">// Set &quot;global&quot; priority</span>
+        <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEIER2</span><span class="p">.</span><span class="n">all</span> <span class="o">&amp;=</span> <span class="n">MG21</span><span class="p">;</span>      <span class="c1">// Set &quot;group&quot; priority</span>
+        <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEACK</span><span class="p">.</span><span class="n">all</span> <span class="o">=</span> <span class="mh">0xFFFF</span><span class="p">;</span>      <span class="c1">// Enable PIE interrupts</span>
+        <span class="k">asm</span><span class="p">(</span><span class="s">&quot;       NOP&quot;</span><span class="p">);</span>                    <span class="c1">// Wait one cycle</span>
+        <span class="n">EINT</span><span class="p">;</span>                                 <span class="c1">// Clear INTM to enable interrupts</span>
+        <span class="c1">//</span>
+        <span class="c1">// Insert ISR Code here.......</span>
+        <span class="c1">// for now just insert a delay</span>
+        <span class="c1">//</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{}</span>
+        <span class="c1">//</span>
+        <span class="c1">// Restore registers saved:</span>
+        <span class="c1">//</span>
+        <span class="n">DINT</span><span class="p">;</span>
+        <span class="n">PieCtrlRegs</span><span class="p">.</span><span class="n">PIEIER2</span><span class="p">.</span><span class="n">all</span> <span class="o">=</span> <span class="n">TempPIEIER</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">2020, Texas Instruments Incorporated</a>, Texas Instruments Incorporated. All rights reserved. <br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+      <span class="lastupdated">
+        Last updated on Feb 12, 2021.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+    <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+
+        $('body').on("mousewheel", function () {
+            // Remove default behavior
+            event.preventDefault();
+            // Scroll without smoothing
+            var wheelDelta = event.wheelDelta;
+            var currentScrollPosition = window.pageYOffset;
+            window.scrollTo(0, currentScrollPosition - wheelDelta);
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

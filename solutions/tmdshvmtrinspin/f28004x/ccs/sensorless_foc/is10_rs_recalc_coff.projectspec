@@ -1,0 +1,135 @@
+<projectSpec>
+  <project
+        name="is10_rs_recalc_coff"
+        device="Generic C28xx Device"
+        cgtVersion="20.2.2.LTS"
+		    outputFormat="COFF"	
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+
+    <configuration name="RAM_Lib" 
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --tmu_support=tmu0 -O2 --fp_mode=relaxed 
+            -I${MCSDK_ROOT} 
+            -I${MCSDK_ROOT}/libraries/control/ctrl/include 
+            -I${MCSDK_ROOT}/libraries/control/pi/include 
+            -I${MCSDK_ROOT}/libraries/control/vsf/include 
+            -I${MCSDK_ROOT}/libraries/control/fwc/include 
+            -I${MCSDK_ROOT}/libraries/control/mtpa/include 
+            -I${MCSDK_ROOT}/libraries/control/vs_freq/include 
+            -I${MCSDK_ROOT}/libraries/filter/filter_fo/include 
+            -I${MCSDK_ROOT}/libraries/filter/filter_so/include 
+            -I${MCSDK_ROOT}/libraries/filter/offset/include 
+            -I${MCSDK_ROOT}/libraries/observers/est/include 
+            -I${MCSDK_ROOT}/libraries/observers/mpid/include 
+            -I${MCSDK_ROOT}/libraries/transforms/clarke/include 
+            -I${MCSDK_ROOT}/libraries/transforms/ipark/include 
+            -I${MCSDK_ROOT}/libraries/transforms/park/include 
+            -I${MCSDK_ROOT}/libraries/transforms/svgen/include 
+            -I${MCSDK_ROOT}/libraries/utilities/angle_gen/include 
+            -I${MCSDK_ROOT}/libraries/utilities/cpu_time/include 
+            -I${MCSDK_ROOT}/libraries/utilities/datalog/include  
+            -I${MCSDK_ROOT}/libraries/utilities/diagnostic/include 
+            -I${MCSDK_ROOT}/libraries/utilities/traj/include 
+            -I${MCSDK_ROOT}/libraries/utilities/types/include 
+            -I${MCSDK_ROOT}/solutions/common/sensorless_foc/include/ 
+            -I${MCSDK_ROOT}/solutions/tmdshvmtrinspin/f28004x/drivers/include 
+            -I${} 
+            -I${C2000WARE_DLIB_ROOT} 
+            -I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+            -I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+            --define=_INLINE --define=_RAM --define= _F28004x
+            --define=_HVKIT_REV1p1_ 
+            --define=DATALOG_ENABLE --define=PWMDAC_ENABLE 
+            --gen_func_subsections=on --abi=coffabi
+            --display_error_number --diag_warning=225 --diag_suppress=10063" 
+        linkerBuildOptions="--entry_point code_start --stack_size=0x300
+            -I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib
+            -llibc.a -w" />
+
+    <configuration name="Flash_Lib" 
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --tmu_support=tmu0 -O2 --fp_mode=relaxed 
+            -I${MCSDK_ROOT} 
+            -I${MCSDK_ROOT}/libraries/control/ctrl/include 
+            -I${MCSDK_ROOT}/libraries/control/pi/include 
+            -I${MCSDK_ROOT}/libraries/control/vsf/include 
+            -I${MCSDK_ROOT}/libraries/control/fwc/include 
+            -I${MCSDK_ROOT}/libraries/control/mtpa/include 
+            -I${MCSDK_ROOT}/libraries/control/vs_freq/include 
+            -I${MCSDK_ROOT}/libraries/filter/filter_fo/include 
+            -I${MCSDK_ROOT}/libraries/filter/filter_so/include 
+            -I${MCSDK_ROOT}/libraries/filter/offset/include 
+            -I${MCSDK_ROOT}/libraries/observers/est/include 
+            -I${MCSDK_ROOT}/libraries/observers/mpid/include
+            -I${MCSDK_ROOT}/libraries/transforms/clarke/include 
+            -I${MCSDK_ROOT}/libraries/transforms/ipark/include 
+            -I${MCSDK_ROOT}/libraries/transforms/park/include 
+            -I${MCSDK_ROOT}/libraries/transforms/svgen/include 
+            -I${MCSDK_ROOT}/libraries/utilities/angle_gen/include 
+            -I${MCSDK_ROOT}/libraries/utilities/cpu_time/include 
+            -I${MCSDK_ROOT}/libraries/utilities/datalog/include  
+            -I${MCSDK_ROOT}/libraries/utilities/diagnostic/include 
+            -I${MCSDK_ROOT}/libraries/utilities/traj/include 
+            -I${MCSDK_ROOT}/libraries/utilities/types/include 
+            -I${MCSDK_ROOT}/solutions/common/sensorless_foc/include/ 
+            -I${MCSDK_ROOT}/solutions/tmdshvmtrinspin/f28004x/drivers/include 
+            -I${} 
+            -I${C2000WARE_DLIB_ROOT} 
+            -I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+            -I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+            --define=_INLINE --define=_FLASH --define= _F28004x
+            --define=_HVKIT_REV1p1_ 
+            --define=DATALOG_ENABLE --define=PWMDAC_ENABLE 
+            --gen_func_subsections=on --abi=coffabi
+            --display_error_number --diag_warning=225 --diag_suppress=10063" 
+        linkerBuildOptions="--entry_point code_start --stack_size=0x300
+            -I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib
+            -llibc.a -w" />
+
+    <pathVariable name="MCSDK_ROOT" path="../../../../.." scope="project" />
+    <pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f28004x" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f28004x/driverlib" scope="project" />
+
+    <file action="link" path="MCSDK_ROOT/solutions/tmdshvmtrinspin/f28004x/drivers/source/hal.c" targetDirectory="src_board" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/f28004x_codestartbranch.asm" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/f28004x_globalvariabledefs.c" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/cmd/f28004x_headers_nonbios.cmd" targetDirectory="src_device" />
+	
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/f28004x_dcsm_z1otp.asm" targetDirectory="src_device" applicableConfigurations="Flash_Lib" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/f28004x_dcsm_z2otp.asm" targetDirectory="src_device" applicableConfigurations="Flash_Lib" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="src_lib" />
+	  <file action="link" path="MCSDK_ROOT/libraries/observers/fast/lib/f28004x/f28004x_fast_rom_symbols_fpu32.lib" targetDirectory="src_lib" />	
+    <file action="link" path="MCSDK_ROOT/libraries/observers/mpid/lib/fluxHF.lib" targetDirectory="src_lib" />	
+
+    <file action="link" path="MCSDK_ROOT/solutions/tmdshvmtrinspin/f28004x/cmd/f28004x_dcsm_lnk_coff.cmd" targetDirectory="src_device" applicableConfigurations="Flash_Lib" />
+    <file action="link" path="MCSDK_ROOT/solutions/tmdshvmtrinspin/f28004x/cmd/f28004x_ram_cpu_is_coff.cmd" targetDirectory="src_device" applicableConfigurations="RAM_Lib" />
+    <file action="link" path="MCSDK_ROOT/solutions/tmdshvmtrinspin/f28004x/cmd/f28004x_flash_cpu_is_coff.cmd" targetDirectory="src_device" applicableConfigurations="Flash_Lib" />
+
+    <file action="link" path="MCSDK_ROOT/libraries/control/ctrl/source/ctrl.c" targetDirectory="src_fast" />
+    <file action="link" path="MCSDK_ROOT/libraries/observers/est/source/user.c" targetDirectory="src_fast" />
+
+    <file action="link" path="MCSDK_ROOT/libraries/transforms/clarke/source/clarke.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/utilities/datalog/source/datalog.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/filter/filter_fo/source/filter_fo.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/filter/filter_so/source/filter_so.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/transforms/ipark/source/ipark.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/filter/offset/source/offset.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/transforms/park/source/park.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/control/pi/source/pi.c" targetDirectory="src_foc" />
+	  <file action="link" path="MCSDK_ROOT/libraries/control/vsf/source/vsf.c" targetDirectory="src_foc" />	
+    <file action="link" path="MCSDK_ROOT/libraries/control/fwc/source/fwc.c" targetDirectory="src_foc" />	
+    <file action="link" path="MCSDK_ROOT/libraries/control/mtpa/source/mtpa.c" targetDirectory="src_foc" />		
+    <file action="link" path="MCSDK_ROOT/libraries/transforms/svgen/source/svgen.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/transforms/svgen/source/svgen_current.c" targetDirectory="src_foc" />	
+    <file action="link" path="MCSDK_ROOT/libraries/utilities/traj/source/traj.c" targetDirectory="src_foc" />
+    <file action="link" path="MCSDK_ROOT/libraries/utilities/cpu_time/source/cpu_time.c" targetDirectory="src_foc" />
+
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensorless_foc/source/is10_rs_recalc.c" targetDirectory="" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensorless_foc/debug/is10_rs_recalc.js" targetDirectory="" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F280049C.ccxml" targetDirectory="" />
+
+  </project>
+</projectSpec>

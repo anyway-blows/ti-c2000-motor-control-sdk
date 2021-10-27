@@ -1,0 +1,51 @@
+<projectSpec>
+  <project
+        name="pto_pulsegen_f2838x_boostxl_posmgr"
+        device="TMS320F28388D"
+        cgtVersion="18.12.3.LTS"
+        launchWizard="False"
+        outputFormat="ELF"
+        linkerCommandFile=""
+        >
+  
+    <configuration
+        name="F2838x_RAM"
+        compilerBuildOptions="-v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --vcu_support=vcu2 -O4 --opt_for_speed=5 
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+							-I${C2000WARE_DLIB_ROOT} -I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/ 
+							-I${SDK_ROOT}/libraries/position_sensing/pto/include 
+							-I${SDK_ROOT}/solutions/boostxl_posmgr/f28004x/include 
+							--define=_DEBUG --define=CPU1 --define=LARGE_MODEL
+							--abi=eabi --float_operations_allowed=32 -g --diag_warning=225 --quiet -k --asm_listing"
+							
+        linkerBuildOptions="--stack_size=0x380 
+							-I${SDK_ROOT}/libraries/position_sensing/pto/lib 
+							-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib 
+							-I${C2000WARE_DLIB_ROOT}/ccs/Release 
+							-ldriverlib.lib -lpto_pulsegen_f2838x.lib -lrts2800_fpu32_eabi.lib -lIQmath_fpu32.lib"
+        />
+    
+    <pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f2838x" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f2838x/driverlib/" scope="project" />
+    <pathVariable name="C2000WARE_LIB_ROOT" path="../../../../../c2000ware/libraries" scope="project" />
+    <pathVariable name="SDK_ROOT" path="../../../../../" scope="project" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F28388D.ccxml" targetDirectory="" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/f2838x_GlobalVariableDefs.c" targetDirectory="common" />
+
+    <file action="copy" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/device.c" targetDirectory="device" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="src" />
+    
+    <file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/f2838x/cmd/PM_encoder_2838x_RAM_lnk_cpu1.cmd" targetDirectory="cmd" applicableConfigurations="F2838x_RAM" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/cmd/f2838x_Headers_nonBIOS_cpu1.cmd" targetDirectory="common" />
+    
+    <file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/f2838x/source/pulsegen.c" targetDirectory="source" />
+	<file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/f2838x/include/pulsegen.h" targetDirectory="include" />
+    <file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/f2838x/source/pto_pulsegen_main.c" targetDirectory="source"/>
+      
+  </project>
+</projectSpec>  
+    
+

@@ -1,0 +1,16 @@
+CLB Tool Release Notes 10/18/2020
+===================================================
+
+
+1. Differences w.r.t. previous version
+----------------------------
+
+a. Type 3 features added
+
+
+
+2. Limitations of this Release
+------------------------------------
+
+This release requires CCSv10.1 CCS version for F28002x and F2838x CLB OUTPUTXBAR support.
+AOC system C simulation models not included.

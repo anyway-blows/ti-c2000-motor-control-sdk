@@ -1,0 +1,50 @@
+{
+    "name": "C2000WARE",
+    "displayName": "C2000 SysConfig",
+    "version": "3.00.00.00",
+    "documentationPath": "./doc",
+
+    "includePaths": [
+        ".."
+    ],
+
+    "templates": [{
+            "name": "/driverlib/board.c.xdt",
+            "outputPath": "board.c",
+            "alwaysRun": true
+        },
+        {
+            "name": "/driverlib/board.h.xdt",
+            "outputPath": "board.h",
+            "alwaysRun": true
+        },
+        {
+            "name": "/driverlib/pinmux.csv.xdt",
+            "outputPath": "pinmux.csv",
+            "alwaysRun": true
+        }
+    ],
+
+
+	// "pinmuxUIOptions": {
+	//                "showUsed": true,
+	//                "showSignals": true,
+	//                "collapseTab": false
+	// }
+	// ,
+
+    "components": [
+        "/driverlib/PeripheralComponents.js",
+        "/utilities/clb_tool/clb_syscfg/source/CLBToolComponents.js",
+        "/utilities/dcsm_tool/dcsm_syscfg/source/DCSMToolComponents.js"
+    ],
+
+    "devices": [
+        "F28004x",
+        "F2837xD",
+        "F2837xS",
+        "F2807x",
+        "F2838x",
+        "F28002x"
+    ]
+}

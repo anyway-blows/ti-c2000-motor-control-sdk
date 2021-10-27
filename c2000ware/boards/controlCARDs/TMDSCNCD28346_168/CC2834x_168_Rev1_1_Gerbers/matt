@@ -1,0 +1,214 @@
+
+
+ ----DRC Report---    Wed Jan 28 17:42:55 2009
+
+
+Minimum air-gap separation (inch)
+	Trace/Trace... 0.0030  Trace/Pad...0.0030  Pad/Pad... 0.0030
+Annular ring clearance (CPU/CPL) (inch)...0.0040
+Annular ring clearance (Plane) (inch)...0.0040
+Annular ring clearance (Other) (inch)...0.0025
+Thermal ring clearance (inch)...0.0020
+Solder Mask annular ring clearance (inch)...0.0080
+Solder Mask air gap clearance (inch)...0.0080
+
+CPL   component layer (lower)
+CPU   component layer (upper)
+DRI   drill layer
+GD1   ground layer
+GD2   ground layer
+GD3   ground layer
+GD4   ground layer
+GD5   ground layer
+GS1   ground split
+GS2   ground split
+GS3   ground split
+GS4   ground split
+GS5   ground split
+MSL   solder mask layer (lower)
+MSU   solder mask layer (upper)
+OTH   internal signal layer
+PAD   Gerber drill layer
+PS1   power split
+PS2   power split
+PS3   power split
+PS4   power split
+PS5   power split
+PW1   power layer
+PW2   power layer
+PW3   power layer
+PW4   power layer
+PW5   power layer
+SIG   signal layer
+SKL   silkscreen layer (lower)
+SKU   silkscreen layer (upper)
+SPL   solder paste layer (lower)
+SPU   solder paste layer (upper)
+VIA   via (Gerber)
+VID   via (Drill)
+BOL   board outline
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+Files and Type:
+ART01.PHO...SIG
+
+
+File name:ART01.PHO
+    T-T Air-Gap ................. 0     
+    T-P Air-Gap ................. 0     
+    P-P Air-Gap ................. 0     
+
+
+D Code map for Gerber error file :
+ Unterminated Traces Ends.....		600  (T)
+ T-T Air-Gap .................
+ T-P Air-Gap .................		601  (T)		602  (P)
+ P-P Air-Gap .................
+ Centerline Connection .......		603  (T)		604  (P)
+ P-P Connection ..............		605  (P)
+ Solder Mask .................		607  (T)		606  (P)
+ Annular Ring ................		608  (P)
+ Trace Intersections .........		609  (P)
+ Outline to Copper area ......		610  (T)		611  (P)
+
+File name:ART01.PHO
+Plot Size: 7.225 X 4.009 (inch)
+Corners: (1.004,1.004), (8.229, 5.013)
+
+			3555 traces and 1179 pads checked
+
+
+
+D Code    Aperture Shape    X Axis Size   Y Axis Size
+  10        C                0.0100        0.0000
+  11        C                0.0400        0.0000
+  12        C                0.0200        0.0000
+  13        C                0.0080        0.0000
+  23        C                0.0150        0.0000
+  44        S                0.0100        0.0000
+ 103        C                0.0050        0.0000
+ 105        S                0.0400        0.0000
+ 116        S                0.0200        0.0000
+ 118        S                0.0300        0.0000
+ 177        S                0.0280        0.0000
+ 178        C                0.0240        0.0000
+ 205        C                0.0070        0.0000
+ 207        S                0.0480        0.0000
+ 208        S                0.0256        0.0000
+ 209        C                0.0160        0.0000
+ 210        C                0.0118        0.0000
+ 211        C                0.0110        0.0000
+ 212        S                0.0787        0.0000
+ 213        S                0.0394        0.0000
+ 214        C                0.1181        0.0000
+ 215        C                0.0040        0.0000
+ 216        C                0.0170        0.0000
+*************** AIR GAP ERROR TALLY [ART01.PHO]*****************
+	-------------------
+                    Total 0 
+
+****************************************************
+
+	-----------------------
+
+
+Total time used: (00:00:02)

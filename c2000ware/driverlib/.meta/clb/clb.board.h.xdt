@@ -1,0 +1,11 @@
+% var moduleName = "clb"
+% var module = system.modules['/driverlib/' + moduleName + '.js'];
+%if (module != null)
+%{
+    % for(var i = 0; i < module.$instances.length; i++) {
+        % var instance = module.$instances[i];
+        % let modInst  = instance[moduleName];
+#define `instance.$name`_BASE `instance.clbBase`
+    % }
+%}
+%

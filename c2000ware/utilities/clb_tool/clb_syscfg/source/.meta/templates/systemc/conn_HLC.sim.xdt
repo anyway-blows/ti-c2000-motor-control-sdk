@@ -1,0 +1,175 @@
+%%{
+    let inst      = args[0];
+    let tileName  = args[1];
+    let instNum   = args[2];
+    let inputs    = args[3];
+    let name      = tileName + "_HLC";
+    let Common    = system.getScript("/utilities/clb_tool/clb_syscfg/source/Common.js");
+
+%%}
+% for (let j = 0; j < inputs.length; ++j) {
+%    let inName = inputs[j];
+%    let inFrom = inst[inName].replace("BOUNDARY.in","BOUNDARY_IN.out");
+%    let sigName = 'sig_' + name + '_' + inName;
+        `name`.`inName`        (`sigName`);
+        sc_trace(tf, `name`.`inName`, "`name`.`inName`");
+% }
+#if TYPE == 2 || TYPE == 3
+        `name`.ae0       (sig_`name`_ae0);
+        `name`.ae1       (sig_`name`_ae0);
+        `name`.ae2       (sig_`name`_ae0);
+        `name`.ae3       (sig_`name`_ae0);
+        sc_trace(tf, `name`.ae0,            "`name`.ae0");
+        sc_trace(tf, `name`.ae1,            "`name`.ae1");
+        sc_trace(tf, `name`.ae2,            "`name`.ae2");
+        sc_trace(tf, `name`.ae3,            "`name`.ae3");
+
+        `name`.clb_result_in[0] (sig_`tileName`_BOUNDARY_OUT_out0);
+        `name`.clb_result_in[1] (sig_`tileName`_BOUNDARY_OUT_out1);
+        `name`.clb_result_in[2] (sig_`tileName`_BOUNDARY_OUT_out2);
+        `name`.clb_result_in[3] (sig_`tileName`_BOUNDARY_OUT_out3);
+        `name`.clb_result_in[4] (sig_`tileName`_BOUNDARY_OUT_out4);
+        `name`.clb_result_in[5] (sig_`tileName`_BOUNDARY_OUT_out5);
+        `name`.clb_result_in[6] (sig_`tileName`_BOUNDARY_OUT_out6);
+        `name`.clb_result_in[7] (sig_`tileName`_BOUNDARY_OUT_out7);
+        sc_trace(tf, `name`.clb_result_in[0],           "`name`.clb_result_in(0)");
+        sc_trace(tf, `name`.clb_result_in[1],           "`name`.clb_result_in(1)");
+        sc_trace(tf, `name`.clb_result_in[2],           "`name`.clb_result_in(2)");
+        sc_trace(tf, `name`.clb_result_in[3],           "`name`.clb_result_in(3)");
+        sc_trace(tf, `name`.clb_result_in[4],           "`name`.clb_result_in(4)");
+        sc_trace(tf, `name`.clb_result_in[5],           "`name`.clb_result_in(5)");
+        sc_trace(tf, `name`.clb_result_in[6],           "`name`.clb_result_in(6)");
+        sc_trace(tf, `name`.clb_result_in[7],           "`name`.clb_result_in(7)");
+
+        `name`.clb_async_result_in[0] (sig_`tileName`_BOUNDARY_OUT_out0);
+        `name`.clb_async_result_in[1] (sig_`tileName`_BOUNDARY_OUT_out1);
+        `name`.clb_async_result_in[2] (sig_`tileName`_BOUNDARY_OUT_out2);
+        `name`.clb_async_result_in[3] (sig_`tileName`_BOUNDARY_OUT_out3);
+        `name`.clb_async_result_in[4] (sig_`tileName`_BOUNDARY_OUT_out4);
+        `name`.clb_async_result_in[5] (sig_`tileName`_BOUNDARY_OUT_out5);
+        `name`.clb_async_result_in[6] (sig_`tileName`_BOUNDARY_OUT_out6);
+        `name`.clb_async_result_in[7] (sig_`tileName`_BOUNDARY_OUT_out7);
+        sc_trace(tf, `name`.clb_async_result_in[0],     "`name`.clb_async_result_in(0)");
+        sc_trace(tf, `name`.clb_async_result_in[1],     "`name`.clb_async_result_in(1)");
+        sc_trace(tf, `name`.clb_async_result_in[2],     "`name`.clb_async_result_in(2)");
+        sc_trace(tf, `name`.clb_async_result_in[3],     "`name`.clb_async_result_in(3)");
+        sc_trace(tf, `name`.clb_async_result_in[4],     "`name`.clb_async_result_in(4)");
+        sc_trace(tf, `name`.clb_async_result_in[5],     "`name`.clb_async_result_in(5)");
+        sc_trace(tf, `name`.clb_async_result_in[6],     "`name`.clb_async_result_in(6)");
+        sc_trace(tf, `name`.clb_async_result_in[7],     "`name`.clb_async_result_in(7)");
+#endif
+#if TYPE == 3
+        `name`.RECONFIG_PIPELINE_EN       (sig_`name`_RECONFIG_PIPELINE_EN);
+        sc_trace(tf, `name`.RECONFIG_PIPELINE_EN,            "`name`.RECONFIG_PIPELINE_EN");
+#endif
+        `name`.P_clk(sc_top_clock);
+        `name`.P_glbl_load_en(sc_top_enable);
+        `name`.P_rst_n(sc_top_reset);
+        `name`.P_counter_in_0(sig_`tileName`_COUNTER_0_count_out);
+        `name`.P_counter_in_1(sig_`tileName`_COUNTER_1_count_out);
+        `name`.P_counter_in_2(sig_`tileName`_COUNTER_2_count_out);
+        `name`.P_local_count_load_enable_0(sig_`tileName`_COUNTER_0_hlc_count_load_en);
+        `name`.P_local_count_load_enable_1(sig_`tileName`_COUNTER_1_hlc_count_load_en);
+        `name`.P_local_count_load_enable_2(sig_`tileName`_COUNTER_2_hlc_count_load_en);
+        `name`.P_local_count_match1_enable_0(sig_`tileName`_COUNTER_0_hlc_match1_load_en);
+        `name`.P_local_count_match1_enable_1(sig_`tileName`_COUNTER_1_hlc_match1_load_en);
+        `name`.P_local_count_match1_enable_2(sig_`tileName`_COUNTER_2_hlc_match1_load_en);
+        `name`.P_local_count_match2_enable_0(sig_`tileName`_COUNTER_0_hlc_match2_load_en);
+        `name`.P_local_count_match2_enable_1(sig_`tileName`_COUNTER_1_hlc_match2_load_en);
+        `name`.P_local_count_match2_enable_2(sig_`tileName`_COUNTER_2_hlc_match2_load_en);
+
+        sc_trace(tf, `name`.P_clk,            "`name`.P_clk");
+        sc_trace(tf, `name`.P_glbl_load_en,   "`name`.P_glbl_load_en");
+        sc_trace(tf, `name`.P_rst_n,          "`name`.P_rst_n");
+        sc_trace(tf, `name`.P_counter_in_0, "`name`.P_counter_in_0");
+        sc_trace(tf, `name`.P_counter_in_1, "`name`.P_counter_in_1");
+        sc_trace(tf, `name`.P_counter_in_2, "`name`.P_counter_in_2");
+        sc_trace(tf, `name`.P_local_count_load_enable_0, "`name`.P_local_count_load_enable_0");
+        sc_trace(tf, `name`.P_local_count_load_enable_1, "`name`.P_local_count_load_enable_1");
+        sc_trace(tf, `name`.P_local_count_load_enable_2, "`name`.P_local_count_load_enable_2");
+        sc_trace(tf, `name`.P_local_count_match1_enable_0, "`name`.P_local_count_match1_enable_0");
+        sc_trace(tf, `name`.P_local_count_match1_enable_1, "`name`.P_local_count_match1_enable_1");
+        sc_trace(tf, `name`.P_local_count_match1_enable_2, "`name`.P_local_count_match1_enable_2");
+        sc_trace(tf, `name`.P_local_count_match2_enable_0, "`name`.P_local_count_match2_enable_0");
+        sc_trace(tf, `name`.P_local_count_match2_enable_1, "`name`.P_local_count_match2_enable_1");
+        sc_trace(tf, `name`.P_local_count_match2_enable_2, "`name`.P_local_count_match2_enable_2");
+
+        `name`.P_EVENT_BUS_IN[0](sc_zero);
+        `name`.P_EVENT_BUS_IN[1](sig_`tileName`_COUNTER_0_count_match2);
+        `name`.P_EVENT_BUS_IN[2](sig_`tileName`_COUNTER_0_count_zero);
+        `name`.P_EVENT_BUS_IN[3](sig_`tileName`_COUNTER_0_count_match1);
+        `name`.P_EVENT_BUS_IN[4](sig_`tileName`_FSM_0_S0);
+        `name`.P_EVENT_BUS_IN[5](sig_`tileName`_FSM_0_S1);
+        `name`.P_EVENT_BUS_IN[6](sig_`tileName`_FSM_0_OUT);
+        `name`.P_EVENT_BUS_IN[7](sig_`tileName`_LUT_0_OUT);
+        `name`.P_EVENT_BUS_IN[8](sc_one);
+        `name`.P_EVENT_BUS_IN[9](sig_`tileName`_COUNTER_1_count_match2);
+        `name`.P_EVENT_BUS_IN[10](sig_`tileName`_COUNTER_1_count_zero);
+        `name`.P_EVENT_BUS_IN[11](sig_`tileName`_COUNTER_1_count_match1);
+        `name`.P_EVENT_BUS_IN[12](sig_`tileName`_FSM_1_S0);
+        `name`.P_EVENT_BUS_IN[13](sig_`tileName`_FSM_1_S1);
+        `name`.P_EVENT_BUS_IN[14](sig_`tileName`_FSM_1_OUT);
+        `name`.P_EVENT_BUS_IN[15](sig_`tileName`_LUT_1_OUT);
+        `name`.P_EVENT_BUS_IN[16](sc_zero);
+        `name`.P_EVENT_BUS_IN[17](sig_`tileName`_COUNTER_2_count_match2);
+        `name`.P_EVENT_BUS_IN[18](sig_`tileName`_COUNTER_2_count_zero);
+        `name`.P_EVENT_BUS_IN[19](sig_`tileName`_COUNTER_2_count_match1);
+        `name`.P_EVENT_BUS_IN[20](sig_`tileName`_FSM_2_S0);
+        `name`.P_EVENT_BUS_IN[21](sig_`tileName`_FSM_2_S1);
+        `name`.P_EVENT_BUS_IN[22](sig_`tileName`_FSM_2_OUT);
+        `name`.P_EVENT_BUS_IN[23](sig_`tileName`_LUT_2_OUT);
+        `name`.P_EVENT_BUS_IN[24](sig_`tileName`_BOUNDARY_IN_out0);
+        `name`.P_EVENT_BUS_IN[25](sig_`tileName`_BOUNDARY_IN_out1);
+        `name`.P_EVENT_BUS_IN[26](sig_`tileName`_BOUNDARY_IN_out2);
+        `name`.P_EVENT_BUS_IN[27](sig_`tileName`_BOUNDARY_IN_out3);
+        `name`.P_EVENT_BUS_IN[28](sig_`tileName`_BOUNDARY_IN_out4);
+        `name`.P_EVENT_BUS_IN[29](sig_`tileName`_BOUNDARY_IN_out5);
+        `name`.P_EVENT_BUS_IN[30](sig_`tileName`_BOUNDARY_IN_out6);
+        `name`.P_EVENT_BUS_IN[31](sig_`tileName`_BOUNDARY_IN_out7);
+
+%       for (let idx = 0; idx < 32; idx++) {
+        sc_trace(tf, `name`.P_EVENT_BUS_IN[`idx`], "`name`.P_EVENT_BUS_IN(`idx`)");
+%       }
+
+
+%       for (let idx = 0; idx < 32; idx++) {
+		`name`.hlc_instructions[`idx`](sig_`name`_hlc_instr_`idx`);
+%		}
+
+%       for (let idx = 0; idx < 32; idx++) {
+		sc_trace(tf, `name`.hlc_instructions[`idx`], "`name`.hlc_instructions(`idx`)");
+%		}
+		
+		
+        `name`.P_counter_load_bus(sig_`tileName`_COUNTER_hlc_count_load_val);
+        sc_trace(tf, `name`.P_counter_load_bus, "`name`.P_counter_load_bus");
+
+        // Not connected.  Here for debug purposes
+        `name`.P_comm_R0_out(sig_`name`_P_comm_R0_out);
+        `name`.P_comm_R1_out(sig_`name`_P_comm_R1_out);
+        `name`.P_comm_R2_out(sig_`name`_P_comm_R2_out);
+        `name`.P_comm_R3_out(sig_`name`_P_comm_R3_out);
+
+        sc_trace(tf, `name`.P_comm_R0_out, "`name`.P_comm_R0_out");
+        sc_trace(tf, `name`.P_comm_R1_out, "`name`.P_comm_R1_out");
+        sc_trace(tf, `name`.P_comm_R2_out, "`name`.P_comm_R2_out");
+        sc_trace(tf, `name`.P_comm_R3_out, "`name`.P_comm_R3_out");
+
+        `name`.P_push_data_en  (sig_`name`_P_push_data_en);
+        `name`.P_push_data_out (sig_`name`_P_push_data_out);
+        `name`.P_pull_data_en  (sig_`name`_P_pull_data_en);
+        `name`.P_set_intr_flag (sig_`name`_P_set_intr_flag);
+
+        sc_trace(tf, `name`.P_push_data_en,  "`name`.P_push_data_en");
+        sc_trace(tf, `name`.P_push_data_out, "`name`.P_push_data_out");
+        sc_trace(tf, `name`.P_pull_data_en,  "`name`.P_pull_data_en");
+        sc_trace(tf, `name`.P_set_intr_flag, "`name`.P_set_intr_flag");
+
+        // not currently used.  Fixed to 0 value.
+        `name`.P_glbl_load_addr  (sig_`name`_P_glbl_load_addr);
+        `name`.P_glbl_load_value (sig_`name`_P_glbl_load_value);
+        `name`.P_pull_data_in    (sig_`name`_P_pull_data_in);
+
+        sc_trace(tf, `name`.P_glbl_load_addr,  "`name`.P_glbl_load_addr");
+        sc_trace(tf, `name`.P_glbl_load_value, "`name`.P_glbl_load_value");
+        sc_trace(tf, `name`.P_pull_data_in,    "`name`.P_pull_data_in");

@@ -1,0 +1,11 @@
+% var module = system.modules['/driverlib/pmbus.js'];
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% let pmbus        	= instance.pmbus;
+	% let solution    		= pmbus.$solution;
+	%let peripheral 	 	= system.deviceData.peripherals[solution.peripheralName];
+% }
+%}
+%

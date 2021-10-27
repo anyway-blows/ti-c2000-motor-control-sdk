@@ -1,0 +1,75 @@
+<projectSpec>
+  <project
+        name="boot_ex1_cpu1_cpu2_cm_secure_flash_cpu1"
+        device="TMS320F28388D"
+        cgtVersion="20.2.1.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        enableHexTool="True"
+        linkerCommandFile=""
+        >
+    <configuration name="CPU1_FLASH" compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT}/device -I${C2000WARE_DLIB_ROOT}  -v28 -ml -mt --define=_FLASH --cla_support=cla2 --float_support=fpu64 --tmu_support=tmu0 --define=DEBUG  --define=CPU1  --diag_warning=225  --diag_suppress=10063" linkerBuildOptions="--entry_point code_start --stack_size=0x100  --heap_size=0x200 " hexBuildOptions="--image --cmac=&quot;${PROJECT_ROOT}/boot_ex1_user_cmac_key.txt&quot; --memwidth=16 --romwidth=16 &quot;${PROJECT_ROOT}\boot_ex1_flash_hex_lnk_cpu1.cmd&quot;  --outfile &quot;${BuildArtifactFileBaseName}.hex&quot;" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../../driverlib/f2838x/driverlib/" scope="project" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/driverlib.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/device.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/device.c" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/targetConfigs/TMS320F28388D.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/cmd/2838x_FLASH_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="CPU1_FLASH" />
+    <file action="copy" path="../../../../../../driverlib/f2838x/driverlib/" targetDirectory="device" excludeFromBuild="True" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/f2838x_codestartbranch.asm" targetDirectory="device" />
+    <file action="link" path="../../../../../../driverlib/f2838x/driverlib/ccs/Debug/driverlib.lib" targetDirectory="" />
+	<file action="link" path="../../../../../../libraries/boot_rom/f2838x/revA/rom_symbol_libs/cpu1/secureZoneCode/F2838xCPU1_SecureZoneCode_Symbols_fpu32.lib" targetDirectory="" />
+    <file action="copy" path="../boot_ex1_cpu1_cpu2_cm_secure_flash_cpu1.c" targetDirectory="" />
+    <file action="copy" path="../boot_ex1_flash_hex_lnk_cpu1.cmd" targetDirectory="" excludeFromBuild="True" />    
+    <file action="copy" path="../boot_ex1_user_cmac_key.txt" targetDirectory="" excludeFromBuild="True" />  
+  </project>
+  <project
+        name="boot_ex1_cpu1_cpu2_cm_secure_flash_cpu2"
+        device="TMS320F28388D"
+        cgtVersion="20.2.1.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        enableHexTool="True"
+        linkerCommandFile=""
+        >
+    <configuration name="CPU2_FLASH" compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT}/device -I${C2000WARE_DLIB_ROOT}  -v28 -ml -mt --define=_FLASH --cla_support=cla2 --float_support=fpu64 --tmu_support=tmu0 --define=DEBUG  --define=CPU2  --diag_warning=225  --diag_suppress=10063" linkerBuildOptions="--entry_point code_start --stack_size=0x100  --heap_size=0x200 " hexBuildOptions="--image --cmac=&quot;${PROJECT_ROOT}/boot_ex1_user_cmac_key.txt&quot; --memwidth=16 --romwidth=16 &quot;${PROJECT_ROOT}\boot_ex1_flash_hex_lnk_cpu2.cmd&quot; --outfile &quot;${BuildArtifactFileBaseName}.hex&quot;"/>
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../../driverlib/f2838x/driverlib/" scope="project" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/driverlib.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/device.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/device.c" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/targetConfigs/TMS320F28388D.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/cmd/2838x_FLASH_lnk_cpu2.cmd" targetDirectory="" applicableConfigurations="CPU2_FLASH" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/f2838x_codestartbranch.asm" targetDirectory="device" />
+    <file action="link" path="../../../../../../driverlib/f2838x/driverlib/ccs/Debug/driverlib.lib" targetDirectory="" />
+    <file action="copy" path="../../../../../../driverlib/f2838x/driverlib/" targetDirectory="device" excludeFromBuild="True" />
+	<file action="link" path="../../../../../../libraries/boot_rom/f2838x/revA/rom_symbol_libs/cpu2/secureZoneCode/F2838xCPU2_SecureZoneCode_Symbols_fpu32.lib" targetDirectory="" />	
+    <file action="copy" path="../boot_ex1_cpu1_cpu2_cm_secure_flash_cpu2.c" targetDirectory="" />
+    <file action="copy" path="../boot_ex1_flash_hex_lnk_cpu2.cmd" targetDirectory="" excludeFromBuild="True" />    
+    <file action="copy" path="../boot_ex1_user_cmac_key.txt" targetDirectory="" excludeFromBuild="True" />   
+  </project>  
+  <project
+        name="boot_ex1_cpu1_cpu2_cm_secure_flash_cm"
+        device="Cortex M.TMS320F28388D"
+        cgtVersion="20.2.1.LTS"
+        endianness="little"
+        launchWizard="False"
+        enableHexTool="True"
+        linkerCommandFile=""
+        >
+    <configuration name="CM_FLASH" compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT}/device -I${C2000WARE_DLIB_ROOT} --define=DEBUG --float_support=none --define=_FLASH  -mv7M4 -me --diag_warning=225 " linkerBuildOptions="--stack_size=512 --heap_size=1024  --library=libc.a " hexBuildOptions="--image --cmac=&quot;${PROJECT_ROOT}/boot_ex1_user_cmac_key.txt&quot; --memwidth=8 --romwidth=8 &quot;${PROJECT_ROOT}\boot_ex1_flash_hex_lnk_cm.cmd&quot; --outfile &quot;${BuildArtifactFileBaseName}.hex&quot;"/>
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../../driverlib/f2838x/driverlib_cm/" scope="project" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/driverlib_cm.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/include/cm.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/cm.c" targetDirectory="device" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/targetConfigs/TMS320F28388D.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/cmd/2838x_FLASH_secure_boot_lnk_cm.cmd" targetDirectory="" applicableConfigurations="CM_FLASH" />
+    <file action="copy" path="../../../../../../driverlib/f2838x/driverlib_cm/" targetDirectory="device" excludeFromBuild="True" />
+    <file action="link" path="../../../../../../driverlib/f2838x/driverlib_cm/ccs/Debug/driverlib_cm.lib" targetDirectory="" />
+    <file action="copy" path="../../../../../../device_support/f2838x/common/source/startup_cm.c" targetDirectory="" />
+	<file action="link" path="../../../../../../libraries/boot_rom/f2838x/revA/rom_symbol_libs/cm/secureZoneCode/F2838xCM_SecureZoneCode_Symbols.lib" targetDirectory="" />	
+    <file action="copy" path="../boot_ex1_cpu1_cpu2_cm_secure_flash_cm.c" targetDirectory="" />
+    <file action="copy" path="../boot_ex1_secure_startup_cm.asm" targetDirectory="" />    
+    <file action="copy" path="../boot_ex1_flash_hex_lnk_cm.cmd" targetDirectory="" excludeFromBuild="True" />    
+    <file action="copy" path="../boot_ex1_user_cmac_key.txt" targetDirectory="" excludeFromBuild="True" />    
+  </project>
+</projectSpec>

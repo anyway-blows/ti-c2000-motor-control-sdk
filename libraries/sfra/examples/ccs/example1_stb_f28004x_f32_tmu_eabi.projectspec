@@ -1,0 +1,85 @@
+<projectSpec>
+  <project
+        name="example1_stb_f28004x_f32_tmu_eabi"
+        device="TMS320F280049C"
+        outputFormat="ELF"
+        cgtVersion="18.12.1.LTS"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <configuration name="RELEASE"
+     compilerBuildOptions="--opt_level=2 --opt_for_speed=5
+                   -I${PROJECT_ROOT}/device
+                   -I${PROJECT_ROOT}/libraries/sfra
+                   -I${PROJECT_ROOT}/device/driverlib
+                   -I${PROJECT_ROOT}/libraries/DCL
+                   --define=_DEBUG --define=F28x_DEVICE --define=CPU1 --define=LARGE_MODEL
+                   --define=_FLASH
+                   -ml -mt -v28
+                   --float_support=fpu32 --vcu_support=vcu0 --tmu_support=tmu0 --fp_mode=relaxed
+                   --diag_warning=225 --quiet --diag_suppress=10063 --diag_suppress=173 --display_error_number
+                   -g -k --asm_listing --abi=eabi"
+     linkerBuildOptions="--stack_size=0x400
+                       --heap_size=0x200
+                       --define RAM
+                       -i${PROJECT_ROOT}/libraries/sfra
+                       -i${PROJECT_ROOT}/libraries/FPUfastRTS
+                       -i${PROJECT_ROOT}/device/driverlib/ccs/Release
+                       -l driverlib_eabi.lib
+                       -l sfra_f32_tmu_eabi.lib
+                       -l rts2800_fpu32_fast_supplement_eabi.lib
+                       -l rts2800_fpu32_eabi.lib " />
+
+    <file action="copy" path="../drivers/f28004x/include/driverlib.h"
+                        targetDirectory="device" />
+    <file action="copy" path="../drivers/f28004x/source/device.c"
+                        targetDirectory="device" />
+    <file action="copy" path="../drivers/f28004x/include/device.h"
+                        targetDirectory="device" />
+    <file action="copy" path="../../../../c2000ware/device_support/f28004x/common/source/f28004x_codestartbranch.asm"
+                        targetDirectory="device" applicableConfigurations="RELEASE" />
+    <file action="copy" path="../../../../c2000ware/device_support/f28004x/common/targetConfigs/TMS320F280049C.ccxml"
+                        targetDirectory="targetConfigs" />
+    <file action="copy" path="../../../../c2000ware/driverlib/f28004x/driverlib/"
+                        targetDirectory="device/" excludeFromBuild="True"/>
+
+    <file action="copy" path="../../../../c2000ware/libraries/math/FPUfastRTS/c28/lib/rts2800_fpu32_fast_supplement_eabi.lib"
+                        targetDirectory="libraries/FPUfastRTS" excludeFromBuild="True"/>
+
+    <file action="copy" path="../../../../c2000ware/libraries/control/DCL/c28/source/DCL_DF22_C1.asm"
+                        targetDirectory="libraries/DCL/" />
+    <file action="copy" path="../../../../c2000ware/libraries/control/DCL/c28/source/DCL_PI_C1.asm"
+                        targetDirectory="libraries/DCL/" />
+    <file action="copy" path="../../../../c2000ware/libraries/control/DCL/c28/source/DCL_PI_C4.asm"
+                        targetDirectory="libraries/DCL/" />
+    <file action="copy" path="../../../../c2000ware/libraries/control/DCL/c28/source/DCL_PI_L1.asm"
+                        targetDirectory="libraries/DCL/" />
+    <file action="copy" path="../../../../c2000ware/libraries/control/DCL/c28/include/DCL.h" targetDirectory="libraries/DCL/" />
+    <file action="copy" path="../../../../c2000ware/libraries/control/DCL/c28/include/DCLCLA.h" targetDirectory="libraries/DCL/" />
+    <file action="copy" path="../../../../c2000ware/libraries/control/DCL/c28/include/DCLF32.h" targetDirectory="libraries/DCL/" />
+
+    <file action="copy" path="../../../../libraries/sfra/include/sfra_f32.h" targetDirectory="libraries/sfra/" />
+    <file action="copy" path="../../../../libraries/sfra/lib/sfra_f32_tmu_eabi.lib" 
+                        targetDirectory="libraries/sfra/" excludeFromBuild="True" />
+    <file action="copy" path="../../../../libraries/sfra/gui/source/sfra_gui_scicomms_driverlib.c"
+                        targetDirectory="libraries/sfra" />
+    <file action="copy" path="../../../../libraries/sfra/gui/include/sfra_gui_scicomms_driverlib.h"
+                        targetDirectory="libraries/sfra" />
+
+    <file action="copy" path="../cmd/f28004x_flash_lnk_eabi.cmd"
+                        targetDirectory="" applicableConfigurations="RELEASE" />
+
+    <file action="copy" path="../drivers/f28004x/source/sfra_examples_hal.c"
+                        targetDirectory="" />
+    <file action="copy" path="../drivers/f28004x/include/sfra_examples_hal.h"
+                        targetDirectory="" />
+    <file action="copy" path="../drivers/f28004x/include/sfra_examples_settings.h"
+                        targetDirectory="" />
+
+    <file action="copy" path="../example1_stb/source/example1_stb.c" targetDirectory="" />
+    <file action="copy" path="../example1_stb/include/example1_stb.h" targetDirectory="" />
+
+    <file action="copy" path="../example1_stb/debug/setupdebugenv.js" targetDirectory="" />
+
+  </project>
+</projectSpec>

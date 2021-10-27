@@ -1,0 +1,14 @@
+% var module = system.modules['/driverlib/aio.js'];
+void `module.peripheralName`_init(){
+%if (module != null)
+%{
+	%console.log()
+	% for(var i = 0; i < module.$instances.length; i++) {
+	    % var instance = module.$instances[i];
+	    
+	//`instance.$name` initialization
+    
+ 	%}
+%}
+
+}

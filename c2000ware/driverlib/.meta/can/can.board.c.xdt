@@ -1,0 +1,57 @@
+% var module = system.modules['/driverlib/can.js'];
+% let Common   = system.getScript("/driverlib/Common.js");
+% var nameOfModule = "can";
+% var nameOfPeripheral = module.peripheralName;
+void `nameOfPeripheral`_init(){
+%if (module != null)
+%{
+    % for(var i = 0; i < module.$instances.length; i++) {
+        % var instance = module.$instances[i];
+
+    //`instance.$name` initialization
+    CAN_initModule(`instance.$name`_BASE);
+
+    // Refer to the Driver Library User Guide for information on how to set
+    // tighter timing control. Additionally, consult the device data sheet
+    // for more information about the CAN module clocking.
+    //
+    CAN_setBitRate(`instance.$name`_BASE, DEVICE_SYSCLK_FREQ, `instance.bitRate`, `instance.bitTime`);
+        % if (instance.enableLoopback){
+
+    // Enable CAN test mode
+    CAN_enableTestMode(`instance.$name`_BASE, `instance.loopbackMode`);
+        %}
+
+        % if (instance.enableInterrupt){
+    // Enable CAN Interrupts
+        % let x = String(instance.interruptFlags).replace(",","|");
+        % if (!x) { x = "0";}
+    CAN_enableInterrupt(`instance.$name`_BASE, `x`);
+
+            % for (var int_index in instance.interruptLine)
+               %{
+    CAN_enableGlobalInterrupt(`instance.$name`_BASE, `instance.interruptLine[int_index]`);          
+               %}
+            %}
+        % for(var i2 = 1; i2 <= instance.msgObjs ; i2++) {
+            % var msgObjInstance = instance["msgObj" + i2];        
+    // Initialize the transmit message object used for sending CAN messages.
+    // Message Object Parameters:
+    //      Message Object ID Number: `i2`
+    //      Message Identifier: `msgObjInstance.msgID`
+    //      Message Frame: `msgObjInstance.frameType`
+    //      Message Type: `msgObjInstance.msgType`
+    //      Message ID Mask: `msgObjInstance.msgIDMask`
+    //      Message Object Flags: `msgObjInstance.flags`
+    //      Message Data Length: `msgObjInstance.msgLen` Bytes
+    //
+            % let x = String(msgObjInstance.flags).replace(",","|");
+            % if (!x) { x = "0";}
+    CAN_setupMessageObject(`instance.$name`_BASE, `i2`, `msgObjInstance.msgID`, `msgObjInstance.frameType`,`msgObjInstance.msgType`, `msgObjInstance.msgIDMask`, `x`,`msgObjInstance.msgLen`);
+        %}
+        % let instancePinmux = instance[nameOfModule];
+        % let solution    = instancePinmux.$solution;
+        % let peripheral  = system.deviceData.peripherals[solution.peripheralName];
+    %}
+%}
+}

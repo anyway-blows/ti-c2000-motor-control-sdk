@@ -1,0 +1,30 @@
+<projectSpec>
+  <project
+        name="f28004x_diagnostic_library"
+        device="TMS320F280049C"
+        cgtVersion="20.2.1.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        outputType="staticLibrary"
+
+        >
+    <configuration name="DEBUG" compilerBuildOptions="--opt_level=off -I${DIAG_LIBRARY_ROOT}/include -I${C2000WARE_DLIB_ROOT} -I${DIAG_LIBRARY_ROOT}/../../calibration/hrpwm/f28004x/include -I${C2000WARE_HEADERS}/include -v28 -ml -mt --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 --define=DEBUG --gen_func_subsections=on --diag_warning=225  --diag_suppress=10063 --display_error_number" archiverBuildOptions="${DIAG_LIBRARY_ROOT}/lib/f28004x_diagnostic_stl_debug.lib" />
+    <configuration name="RELEASE" compilerBuildOptions="--opt_level=4 --opt_for_speed=2 -I${DIAG_LIBRARY_ROOT}/include -I${C2000WARE_DLIB_ROOT} -I${DIAG_LIBRARY_ROOT}/../../calibration/hrpwm/f28004x/include -I${C2000WARE_HEADERS}/include -v28 -ml -mt --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 --gen_func_subsections=on --diag_warning=225  --diag_suppress=10063 --display_error_number" archiverBuildOptions="${DIAG_LIBRARY_ROOT}/lib/f28004x_diagnostic_stl_release.lib" />
+
+    <pathVariable name="DIAG_LIBRARY_ROOT" path="../" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../driverlib/f28004x/driverlib/" scope="project" />
+	<pathVariable name="C2000WARE_HEADERS" path="../../../../device_support/f28004x/headers" scope="project" />
+
+    <file action="link" path="../source/stl_can_ram.c" targetDirectory="" />
+    <file action="link" path="../source/stl_cpu_reg.asm" targetDirectory="" />
+    <file action="link" path="../source/stl_crc.c" targetDirectory="" />
+    <file action="link" path="../source/stl_crc_s.asm" targetDirectory="" />
+    <file action="link" path="../source/stl_march.c" targetDirectory="" />
+    <file action="link" path="../source/stl_march_s.asm" targetDirectory="" />
+    <file action="link" path="../source/stl_osc_ct.c" targetDirectory="" />
+    <file action="link" path="../source/stl_osc_hr.c" targetDirectory="" />
+    <file action="link" path="../source/stl_pie_ram.c" targetDirectory="" />
+    <file action="link" path="../source/stl_util.c" targetDirectory="" />
+
+  </project>
+</projectSpec>

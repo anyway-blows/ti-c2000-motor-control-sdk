@@ -1,0 +1,11 @@
+% var module = system.modules['/driverlib/dcdc.js'];
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% let dcdc        	= instance.dcdc;
+	% let solution    		= dcdc.$solution;
+	%let peripheral 	 	= system.deviceData.peripherals[solution.peripheralName];
+% }
+%}
+%

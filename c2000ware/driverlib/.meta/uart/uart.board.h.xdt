@@ -1,0 +1,11 @@
+% var module = system.modules['/driverlib/uart.js'];
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% let uart        	= instance.uart;
+	% let solution    		= uart.$solution;
+	% let peripheral 	 	= system.deviceData.peripherals[solution.peripheralName];
+% }
+%}
+%

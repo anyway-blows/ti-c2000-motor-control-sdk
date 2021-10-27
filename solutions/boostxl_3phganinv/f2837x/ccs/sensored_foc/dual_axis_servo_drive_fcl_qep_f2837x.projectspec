@@ -1,0 +1,132 @@
+<projectSpec>
+  <project
+        name="dual_axis_servo_drive_fcl_qep_f2837x"
+        device="Generic C28xx Device"
+        cgtVersion="20.2.2.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+
+    <configuration
+        name="F2837x_RAM"
+        compilerBuildOptions="-v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 -O4 --opt_for_speed=5 --fp_mode=relaxed
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+			-I${C2000WARE_DLIB_ROOT}
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/   
+ 		    -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/ 				
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/                     
+			-I${SFRA_INSTALL_ROOT}/include/
+			-I${SFRA_INSTALL_ROOT}/gui/include/
+			-I${SDK_ROOT}/libraries/utilities/datalog/include/
+			-I${SDK_ROOT}/libraries/fcl/include/
+			-I${SDK_ROOT}/libraries/position_sensing/qep/include/
+			-I${SDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/
+			-I${SDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/
+            -I${SDK_ROOT}/libraries/dacs/dac128s085/include	
+			-I${SDK_ROOT}/solutions/common/sensored_foc/include/
+			-I${SDK_ROOT}/solutions/boostxl_3phganinv/f2837x/include/
+			--define=_DEBUG --define=LARGE_MODEL --define=CPU1 
+            --define=DAC128S_ENABLE --define=DAC128S_SPIA
+            --define=_DUAL_HEADERS --define=TEST_ENABLE 
+            --define=F2837x_DEVICE --define=_LAUNCHXL_F28379D --define=_BOOSTXL_3PHGANINV 
+			-g --diag_warning=225 --diag_suppress=10063 
+            --quiet -k --asm_listing 
+            --gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x380 
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+			-I${C2000WARE_LIB_ROOT}/dsp/VCU/c28/lib
+			--define=CLA_C
+			--reread_libs
+			-llibc.a"
+        />
+    <configuration
+        name="F2837x_FLASH"
+        compilerBuildOptions="-v28 -ml -mt --cla_support=cla1 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu2 -O4 --opt_for_speed=5 --fp_mode=relaxed
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+			-I${C2000WARE_DLIB_ROOT}
+            -I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/ 
+            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/ 				
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/
+			-I${SFRA_INSTALL_ROOT}/include/
+			-I${SFRA_INSTALL_ROOT}/gui/include/
+			-I${SDK_ROOT}/libraries/utilities/datalog/include/
+			-I${SDK_ROOT}/libraries/fcl/include/
+			-I${SDK_ROOT}/libraries/position_sensing/qep/include/
+			-I${SDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/
+			-I${SDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/
+            -I${SDK_ROOT}/libraries/dacs/dac128s085/include	
+			-I${SDK_ROOT}/solutions/common/sensored_foc/include/
+			-I${SDK_ROOT}/solutions/boostxl_3phganinv/f2837x/include/
+			--define=_DEBUG --define=LARGE_MODEL --define=_FLASH --define=CPU1 
+            --define=_DUAL_HEADERS --define=TEST_ENABLE  
+            --define=F2837x_DEVICE --define=_LAUNCHXL_F28379D --define=_BOOSTXL_3PHGANINV
+			-g --diag_warning=225 --diag_suppress=10063 
+            --quiet -k --asm_listing 
+            --gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x380 
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+			-I${C2000WARE_LIB_ROOT}/dsp/VCU/c28/lib
+			--define=CLA_C
+			--reread_libs 
+            -llibc.a"
+        />
+
+    <pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f2837xd" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f2837xd/driverlib" scope="project" />
+    <pathVariable name="C2000WARE_LIB_ROOT" path="../../../../../c2000ware/libraries" scope="project" />
+    <pathVariable name="SFRA_INSTALL_ROOT" path="../../../../../libraries/sfra" scope="project" />
+    <pathVariable name="SDK_ROOT" path="../../../../.." scope="project" />
+
+
+    <file action="link" path="SFRA_INSTALL_ROOT/lib/sfra.lib" targetDirectory="" />
+
+    <file action="link" path="SDK_ROOT/solutions/common/sensored_foc/debug/dual_axis_servo_drive_vars.txt" targetDirectory="" />
+    <file action="link" path="SDK_ROOT/solutions/common/sensored_foc/debug/dual_axis_servo_drive_graph1.graphProp" targetDirectory="" />
+    <file action="link" path="SDK_ROOT/solutions/common/sensored_foc/debug/dual_axis_servo_drive_graph2.graphProp" targetDirectory="" />
+
+    <file action="link" path="SDK_ROOT/solutions/boostxl_3phganinv/f2837x/cmd/dual_axis_f2837x_flash_lnk_cpu1.cmd" targetDirectory="src_device" applicableConfigurations="F2837x_FLASH" />
+    <file action="link" path="SDK_ROOT/solutions/boostxl_3phganinv/f2837x/cmd/dual_axis_f2837x_ram_lnk_cpu1.cmd" targetDirectory="src_device" applicableConfigurations="F2837x_RAM" />
+    <file action="link" path="SDK_ROOT/solutions/boostxl_3phganinv/f2837x/cmd/F2837xD_Headers_nonBIOS_cpu1_eabi.cmd" targetDirectory="src_device" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F28379D.ccxml" targetDirectory="" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/device.c" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/F2837xD_GlobalVariableDefs.c" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/F2837xD_CodeStartBranch.asm" targetDirectory="src_device" />	
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/adc.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cla.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cmpss.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cputimer.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/eqep.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/flash.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/gpio.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/interrupt.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/memcfg.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sci.c" targetDirectory="src_driver" applicableConfigurations="" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/spi.c" targetDirectory="src_driver" applicableConfigurations="" />	
+    <file action="link" path="C2000WARE_DLIB_ROOT/sdfm.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sysctl.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/xbar.c" targetDirectory="src_driver" applicableConfigurations="" />
+
+    <file action="link" path="SDK_ROOT/libraries/fcl/source/fcl_cla_code_dm.cla" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/libraries/fcl/source/fcl_cpu_code_dm.c" targetDirectory="sources" />
+
+    <file action="link" path="SFRA_INSTALL_ROOT/gui/source/sfra_gui_scicomms_driverlib.c" targetDirectory="sources" />
+
+    <file action="link" path="SDK_ROOT/libraries/utilities/datalog/source/dlog_4ch_f.c" targetDirectory="sources" />
+
+    <file action="link" path="SDK_ROOT/solutions/common/sensored_foc/source/sfra_gui.c" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/solutions/common/sensored_foc/source/dual_axis_servo_drive.c" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/solutions/common/sensored_foc/source/dual_axis_servo_drive_cla_tasks.cla" targetDirectory="sources" />
+    <file action="link" path="SDK_ROOT/solutions/common/sensored_foc/source/dual_axis_servo_drive_user.c" targetDirectory="sources" />
+
+    <file action="link" path="SDK_ROOT/solutions/boostxl_3phganinv/f2837x/source/dual_axis_servo_drive_hal.c" targetDirectory="sources" />
+
+
+  </project>
+</projectSpec>

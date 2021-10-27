@@ -1,0 +1,33 @@
+%%{
+    let inst      = args[0];
+    let tileName  = args[1];
+    let instNum   = args[2];
+    let inputs    = args[3];
+    let name      = tileName + "_HLC";
+    let Common    = system.getScript("/utilities/clb_tool/clb_syscfg/source/Common.js");
+
+    let alt_e0 = (Common.altInputNames.includes(inst.e0))?1:0;
+    let alt_e1 = (Common.altInputNames.includes(inst.e1))?1:0;
+    let alt_e2 = (Common.altInputNames.includes(inst.e2))?1:0;
+    let alt_e3 = (Common.altInputNames.includes(inst.e3))?1:0;
+%%}
+% for (let j = 0; j < inputs.length; ++j) {
+%    let inName = inputs[j];
+%    let inFrom = inst[inName];
+        sig_`name`_`inName`.write((sc_uint<32>) `Common.inputNameToValue[inFrom]`);
+% }
+        sig_`name`_P_glbl_load_addr.write((sc_uint<32>)0);
+        sig_`name`_P_glbl_load_value.write((sc_uint<32>)0);
+        sig_`name`_P_pull_data_in.write((sc_uint<32>)0);
+#if TYPE == 2 || TYPE == 3
+        sig_`name`_ae0.write          ((bool) `alt_e0`);
+        sig_`name`_ae1.write          ((bool) `alt_e1`);
+        sig_`name`_ae2.write          ((bool) `alt_e2`);
+        sig_`name`_ae3.write          ((bool) `alt_e3`);
+#endif
+#if TYPE == 3
+        sig_`name`_RECONFIG_PIPELINE_EN.write          ((bool) `tileName`_PIPELINE_MODE);
+#endif
+%       for (let idx = 0; idx < 32; idx++) {
+		sig_`name`_hlc_instr_`idx`.write((sc_uint<32>) `tileName`_HLCINSTR_`idx`);
+%		}

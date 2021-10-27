@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExportImportMemento.1>
+<VarMeta IMemento.internal.id="motorVars.flagEnableSys"/>
+<VarMeta IMemento.internal.id="motorVars.flagRunIdentAndOnLine"/>
+<VarMeta IMemento.internal.id="motorVars.flagMotorIdentified"/>
+<VarMeta IMemento.internal.id="motorVars.flagEnableRsRecalc"/>
+<VarMeta IMemento.internal.id="motorVars.flagEnableUserParams"/>
+<VarMeta IMemento.internal.id="motorVars.flagEnableOffsetCalc"/>
+<VarMeta IMemento.internal.id="motorVars.flagEnableForceAngle"/>
+<VarMeta IMemento.internal.id="motorVars.flagEnablePowerWarp"/>
+<VarMeta IMemento.internal.id="motorVars.flagBypassLockRotor"/>
+<VarMeta IMemento.internal.id="motorVars.flagEnableSpeedCtrl"/>
+<VarMeta IMemento.internal.id="motorVars.ctrlState"/>
+<VarMeta IMemento.internal.id="motorVars.estState"/>
+<VarMeta IMemento.internal.id="motorVars.trajState"/>
+<VarMeta IMemento.internal.id="motorVars.RoverL_rps"/>
+<VarMeta IMemento.internal.id="motorVars.Rr_Ohm"/>
+<VarMeta IMemento.internal.id="motorVars.Rs_Ohm"/>
+<VarMeta IMemento.internal.id="motorVars.Ls_d_H"/>
+<VarMeta IMemento.internal.id="motorVars.Ls_q_H"/>
+<VarMeta IMemento.internal.id="motorVars.RsOnLine_Ohm"/>
+<VarMeta IMemento.internal.id="motorVars.RoverL_rps"/>
+<VarMeta IMemento.internal.id="motorVars.flux_VpHz"/>
+<VarMeta IMemento.internal.id="motorVars.speedRef_Hz"/>
+<VarMeta IMemento.internal.id="motorVars.accelerationMax_Hzps"/>
+<VarMeta IMemento.internal.id="motorVars.speed_Hz"/>
+<VarMeta IMemento.internal.id="motorVars.speed_krpm"/>
+<VarMeta IMemento.internal.id="motorVars.torque_Nm"/>
+<VarMeta IMemento.internal.id="motorVars.Vs_V"/>
+<VarMeta IMemento.internal.id="motorVars.VsRef_V"/>
+<VarMeta IMemento.internal.id="motorVars.VdcBus_V"/>
+<VarMeta IMemento.internal.id="motorVars.Is_A"/>
+<VarMeta IMemento.internal.id="motorVars.Kp_Id"/>
+<VarMeta IMemento.internal.id="motorVars.Ki_Id"/>
+<VarMeta IMemento.internal.id="motorVars.Kp_Iq"/>
+<VarMeta IMemento.internal.id="motorVars.Ki_Iq"/>
+<VarMeta IMemento.internal.id="motorVars.Kp_spd"/>
+<VarMeta IMemento.internal.id="motorVars.Ki_spd"/>
+<VarMeta IMemento.internal.id="Idq_ref_A.value[1]"/>
+<VarMeta IMemento.internal.id="motorVars.faultNow.all"/>
+<VarMeta IMemento.internal.id="motorVars.faultNow.bit"/>
+</ExportImportMemento.1>

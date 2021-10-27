@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+  <project
+        name="universal_motorcontrol_lab_f28002x"
+        device="TMS320F280025C"
+        cgtVersion="20.2.5.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        enableSysConfigTool="true"
+        sysConfigBuildOptions="--product ${C2000WARE_ROOT}/.metadata/sdk.json --device F28002x --package 80QFP --part F28002x_80QFP"
+        >
+<!-- Supports multiple algorithm and board in this project -->
+	
+<!-- Launchxl-f28002x + boostxl-drv8323rh, FAST Software Library -->
+    <configuration name="Flash_lib_DRV8323RH" 
+				compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --idiv_support=idiv0 --tmu_support=tmu0 -O3 --opt_for_speed=3 --fp_mode=relaxed 
+					-I${SDK_ROOT} 
+					-I${SDK_ROOT}/libraries/observers/est_lib/include 					
+					-I${SDK_ROOT}/libraries/control/pi/include 
+					-I${SDK_ROOT}/libraries/control/vsf/include 
+					-I${SDK_ROOT}/libraries/control/fwc/include 
+					-I${SDK_ROOT}/libraries/control/mtpa/include 
+					-I${SDK_ROOT}/libraries/control/vs_freq/include 
+					-I${SDK_ROOT}/libraries/control/dclink_ss/include 					
+					-I${SDK_ROOT}/libraries/filter/filter_fo/include 
+					-I${SDK_ROOT}/libraries/filter/filter_so/include 
+					-I${SDK_ROOT}/libraries/filter/offset/include 
+					-I${SDK_ROOT}/libraries/observers/esmo/include 
+					-I${SDK_ROOT}/libraries/observers/speedfr/include	
+					-I${SDK_ROOT}/libraries/observers/speedcalc/include						
+					-I${SDK_ROOT}/libraries/observers/mpid/include 	
+					-I${SDK_ROOT}/libraries/observers/ssipd/include 
+					-I${SDK_ROOT}/libraries/observers/isbldc/include					
+					-I${SDK_ROOT}/libraries/observers/encoder/include
+					-I${SDK_ROOT}/libraries/observers/hall/include
+					-I${SDK_ROOT}/libraries/transforms/clarke/include 
+					-I${SDK_ROOT}/libraries/transforms/ipark/include 
+					-I${SDK_ROOT}/libraries/transforms/park/include 
+					-I${SDK_ROOT}/libraries/transforms/svgen/include 
+					-I${SDK_ROOT}/libraries/transforms/volts/include 
+					-I${SDK_ROOT}/libraries/utilities/angle_gen/include 
+					-I${SDK_ROOT}/libraries/utilities/cpu_time/include 
+					-I${SDK_ROOT}/libraries/utilities/datalog/include  
+					-I${SDK_ROOT}/libraries/utilities/diagnostic/include
+					-I${SDK_ROOT}/libraries/utilities/step_response/include 					
+					-I${SDK_ROOT}/libraries/utilities/traj/include 
+					-I${SDK_ROOT}/libraries/utilities/types/include
+					-I${SDK_ROOT}/libraries/utilities/rimpulse/include
+					-I${SDK_ROOT}/libraries/utilities/mod6cnt/include			
+					-I${SDK_ROOT}/libraries/sfra/include
+					-I${SDK_ROOT}/libraries/sfra/gui/include													
+					-I${SDK_ROOT}/libraries/dacs/dac128s085/include						
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/common/include/ 
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/f28002x/drivers/include 
+					-I${} 
+					-I${C2000WARE_DLIB_ROOT} 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+					-I${C2000WARE_LIBS_ROOT}/flash_api/f28002x/include/FlashAPI/
+					--define=_INLINE --define=_FLASH --define=_F28002x 
+					--define=_SOFT_LIB			
+					--define=BSXL8323RH_REVB	
+					--define=LPD_SITE_J1_J4																					
+					--define=MOTOR1_FAST
+					--define=MOTOR1_ESMO_N
+					--define=MOTOR1_ENC_N
+					--define=QEP_ENABLE_N
+					--define=MOTOR1_HALL_N
+					--define=HALL_ENABLE_N
+					--define=HALL_CAL_N
+					--define=MOTOR1_ISBLDC_N
+					--define=MOTOR1_DCLINKSS_N					
+					--define=MOTOR1_OVM_N
+					--define=MOTOR1_FWC_N
+					--define=MOTOR1_MTPA_N
+					--define=MOTOR1_SSIPD_N
+					--define=MOTOR1_VOLRECT_N
+					--define=DATALOGF2_EN_N
+					--define=DAC128S_ENABLE --define=DAC128S_SPIB						
+					--define=SFRA_ENABLE_N
+					--define=STEP_RP_EN_N					
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE
+					--define=CMD_POT_EN_N
+					--define=CMD_CAP_EN_N
+					--define=CMD_SWITCH_EN_N
+					--define=CMD_CAN_EN_N																								
+					--gen_func_subsections=on --abi=eabi  
+					--display_error_number --diag_warning=225 --diag_suppress=10063" 
+				linkerBuildOptions="--entry_point  code_start --stack_size=0x100
+					-I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib	
+					-I${SDK_ROOT}/libraries/sfra/lib/	
+					--define=SFRA_ENABLE_N								
+					-llibc.a -w" />
+
+<!-- Launchxl-f28002x + boostxl-drv8323rs, FAST Software Library -->	
+    <configuration name="Flash_lib_DRV8323RS" 
+				compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --idiv_support=idiv0 --tmu_support=tmu0 -O3 --opt_for_speed=3 --fp_mode=relaxed 
+					-I${SDK_ROOT} 
+					-I${SDK_ROOT}/libraries/observers/est_lib/include 					
+					-I${SDK_ROOT}/libraries/control/pi/include 
+					-I${SDK_ROOT}/libraries/control/vsf/include 
+					-I${SDK_ROOT}/libraries/control/fwc/include 
+					-I${SDK_ROOT}/libraries/control/mtpa/include 
+					-I${SDK_ROOT}/libraries/control/vs_freq/include 
+					-I${SDK_ROOT}/libraries/control/dclink_ss/include 					
+					-I${SDK_ROOT}/libraries/filter/filter_fo/include 
+					-I${SDK_ROOT}/libraries/filter/filter_so/include 
+					-I${SDK_ROOT}/libraries/filter/offset/include 
+					-I${SDK_ROOT}/libraries/observers/esmo/include 
+					-I${SDK_ROOT}/libraries/observers/speedfr/include	
+					-I${SDK_ROOT}/libraries/observers/speedcalc/include						
+					-I${SDK_ROOT}/libraries/observers/mpid/include 	
+					-I${SDK_ROOT}/libraries/observers/ssipd/include 
+					-I${SDK_ROOT}/libraries/observers/isbldc/include					
+					-I${SDK_ROOT}/libraries/observers/encoder/include
+					-I${SDK_ROOT}/libraries/observers/hall/include
+					-I${SDK_ROOT}/libraries/transforms/clarke/include 
+					-I${SDK_ROOT}/libraries/transforms/ipark/include 
+					-I${SDK_ROOT}/libraries/transforms/park/include 
+					-I${SDK_ROOT}/libraries/transforms/svgen/include 
+					-I${SDK_ROOT}/libraries/transforms/volts/include 
+					-I${SDK_ROOT}/libraries/utilities/angle_gen/include 
+					-I${SDK_ROOT}/libraries/utilities/cpu_time/include 
+					-I${SDK_ROOT}/libraries/utilities/datalog/include  
+					-I${SDK_ROOT}/libraries/utilities/diagnostic/include 
+					-I${SDK_ROOT}/libraries/utilities/step_response/include					
+					-I${SDK_ROOT}/libraries/utilities/traj/include 
+					-I${SDK_ROOT}/libraries/utilities/types/include
+					-I${SDK_ROOT}/libraries/utilities/rimpulse/include
+					-I${SDK_ROOT}/libraries/utilities/mod6cnt/include	
+					-I${SDK_ROOT}/libraries/sfra/include
+					-I${SDK_ROOT}/libraries/sfra/gui/include										
+					-I${SDK_ROOT}/libraries/drvic/drv8323/include					
+					-I${SDK_ROOT}/libraries/dacs/dac128s085/include						
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/common/include/ 
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/f28002x/drivers/include 
+					-I${} 
+					-I${C2000WARE_DLIB_ROOT} 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+					-I${C2000WARE_LIBS_ROOT}/flash_api/f28002x/include/FlashAPI/
+					--define=_INLINE --define=_FLASH --define=_F28002x 
+					--define=_SOFT_LIB				
+					--define=BSXL8323RS_REVA	
+					--define=LPD_SITE_J1_J4																					
+					--define=MOTOR1_FAST
+					--define=MOTOR1_ESMO_N
+					--define=MOTOR1_ENC_N
+					--define=QEP_ENABLE_N
+					--define=MOTOR1_HALL_N
+					--define=HALL_ENABLE_N
+					--define=HALL_CAL_N
+					--define=MOTOR1_ISBLDC_N
+					--define=MOTOR1_DCLINKSS_N					
+					--define=MOTOR1_OVM_N
+					--define=MOTOR1_FWC_N
+					--define=MOTOR1_MTPA_N
+					--define=MOTOR1_SSIPD_N
+					--define=MOTOR1_VOLRECT_N			
+					--define=DATALOGF2_EN_N
+					--define=DAC128S_ENABLE --define=DAC128S_SPIB						
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE		
+					--define=SFRA_ENABLE_N
+					--define=STEP_RP_EN_N					
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE
+					--define=CMD_POT_EN_N
+					--define=CMD_CAP_EN_N
+					--define=CMD_SWITCH_EN_N
+					--define=CMD_CAN_EN_N																		
+					--gen_func_subsections=on --abi=eabi  
+					--display_error_number --diag_warning=225 --diag_suppress=10063" 
+				linkerBuildOptions="--entry_point  code_start --stack_size=0x100
+					-I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib	
+					-I${SDK_ROOT}/libraries/sfra/lib/			
+					--define=SFRA_ENABLE_N						
+					-llibc.a -w" />
+
+<!-- Launchxl-f28002x + boostxl-drv8353rs, FAST Software Library -->
+    <configuration name="Flash_lib_DRV8353RS" 
+				compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --idiv_support=idiv0 --tmu_support=tmu0 -O3 --opt_for_speed=3 --fp_mode=relaxed 
+					-I${SDK_ROOT} 
+					-I${SDK_ROOT}/libraries/observers/est_lib/include 					
+					-I${SDK_ROOT}/libraries/control/pi/include 
+					-I${SDK_ROOT}/libraries/control/vsf/include 
+					-I${SDK_ROOT}/libraries/control/fwc/include 
+					-I${SDK_ROOT}/libraries/control/mtpa/include 
+					-I${SDK_ROOT}/libraries/control/vs_freq/include 
+					-I${SDK_ROOT}/libraries/control/dclink_ss/include 					
+					-I${SDK_ROOT}/libraries/filter/filter_fo/include 
+					-I${SDK_ROOT}/libraries/filter/filter_so/include 
+					-I${SDK_ROOT}/libraries/filter/offset/include 
+					-I${SDK_ROOT}/libraries/observers/esmo/include 
+					-I${SDK_ROOT}/libraries/observers/speedfr/include	
+					-I${SDK_ROOT}/libraries/observers/speedcalc/include						
+					-I${SDK_ROOT}/libraries/observers/mpid/include 	
+					-I${SDK_ROOT}/libraries/observers/ssipd/include 
+					-I${SDK_ROOT}/libraries/observers/isbldc/include					
+					-I${SDK_ROOT}/libraries/observers/encoder/include
+					-I${SDK_ROOT}/libraries/observers/hall/include
+					-I${SDK_ROOT}/libraries/transforms/clarke/include 
+					-I${SDK_ROOT}/libraries/transforms/ipark/include 
+					-I${SDK_ROOT}/libraries/transforms/park/include 
+					-I${SDK_ROOT}/libraries/transforms/svgen/include 
+					-I${SDK_ROOT}/libraries/transforms/volts/include 
+					-I${SDK_ROOT}/libraries/utilities/angle_gen/include 
+					-I${SDK_ROOT}/libraries/utilities/cpu_time/include 
+					-I${SDK_ROOT}/libraries/utilities/datalog/include  
+					-I${SDK_ROOT}/libraries/utilities/diagnostic/include 
+					-I${SDK_ROOT}/libraries/utilities/step_response/include					
+					-I${SDK_ROOT}/libraries/utilities/traj/include 
+					-I${SDK_ROOT}/libraries/utilities/types/include
+					-I${SDK_ROOT}/libraries/utilities/rimpulse/include
+					-I${SDK_ROOT}/libraries/utilities/mod6cnt/include		
+					-I${SDK_ROOT}/libraries/sfra/include
+					-I${SDK_ROOT}/libraries/sfra/gui/include									
+					-I${SDK_ROOT}/libraries/drvic/drv8353/include							
+					-I${SDK_ROOT}/libraries/dacs/dac128s085/include						
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/common/include/ 
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/f28002x/drivers/include 
+					-I${} 
+					-I${C2000WARE_DLIB_ROOT} 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+					-I${C2000WARE_LIBS_ROOT}/flash_api/f28002x/include/FlashAPI/
+					--define=_INLINE --define=_FLASH --define=_F28002x 
+					--define=_SOFT_LIB					
+					--define=BSXL8353RS_REVA
+					--define=LPD_SITE_J1_J4																					
+					--define=MOTOR1_FAST
+					--define=MOTOR1_ESMO_N
+					--define=MOTOR1_ENC_N
+					--define=QEP_ENABLE_N
+					--define=MOTOR1_HALL_N
+					--define=HALL_ENABLE_N
+					--define=HALL_CAL_N			
+					--define=MOTOR1_OVM_N
+					--define=MOTOR1_FWC_N
+					--define=MOTOR1_MTPA_N
+					--define=MOTOR1_SSIPD_N
+					--define=MOTOR1_VOLRECT_N
+					--define=DATALOGF2_EN_N
+					--define=DAC128S_ENABLE --define=DAC128S_SPIB						
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE		
+					--define=SFRA_ENABLE_N
+					--define=STEP_RP_EN_N					
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE
+					--define=CMD_POT_EN_N
+					--define=CMD_CAP_EN_N
+					--define=CMD_SWITCH_EN_N
+					--define=CMD_CAN_EN_N																
+					--gen_func_subsections=on --abi=eabi  
+					--display_error_number --diag_warning=225 --diag_suppress=10063" 
+				linkerBuildOptions="--entry_point  code_start --stack_size=0x100
+					-I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib	
+					-I${SDK_ROOT}/libraries/sfra/lib/				
+					--define=SFRA_ENABLE_N					
+					-llibc.a -w" />
+
+<!-- ControlCard-f28002x + HighVoltageKit, FAST Software Library -->
+    <configuration name="Flash_lib_HVKIT" 
+				compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --idiv_support=idiv0 --tmu_support=tmu0 -O3 --opt_for_speed=3 --fp_mode=relaxed 
+					-I${SDK_ROOT} 
+					-I${SDK_ROOT}/libraries/observers/est_lib/include 					
+					-I${SDK_ROOT}/libraries/control/pi/include 
+					-I${SDK_ROOT}/libraries/control/vsf/include 
+					-I${SDK_ROOT}/libraries/control/fwc/include 
+					-I${SDK_ROOT}/libraries/control/mtpa/include 
+					-I${SDK_ROOT}/libraries/control/vs_freq/include 
+					-I${SDK_ROOT}/libraries/control/dclink_ss/include 					
+					-I${SDK_ROOT}/libraries/filter/filter_fo/include 
+					-I${SDK_ROOT}/libraries/filter/filter_so/include 
+					-I${SDK_ROOT}/libraries/filter/offset/include 
+					-I${SDK_ROOT}/libraries/observers/esmo/include 
+					-I${SDK_ROOT}/libraries/observers/speedfr/include	
+					-I${SDK_ROOT}/libraries/observers/speedcalc/include						
+					-I${SDK_ROOT}/libraries/observers/mpid/include 	
+					-I${SDK_ROOT}/libraries/observers/ssipd/include 
+					-I${SDK_ROOT}/libraries/observers/isbldc/include					
+					-I${SDK_ROOT}/libraries/observers/encoder/include
+					-I${SDK_ROOT}/libraries/observers/hall/include
+					-I${SDK_ROOT}/libraries/transforms/clarke/include 
+					-I${SDK_ROOT}/libraries/transforms/ipark/include 
+					-I${SDK_ROOT}/libraries/transforms/park/include 
+					-I${SDK_ROOT}/libraries/transforms/svgen/include 
+					-I${SDK_ROOT}/libraries/transforms/volts/include 
+					-I${SDK_ROOT}/libraries/utilities/angle_gen/include 
+					-I${SDK_ROOT}/libraries/utilities/cpu_time/include 
+					-I${SDK_ROOT}/libraries/utilities/datalog/include  
+					-I${SDK_ROOT}/libraries/utilities/diagnostic/include 
+					-I${SDK_ROOT}/libraries/utilities/step_response/include					
+					-I${SDK_ROOT}/libraries/utilities/traj/include 
+					-I${SDK_ROOT}/libraries/utilities/types/include
+					-I${SDK_ROOT}/libraries/utilities/rimpulse/include
+					-I${SDK_ROOT}/libraries/utilities/mod6cnt/include		
+					-I${SDK_ROOT}/libraries/sfra/include
+					-I${SDK_ROOT}/libraries/sfra/gui/include														
+					-I${SDK_ROOT}/libraries/dacs/dac128s085/include						
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/common/include/ 
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/f28002x/drivers/include 
+					-I${} 
+					-I${C2000WARE_DLIB_ROOT} 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+					-I${C2000WARE_LIBS_ROOT}/flash_api/f28002x/include/FlashAPI/
+					--define=_INLINE --define=_FLASH --define=_F28002x 
+					--define=_SOFT_LIB							
+					--define=HVMTRPFC_REV1P1																							
+					--define=MOTOR1_FAST
+					--define=MOTOR1_ESMO_N
+					--define=MOTOR1_ENC_N
+					--define=QEP_ENABLE_N
+					--define=MOTOR1_HALL_N
+					--define=HALL_ENABLE_N
+					--define=HALL_CAL_N			
+					--define=MOTOR1_OVM_N
+					--define=MOTOR1_FWC_N
+					--define=MOTOR1_MTPA_N
+					--define=MOTOR1_SSIPD_N
+					--define=MOTOR1_VOLRECT_N		
+					--define=DATALOGF2_EN_N
+					--define=EPWMDAC_MODE
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE		
+					--define=SFRA_ENABLE_N
+					--define=STEP_RP_EN_N					
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE
+					--define=CMD_POT_EN_N
+					--define=CMD_CAP_EN_N
+					--define=CMD_SWITCH_EN_N
+					--define=CMD_CAN_EN_N																			
+					--gen_func_subsections=on --abi=eabi  
+					--display_error_number --diag_warning=225 --diag_suppress=10063" 
+				linkerBuildOptions="--entry_point  code_start --stack_size=0x100
+					-I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib	
+					-I${SDK_ROOT}/libraries/sfra/lib/			
+					--define=SFRA_ENABLE_N						
+					-llibc.a -w" />
+
+<!-- Launchxl-f28002x + boostxl-3PhGaN, FAST Software Library -->
+    <configuration name="Flash_lib_3phGaN" 
+				compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --idiv_support=idiv0 --tmu_support=tmu0 -O3 --opt_for_speed=3 --fp_mode=relaxed 
+					-I${SDK_ROOT} 
+					-I${SDK_ROOT}/libraries/observers/est_lib/include 					
+					-I${SDK_ROOT}/libraries/control/pi/include 
+					-I${SDK_ROOT}/libraries/control/vsf/include 
+					-I${SDK_ROOT}/libraries/control/fwc/include 
+					-I${SDK_ROOT}/libraries/control/mtpa/include 
+					-I${SDK_ROOT}/libraries/control/vs_freq/include 
+					-I${SDK_ROOT}/libraries/control/dclink_ss/include 					
+					-I${SDK_ROOT}/libraries/filter/filter_fo/include 
+					-I${SDK_ROOT}/libraries/filter/filter_so/include 
+					-I${SDK_ROOT}/libraries/filter/offset/include 
+					-I${SDK_ROOT}/libraries/observers/esmo/include 
+					-I${SDK_ROOT}/libraries/observers/speedfr/include	
+					-I${SDK_ROOT}/libraries/observers/speedcalc/include						
+					-I${SDK_ROOT}/libraries/observers/mpid/include 	
+					-I${SDK_ROOT}/libraries/observers/ssipd/include 
+					-I${SDK_ROOT}/libraries/observers/isbldc/include					
+					-I${SDK_ROOT}/libraries/observers/encoder/include
+					-I${SDK_ROOT}/libraries/observers/hall/include
+					-I${SDK_ROOT}/libraries/transforms/clarke/include 
+					-I${SDK_ROOT}/libraries/transforms/ipark/include 
+					-I${SDK_ROOT}/libraries/transforms/park/include 
+					-I${SDK_ROOT}/libraries/transforms/svgen/include 
+					-I${SDK_ROOT}/libraries/transforms/volts/include 
+					-I${SDK_ROOT}/libraries/utilities/angle_gen/include 
+					-I${SDK_ROOT}/libraries/utilities/cpu_time/include 
+					-I${SDK_ROOT}/libraries/utilities/datalog/include  
+					-I${SDK_ROOT}/libraries/utilities/diagnostic/include
+					-I${SDK_ROOT}/libraries/utilities/step_response/include					 
+					-I${SDK_ROOT}/libraries/utilities/traj/include 
+					-I${SDK_ROOT}/libraries/utilities/types/include
+					-I${SDK_ROOT}/libraries/utilities/rimpulse/include
+					-I${SDK_ROOT}/libraries/utilities/mod6cnt/include			
+					-I${SDK_ROOT}/libraries/sfra/include
+					-I${SDK_ROOT}/libraries/sfra/gui/include													
+					-I${SDK_ROOT}/libraries/dacs/dac128s085/include						
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/common/include/ 
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/f28002x/drivers/include 
+					-I${} 
+					-I${C2000WARE_DLIB_ROOT} 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+					-I${C2000WARE_LIBS_ROOT}/flash_api/f28002x/include/FlashAPI/
+					--define=_INLINE --define=_FLASH --define=_F28002x 
+					--define=_SOFT_LIB				
+					--define=BSXL3PHGAN_REVA			
+					--define=LPD_SITE_J1_J4																						
+					--define=MOTOR1_FAST
+					--define=MOTOR1_ESMO_N
+					--define=MOTOR1_ENC_N
+					--define=QEP_ENABLE_N
+					--define=MOTOR1_HALL_N
+					--define=HALL_ENABLE_N
+					--define=HALL_CAL_N					
+					--define=MOTOR1_OVM_N
+					--define=MOTOR1_FWC_N
+					--define=MOTOR1_MTPA_N
+					--define=MOTOR1_SSIPD_N
+					--define=MOTOR1_VOLRECT_N
+					--define=DATALOGF2_EN_N
+					--define=DAC128S_ENABLE --define=DAC128S_SPIB						
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE	
+					--define=SFRA_ENABLE_N
+					--define=STEP_RP_EN_N					
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE
+					--define=CMD_POT_EN_N
+					--define=CMD_CAP_EN_N
+					--define=CMD_SWITCH_EN_N
+					--define=CMD_CAN_EN_N																					
+					--gen_func_subsections=on --abi=eabi  
+					--display_error_number --diag_warning=225 --diag_suppress=10063" 
+				linkerBuildOptions="--entry_point  code_start --stack_size=0x100
+					-I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib	
+					-I${SDK_ROOT}/libraries/sfra/lib/			
+					--define=SFRA_ENABLE_N						
+					-llibc.a -w" />
+
+<!-- Launchxl-f28002x + boostxl-drv8316rt, FAST Software Library -->
+    <configuration name="Flash_lib_DRV8316RT" 
+				compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --idiv_support=idiv0 --tmu_support=tmu0 -O3 --opt_for_speed=3 --fp_mode=relaxed 
+					-I${SDK_ROOT} 
+					-I${SDK_ROOT}/libraries/observers/est_lib/include 					
+					-I${SDK_ROOT}/libraries/control/pi/include 
+					-I${SDK_ROOT}/libraries/control/vsf/include 
+					-I${SDK_ROOT}/libraries/control/fwc/include 
+					-I${SDK_ROOT}/libraries/control/mtpa/include 
+					-I${SDK_ROOT}/libraries/control/vs_freq/include 
+					-I${SDK_ROOT}/libraries/control/dclink_ss/include 					
+					-I${SDK_ROOT}/libraries/filter/filter_fo/include 
+					-I${SDK_ROOT}/libraries/filter/filter_so/include 
+					-I${SDK_ROOT}/libraries/filter/offset/include 
+					-I${SDK_ROOT}/libraries/observers/esmo/include 
+					-I${SDK_ROOT}/libraries/observers/speedfr/include	
+					-I${SDK_ROOT}/libraries/observers/speedcalc/include						
+					-I${SDK_ROOT}/libraries/observers/mpid/include 	
+					-I${SDK_ROOT}/libraries/observers/ssipd/include 
+					-I${SDK_ROOT}/libraries/observers/isbldc/include					
+					-I${SDK_ROOT}/libraries/observers/encoder/include
+					-I${SDK_ROOT}/libraries/observers/hall/include
+					-I${SDK_ROOT}/libraries/transforms/clarke/include 
+					-I${SDK_ROOT}/libraries/transforms/ipark/include 
+					-I${SDK_ROOT}/libraries/transforms/park/include 
+					-I${SDK_ROOT}/libraries/transforms/svgen/include 
+					-I${SDK_ROOT}/libraries/transforms/volts/include 
+					-I${SDK_ROOT}/libraries/utilities/angle_gen/include 
+					-I${SDK_ROOT}/libraries/utilities/cpu_time/include 
+					-I${SDK_ROOT}/libraries/utilities/datalog/include  
+					-I${SDK_ROOT}/libraries/utilities/diagnostic/include 
+					-I${SDK_ROOT}/libraries/utilities/step_response/include					
+					-I${SDK_ROOT}/libraries/utilities/traj/include 
+					-I${SDK_ROOT}/libraries/utilities/types/include
+					-I${SDK_ROOT}/libraries/utilities/rimpulse/include
+					-I${SDK_ROOT}/libraries/utilities/mod6cnt/include	
+					-I${SDK_ROOT}/libraries/sfra/include
+					-I${SDK_ROOT}/libraries/sfra/gui/include										
+					-I${SDK_ROOT}/libraries/drvic/drv8316/include										
+					-I${SDK_ROOT}/libraries/dacs/dac128s085/include						
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/common/include/ 
+					-I${SDK_ROOT}/solutions/universal_motorcontrol_lab/f28002x/drivers/include 
+					-I${} 
+					-I${C2000WARE_DLIB_ROOT} 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+					-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+					-I${C2000WARE_LIBS_ROOT}/flash_api/f28002x/include/FlashAPI/
+					--define=_INLINE --define=_FLASH --define=_F28002x 
+					--define=_SOFT_LIB			
+					--define=BSXL8316RT_REVA
+					--define=LPD_SITE_J1_J4																					
+					--define=MOTOR1_FAST
+					--define=MOTOR1_ESMO_N
+					--define=MOTOR1_ENC_N
+					--define=QEP_ENABLE_N
+					--define=MOTOR1_HALL_N
+					--define=HALL_ENABLE_N
+					--define=HALL_CAL_N					
+					--define=MOTOR1_OVM_N
+					--define=MOTOR1_FWC_N
+					--define=MOTOR1_MTPA_N
+					--define=MOTOR1_SSIPD_N
+					--define=MOTOR1_VOLRECT_N
+					--define=DATALOGF2_EN_N
+					--define=DAC128S_ENABLE --define=DAC128S_SPIB						
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE	
+					--define=SFRA_ENABLE_N
+					--define=STEP_RP_EN_N					
+					--define=CPUTIME_ENABLE
+					--define=TEST_ENABLE
+					--define=CMD_POT_EN_N
+					--define=CMD_CAP_EN_N
+					--define=CMD_SWITCH_EN_N
+					--define=CMD_CAN_EN_N																				
+					--gen_func_subsections=on --abi=eabi  
+					--display_error_number --diag_warning=225 --diag_suppress=10063" 
+				linkerBuildOptions="--entry_point  code_start --stack_size=0x100
+					-I${C2000WARE_DLIB_ROOT}/math/FPUfastRTS/c28/lib	
+					-I${SDK_ROOT}/libraries/sfra/lib/		
+					--define=SFRA_ENABLE_N							
+					-llibc.a -w" />
+
+	<pathVariable name="SDK_ROOT" path="../../../../.." scope="project" />
+	<pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f28002x" scope="project" />
+	<pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f28002x/driverlib" scope="project" />
+	<pathVariable name="C2000WARE_LIBS_ROOT" path="../../../../../c2000ware/libraries/" scope="project" />
+	<pathVariable name="C2000WARE_ROOT" path="../../../../../c2000ware/" scope="project" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/est_lib/lib/fast_flash_lib.lib" targetDirectory="src_lib" />	
+	<file action="link" path="SDK_ROOT/libraries/observers/est_lib/include/est.h" targetDirectory="src_lib" />	
+	<file action="link" path="SDK_ROOT/libraries/observers/est_lib/include/userParams.h" targetDirectory="src_lib" />	
+	<file action="link" path="SDK_ROOT/libraries/observers/est_lib/include/motor.h" targetDirectory="src_lib" />	
+	
+	<file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F280025C_LaunchPad.ccxml" targetDirectory="" />
+	<file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F280025C.ccxml" targetDirectory="" />
+	
+	<file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/f28002x_globalvariabledefs.c" targetDirectory="src_device" />
+	<file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/f28002x_codestartbranch.asm" targetDirectory="src_device" />
+	
+	<file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/cmd/f28002x_headers_nonbios.cmd" targetDirectory="src_device" />	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/f28002x/cmd/f28002x_flash_lib_is_eabi.cmd" targetDirectory="src_device" />
+	
+	<file action="link" path="C2000WARE_DLIB_ROOT/adc.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/asysctl.c"   targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/can.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/clb.c"       targetDirectory="src_driver" />	
+	<file action="link" path="C2000WARE_DLIB_ROOT/cmpss.c"     targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/cputimer.c"  targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/dcc.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/dcsm.c"      targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/dma.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/ecap.c"      targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/epwm.c"      targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/eqep.c"      targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/flash.c"     targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/fsi.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/gpio.c"      targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/hrcap.c"     targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/hrpwm.c"     targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/i2c.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/interrupt.c" targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/lin.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/memcfg.c"    targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/pmbus.c"     targetDirectory="src_driver" />	
+	<file action="link" path="C2000WARE_DLIB_ROOT/sci.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/spi.c"       targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/sysctl.c"    targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/version.c"   targetDirectory="src_driver" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/xbar.c"      targetDirectory="src_driver" />
+	
+	<file action="link" path="SDK_ROOT/libraries/control/pi/source/pi.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/control/fwc/source/fwc.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/control/mtpa/source/mtpa.c" targetDirectory="src_foc" />		
+	<file action="link" path="SDK_ROOT/libraries/control/vs_freq/source/vs_freq.c" targetDirectory="src_foc" />
+	
+	<file action="link" path="SDK_ROOT/libraries/control/dclink_ss/include/dclink_ss.h" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/control/dclink_ss/source/dclink_ss.c" targetDirectory="src_foc" />
+	
+	<file action="link" path="SDK_ROOT/libraries/transforms/clarke/source/clarke.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/transforms/ipark/source/ipark.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/transforms/park/source/park.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/transforms/svgen/source/svgen.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/transforms/svgen/source/svgen_current.c" targetDirectory="src_foc" />	
+	
+	<file action="link" path="SDK_ROOT/libraries/filter/filter_fo/source/filter_fo.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/filter/filter_so/source/filter_so.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/filter/offset/source/offset.c" targetDirectory="src_foc" />
+	
+	<file action="link" path="SDK_ROOT/libraries/utilities/angle_gen/source/angle_gen.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/utilities/traj/source/traj.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/utilities/cpu_time/source/cpu_time.c" targetDirectory="src_foc" />		
+	
+	<file action="link" path="SDK_ROOT/libraries/utilities/datalog/source/datalogIF.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/utilities/datalog/include/datalogIF.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/utilities/step_response/source/step_response.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/utilities/step_response/include/step_response.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/esmo/source/esmo.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/observers/esmo/include/esmo.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/speedfr/source/speedfr.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/observers/speedfr/include/speedfr.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/speedcalc/source/speedcalc.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/observers/speedcalc/include/speedcalc.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/encoder/source/encoder.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/observers/encoder/include/encoder.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/hall/source/hall.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/observers/hall/include/hall.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/ssipd/source/ssipd.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/observers/ssipd/include/ssipd.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/observers/isbldc/source/isbldc.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/observers/isbldc/include/isbldc.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/utilities/mod6cnt/source/mod6cnt.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/utilities/mod6cnt/include/mod6cnt.h" targetDirectory="src_foc" />
+
+	<file action="link" path="SDK_ROOT/libraries/utilities/rimpulse/source/rimpulse.c" targetDirectory="src_foc" />
+	<file action="link" path="SDK_ROOT/libraries/utilities/rimpulse/include/rimpulse.h" targetDirectory="src_foc" />
+		
+	<file action="link" path="SDK_ROOT/libraries/transforms/volts/source/volt_recons.c" targetDirectory="src_foc"/>
+	<file action="link" path="SDK_ROOT/libraries/transforms/volts/include/volt_recons.h" targetDirectory="src_foc" />
+	
+	<file action="link" path="SDK_ROOT/libraries/dacs/dac128s085/source/dac128s085.c" targetDirectory="src_board" />
+	<file action="link" path="SDK_ROOT/libraries/dacs/dac128s085/include/dac128s085.h" targetDirectory="src_board" />
+	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/f28002x/drivers/source/hal.c" targetDirectory="src_board" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/f28002x/drivers/include/hal.h" targetDirectory="src_board" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/f28002x/drivers/include/hal_obj.h" targetDirectory="src_board" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/hal_data.h" targetDirectory="src_board" />	
+
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/user_mtr1.h" targetDirectory="src_board" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/source/user_mtr1.c" targetDirectory="src_board" />
+	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/source/motor_common.c" targetDirectory="src_control" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/motor_common.h" targetDirectory="src_control" />
+	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/source/motor1_drive.c" targetDirectory="src_control" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/motor1_drive.h" targetDirectory="src_control" />	
+	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/source/sys_main.c" targetDirectory="" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/sys_main.h" targetDirectory="" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/sys_settings.h" targetDirectory="" />
+	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/source/communication.c" targetDirectory="src_sys" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/communication.h" targetDirectory="src_sys" />	
+	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/source/codeupdate.c" targetDirectory="src_sys" />	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/include/codeupdate.h" targetDirectory="src_sys" />	
+	
+	<file action="link" path="SDK_ROOT/libraries/sfra/lib/sfra_f32_tmu_eabi.lib" targetDirectory="src_sfra" />
+	<file action="link" path="SDK_ROOT/libraries/sfra/include/sfra_f32.h" targetDirectory="src_sfra" />
+	<file action="link" path="SDK_ROOT/libraries/sfra/gui/source/sfra_gui_scicomms_driverlib.c" targetDirectory="src_sfra" />
+	<file action="link" path="SDK_ROOT/libraries/sfra/gui/include/sfra_gui_scicomms_driverlib.h" targetDirectory="src_sfra" />
+	
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/common/source/sfra_gui.c" targetDirectory="src_sfra" />
+	<file action="link" path="SDK_ROOT/solutions/universal_motorcontrol_lab/f28002x/drivers/include/sfra_settings.h" targetDirectory="src_sfra" />
+
+	<file action="link" path="SDK_ROOT/libraries/drvic/drv8323/source/drv8323s.c" targetDirectory="src_board" applicableConfigurations="Flash_lib_DRV8323RS" />
+	<file action="link" path="SDK_ROOT/libraries/drvic/drv8323/include/drv8323s.h" targetDirectory="src_board" applicableConfigurations="Flash_lib_DRV8323RS" />
+	
+	<file action="link" path="SDK_ROOT/libraries/drvic/drv8353/source/drv8353s.c" targetDirectory="src_board" applicableConfigurations="Flash_lib_DRV8353RS" />
+	<file action="link" path="SDK_ROOT/libraries/drvic/drv8353/include/drv8353s.h" targetDirectory="src_board" applicableConfigurations="Flash_lib_DRV8353RS" />
+	
+	<file action="link" path="SDK_ROOT/libraries/drvic/drv8316/source/drv8316s.c" targetDirectory="src_board" applicableConfigurations="Flash_lib_DRV8316RT" />
+	<file action="link" path="SDK_ROOT/libraries/drvic/drv8316/include/drv8316s.h" targetDirectory="src_board" applicableConfigurations="Flash_lib_DRV8316RT" />			
+
+ 	<!-- this file is not used in this project -->
+
+  </project>
+</projectSpec>

@@ -1,0 +1,41 @@
+<projectSpec>
+  <project
+        name="f28002x_test_application"
+        device="TMS320F280025C"
+        cgtVersion="20.2.1.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <configuration name="RAM" compilerBuildOptions="--opt_level=off -I${DIAG_LIBRARY_ROOT}/include -I${PROJECT_ROOT}/include -I${DIAG_LIBRARY_ROOT}/examples/test_application/include -I${C2000WARE_DLIB_ROOT} -I${C2000WARE_COMMON}/include -I${DIAG_LIBRARY_ROOT}/../../calibration/hrpwm/f28002x/include -v28 -ml -mt  --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --define=_DUAL_HEADERS --gen_func_subsections=on --diag_warning=225  --diag_suppress=10063 --display_error_number" linkerBuildOptions="--stack_size=0x300 --heap_size=0x200" />
+    <configuration name="RAM_RELEASE" compilerBuildOptions="--opt_level=4 -I${DIAG_LIBRARY_ROOT}/include -I${PROJECT_ROOT}/include -I${DIAG_LIBRARY_ROOT}/examples/test_application/include -I${C2000WARE_DLIB_ROOT} -I${C2000WARE_COMMON}/include -I${DIAG_LIBRARY_ROOT}/../../calibration/hrpwm/f28002x/include -v28 -ml -mt  --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --define=_DUAL_HEADERS --gen_func_subsections=on --diag_warning=225  --diag_suppress=10063 --display_error_number" linkerBuildOptions="--stack_size=0x300 --heap_size=0x200" />
+    <configuration name="FLASH" compilerBuildOptions="--opt_level=off -I${DIAG_LIBRARY_ROOT}/include -I${PROJECT_ROOT}/include -I${DIAG_LIBRARY_ROOT}/examples/test_application/include -I${C2000WARE_DLIB_ROOT} -I${C2000WARE_COMMON}/include -I${DIAG_LIBRARY_ROOT}/../../calibration/hrpwm/f28002x/include -v28 -ml -mt  --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --define=_FLASH --define=_DUAL_HEADERS --gen_func_subsections=on --diag_warning=225  --diag_suppress=10063 --display_error_number" linkerBuildOptions="--entry_point=code_start --stack_size=0x300 --heap_size=0x200 " />
+    <configuration name="FLASH_RELEASE" compilerBuildOptions="--opt_level=4 -I${DIAG_LIBRARY_ROOT}/include -I${PROJECT_ROOT}/include -I${DIAG_LIBRARY_ROOT}/examples/test_application/include -I${C2000WARE_DLIB_ROOT} -I${C2000WARE_COMMON}/include -I${DIAG_LIBRARY_ROOT}/../../calibration/hrpwm/f28002x/include -v28 -ml -mt  --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --define=_FLASH --define=_DUAL_HEADERS --gen_func_subsections=on --diag_warning=225  --diag_suppress=10063 --display_error_number" linkerBuildOptions="--entry_point=code_start --stack_size=0x300 --heap_size=0x200 " />
+
+    <pathVariable name="DIAG_LIBRARY_ROOT" path="../../.." scope="project" />
+    <pathVariable name="C2000WARE_COMMON" path="../../../../../../device_support/f28002x/common" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../../driverlib/f28002x/driverlib/" scope="project" />
+
+    <file action="copy" path="../cmd/f28002x_sta_ram_lnk.cmd" targetDirectory="" applicableConfigurations="RAM,RAM_RELEASE" />
+    <file action="copy" path="../cmd/f28002x_sta_flash_lnk.cmd" targetDirectory="" applicableConfigurations="FLASH,FLASH_RELEASE" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="" />
+    <file action="link" path="../../../lib/f28002x_diagnostic_stl_debug.lib" targetDirectory="" applicableConfigurations="RAM,FLASH" />
+    <file action="link" path="../../../lib/f28002x_diagnostic_stl_release.lib" targetDirectory="" applicableConfigurations="RAM_RELEASE,FLASH_RELEASE" />
+    <file action="link" path="../../../../../calibration/hrpwm/f28002x/lib/SFO_v8_fpu_lib_build_c28_driverlib.lib" targetDirectory="" />
+
+    <file action="copy" path="../include" targetDirectory="" />
+
+    <file action="copy" path="../sta_main.c" targetDirectory="" />
+    <file action="copy" path="../sta_comm.c" targetDirectory="" />
+    <file action="copy" path="../sta_tests.c" targetDirectory="" />
+    <file action="copy" path="../sta_timer.c" targetDirectory="" />
+    <file action="copy" path="../sta_user.c" targetDirectory="" />
+    <file action="copy" path="../sta_util.c" targetDirectory="" />
+
+    <file action="copy" path="../../../../../../device_support/f28002x/common/source/device.c" targetDirectory="" />
+    <file action="copy" path="../../../../../../device_support/f28002x/common/include/device.h" targetDirectory="include" />
+    <file action="copy" path="../../../../../../device_support/f28002x/common/source/f28002x_codestartbranch.asm" targetDirectory="" applicableConfigurations="FLASH,FLASH_RELEASE" />
+    <file action="copy" path="../../../../../../device_support/f28002x/common/targetConfigs/TMS320F280025C.ccxml" targetDirectory="" />
+  </project>
+</projectSpec>

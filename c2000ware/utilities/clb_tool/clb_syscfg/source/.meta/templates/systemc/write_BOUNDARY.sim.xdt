@@ -1,0 +1,55 @@
+%%{
+    let inst      = args[0];
+    let tileName  = args[1];
+    let instNum   = args[2];
+    let inputs    = args[3];
+    let name      = tileName + "_BOUNDARY";
+
+    function cfgCode(edge, sync) {
+        let code = 0;
+        switch(edge) {
+            case 'none':         code = 0; break;
+            case 'rising edge' : code = 1; break;
+            case 'falling edge': code = 2; break;
+            case 'both edges'  : code = 3; break;
+        }
+        code |= (sync << 2);
+        return code;
+    }
+%%}
+
+        sig_`name`_IN_in0.write((bool) 0);
+        sig_`name`_IN_in1.write((bool) 0);
+        sig_`name`_IN_in2.write((bool) 0);
+        sig_`name`_IN_in3.write((bool) 0);
+        sig_`name`_IN_in4.write((bool) 0);
+        sig_`name`_IN_in5.write((bool) 0);
+        sig_`name`_IN_in6.write((bool) 0);
+        sig_`name`_IN_in7.write((bool) 0);
+
+        sig_`name`_IN_ctrl0.write((sc_uint<32>) `cfgCode(inst.in_edge0, inst.in_sync0)`);
+        sig_`name`_IN_ctrl1.write((sc_uint<32>) `cfgCode(inst.in_edge1, inst.in_sync1)`);
+        sig_`name`_IN_ctrl2.write((sc_uint<32>) `cfgCode(inst.in_edge2, inst.in_sync2)`);
+        sig_`name`_IN_ctrl3.write((sc_uint<32>) `cfgCode(inst.in_edge3, inst.in_sync3)`);
+        sig_`name`_IN_ctrl4.write((sc_uint<32>) `cfgCode(inst.in_edge4, inst.in_sync4)`);
+        sig_`name`_IN_ctrl5.write((sc_uint<32>) `cfgCode(inst.in_edge5, inst.in_sync5)`);
+        sig_`name`_IN_ctrl6.write((sc_uint<32>) `cfgCode(inst.in_edge6, inst.in_sync6)`);
+        sig_`name`_IN_ctrl7.write((sc_uint<32>) `cfgCode(inst.in_edge7, inst.in_sync7)`);
+
+        sig_`name`_IN_out0.write((bool) 0);
+        sig_`name`_IN_out1.write((bool) 0);
+        sig_`name`_IN_out2.write((bool) 0);
+        sig_`name`_IN_out3.write((bool) 0);
+        sig_`name`_IN_out4.write((bool) 0);
+        sig_`name`_IN_out5.write((bool) 0);
+        sig_`name`_IN_out6.write((bool) 0);
+        sig_`name`_IN_out7.write((bool) 0);
+
+        sig_`name`_OUT_out0.write((bool) 0);
+        sig_`name`_OUT_out1.write((bool) 0);
+        sig_`name`_OUT_out2.write((bool) 0);
+        sig_`name`_OUT_out3.write((bool) 0);
+        sig_`name`_OUT_out4.write((bool) 0);
+        sig_`name`_OUT_out5.write((bool) 0);
+        sig_`name`_OUT_out6.write((bool) 0);
+        sig_`name`_OUT_out7.write((bool) 0);

@@ -1,0 +1,11 @@
+%%{
+    let inst      = args[0];
+    let name      = args[1];
+    let inputs    = args[2];
+    let Common    = system.getScript("/utilities/clb_tool/clb_syscfg/source/Common.js");
+%%}
+        `name`("`name`",
+            (unsigned long) `inst.R0_init`,
+            (unsigned long) `inst.R1_init`,
+            (unsigned long) `inst.R2_init`,
+            (unsigned long) `inst.R3_init`),

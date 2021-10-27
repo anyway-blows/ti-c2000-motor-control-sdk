@@ -1,0 +1,141 @@
+<projectSpec>
+  <project
+        name="sensored_foc_f28002x"
+        device="Generic C28xx Device"
+        cgtVersion="20.2.2.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+
+    <configuration
+        name="F28002x_RAM"
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --tmu_support=tmu1 --idiv_support=idiv0 -O4 --opt_for_speed=5 --fp_mode=relaxed
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+			-I${C2000WARE_DLIB_ROOT}
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/
+		    -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/
+			-I${SFRA_INSTALL_ROOT}/include/
+			-I${SFRA_INSTALL_ROOT}/gui/include/
+			-I${MCSDK_ROOT}/libraries/utilities/datalog/include/ 
+			-I${MCSDK_ROOT}/libraries/fcl/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/qep/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/include 							
+			-I${MCSDK_ROOT}/libraries/observers/speed_observer/include			
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/ 
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/ 		
+			-I${MCSDK_ROOT}/solutions/common/sensored_foc/include/ 			
+			-I${MCSDK_ROOT}/solutions/tmdxiddk379d/f28002x/include/ 
+			--define=LARGE_MODEL --define=_DUAL_HEADERS --define=F28002x_DEVICE --define=_CCARD_F280025C
+			--define=DLOG_ENABLE_N --define=TEST_ENABLE
+			-g --diag_warning=225 --diag_suppress=10063
+			--quiet -k --asm_listing
+			--gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x180
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/lib
+            -lrts2800_fpu64_fast_supplement.lib
+            -lrts2800_fpu32_fast_supplement_eabi.lib
+			--reread_libs -llibc.a"
+        />
+    <configuration
+        name="F28002x_FLASH"
+        compilerBuildOptions="-v28 -ml -mt --float_support=fpu32 --tmu_support=tmu1 --idiv_support=idiv0 -O4 --opt_for_speed=5 --fp_mode=relaxed
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/
+			-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/
+			-I${C2000WARE_DLIB_ROOT}
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/
+			-I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/include/
+			-I${C2000WARE_LIB_ROOT}/control/DCL/c28/include/
+			-I${SFRA_INSTALL_ROOT}/include/
+			-I${SFRA_INSTALL_ROOT}/gui/include/
+			-I${MCSDK_ROOT}/libraries/utilities/datalog/include/ 
+			-I${MCSDK_ROOT}/libraries/fcl/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/qep/include/ 
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/include 							
+			-I${MCSDK_ROOT}/libraries/observers/speed_observer/include				
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/CLA_v1.0/ 
+			-I${MCSDK_ROOT}/libraries/utilities/math_blocks/include/v4.3/ 					
+			-I${MCSDK_ROOT}/solutions/common/sensored_foc/include/ 				
+			-I${MCSDK_ROOT}/solutions/tmdxiddk379d/f28002x/include/ 
+			--define=_FLASH --define=_DUAL_HEADERS --define=LARGE_MODEL --define=F28002x_DEVICE --define=_CCARD_F280025C
+			--define=DLOG_ENABLE_N --define=TEST_ENABLE
+			-g --diag_warning=225  --diag_suppress=10063
+			--quiet -k --asm_listing
+			--gen_func_subsections=on --abi=eabi"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x180
+			-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/lib
+			-I${MCSDK_ROOT}/libraries/position_sensing/tformat/lib	
+            -lrts2800_fpu64_fast_supplement.lib
+            -lrts2800_fpu32_fast_supplement_eabi.lib		
+			--reread_libs -llibc.a"
+        />
+
+    <pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f28002x" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f28002x/driverlib" scope="project" />
+    <pathVariable name="C2000WARE_LIB_ROOT" path="../../../../../c2000ware/libraries" scope="project" />
+    <pathVariable name="SFRA_INSTALL_ROOT" path="../../../../../libraries/sfra" scope="project" />
+    <pathVariable name="MCSDK_ROOT" path="../../../../.." scope="project" />
+
+    <file action="link" path="SFRA_INSTALL_ROOT/lib/sfra_f32_tmu_eabi.lib" targetDirectory="" />
+	
+    <file action="link" path="SFRA_INSTALL_ROOT/gui/source/sfra_gui_scicomms_driverlib.c" targetDirectory="libraries" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F280025C.ccxml" targetDirectory="" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/device.c" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/f28002x_codestartbranch.asm" targetDirectory="src_device" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/f28002x_globalvariabledefs.c" targetDirectory="src_device" />
+
+	<file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="libraries" />
+
+	<file action="link" path="C2000WARE_DLIB_ROOT/adc.c" targetDirectory="src_driver" applicableConfigurations="" />
+	<file action="link" path="C2000WARE_DLIB_ROOT/clb.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cmpss.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/cputimer.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/eqep.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/flash.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/fsi.c" targetDirectory="src_driver" applicableConfigurations="" />    
+    <file action="link" path="C2000WARE_DLIB_ROOT/gpio.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/interrupt.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/memcfg.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/sci.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/spi.c" targetDirectory="src_driver" applicableConfigurations="" />	
+    <file action="link" path="C2000WARE_DLIB_ROOT/sysctl.c" targetDirectory="src_driver" applicableConfigurations="" />
+    <file action="link" path="C2000WARE_DLIB_ROOT/xbar.c" targetDirectory="src_driver" applicableConfigurations="" />
+    
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_PI_C1.asm" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_PI_C4.asm" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_NLPID_C3.asm" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_calcGamma.asm" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/source/DCL_error.c" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/include/DCLF32.h" targetDirectory="libraries" />
+    <file action="link" path="C2000WARE_LIB_ROOT/control/DCL/c28/include/DCL_NLPID.h" targetDirectory="libraries" />
+
+    <file action="link" path="MCSDK_ROOT/libraries/fcl/source/fcl_foc_cpu.c" targetDirectory="libraries" />
+    <file action="link" path="MCSDK_ROOT/libraries/fcl/include/fcl_foc_cpu.h" targetDirectory="libraries" />	
+
+    <file action="link" path="MCSDK_ROOT/libraries/utilities/datalog/source/dlog_4ch_f.c" targetDirectory="libraries" />
+    <file action="link" path="MCSDK_ROOT/libraries/utilities/datalog/include/dlog_4ch_f.h" targetDirectory="libraries" />
+
+	<file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/debug/sensored_foc_vars.txt" targetDirectory="" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/debug/sensored_foc_graph1.graphProp" targetDirectory="" />
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/debug/sensored_foc_graph2.graphProp" targetDirectory="" />
+
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/sfra_gui.c" targetDirectory="sources" />
+
+	<file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/sensored_foc_main.c" targetDirectory="sources" />
+	<file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/sensored_foc_drive.c" targetDirectory="sources" />	
+    <file action="link" path="MCSDK_ROOT/solutions/common/sensored_foc/source/sensored_foc_user.c" targetDirectory="sources" />
+
+	<file action="link" path="MCSDK_ROOT/solutions/tmdxiddk379d/f28002x/source/sensored_foc_hal.c" targetDirectory="sources" />
+
+    <file action="link" path="MCSDK_ROOT/solutions/tmdxiddk379d/f28002x/cmd/sensored_foc_f28002x_flash_lnk.cmd" targetDirectory="src_cmd" applicableConfigurations="F28002x_FLASH" />
+    <file action="link" path="MCSDK_ROOT/solutions/tmdxiddk379d/f28002x/cmd/sensored_foc_f28002x_ram_lnk.cmd" targetDirectory="src_cmd" applicableConfigurations="F28002x_RAM" />
+    <file action="link" path="MCSDK_ROOT/solutions/tmdxiddk379d/f28002x/cmd/f28002x_headers_nonbios_eabi.cmd" targetDirectory="src_cmd" />		   
+
+  </project>
+</projectSpec>
+

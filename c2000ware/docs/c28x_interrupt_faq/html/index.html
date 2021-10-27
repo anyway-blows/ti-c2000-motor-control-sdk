@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>C28x Interrupt FAQ</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/tiicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="None" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> C28x Interrupt FAQ
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.0.0
+              </div>
+            
+          
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-interruptfaq">Interrupt FAQ for C2000</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">C28x Interrupt FAQ</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>C28x Interrupt FAQ</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound" id="c28x-interrupt-faq">
+<span id="document-interruptfaq"></span><div class="section" id="interrupt-faq-for-c2000">
+<span id="interrupt-faq"></span><h1>Interrupt FAQ for C2000<a class="headerlink" href="#interrupt-faq-for-c2000" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This is an frequently asked question list for C28x interrupts and the Peripheral Interrupt Expansion (PIE) unit.</p>
+</div>
+<div class="section" id="electrical-specifications">
+<h2><strong>Electrical Specifications</strong><a class="headerlink" href="#electrical-specifications" title="Permalink to this headline">¶</a></h2>
+<p>Electrical specifications can change between devices, peripheral types and device families. Always refer to the data manual and errata for a particular device for Electrical Specifications.</p>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2><strong>Frequently Asked Questions</strong><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>Q: Where is the CPU’s context save and return documented?</strong></dt><dd><p>Refer to the <a class="reference external" href="http://www.ti.com/lit/pdf/SPRU430">C28x TMS320C28x CPU and Instruction Set Reference Guide</a> for more information.</p>
+</dd>
+<dt><strong>Q: Where is the PIE registers and the PIE vector table documented?</strong></dt><dd><p>Refer to the System Control and Interrupts Reference Guide for your device. All reference guides for each device family are listed in this document: <a class="reference external" href="http://www.ti.com/lit/pdf/SPRU566">TMS320x28xx, 28xxx DSP Peripherals Reference Guide (SPRU566)</a></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="nesting">
+<h3>Nesting<a class="headerlink" href="#nesting" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>Q: Can interrupts be nested?</strong></dt><dd><p>Absolutely.  Interrupts are automatically disabled when an interrupt begins. That is, the interrupt mask bit, INTM, of the main cpu is automatically set. This will prevent new interrupts from being serviced until software re-enables them or you exit the ISR.
+Refer to Interrupt Nesting on C28x for more information</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="isr-latency">
+<h3>ISR Latency<a class="headerlink" href="#isr-latency" title="Permalink to this headline">¶</a></h3>
+<p>Consider the following diagram, taken from the C2000 Workshop Material:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>The actual maximum latency will change, as indicated in the below image. Things that can delay an interrupt:</dt><dd><ul class="simple">
+<li><p>Are interrupts disabled (INTM)? When you take an interrupt this is automatically done - so to allow nested interrupts it has to be cleared.</p></li>
+<li><p>Is the CPU executing a RPT instruction (single repeat). This cannot be interrupted.</p></li>
+<li><p>Multiple cycle instructions - for example, if the CPU was just executing a loop - each time through the loop a branch would be taken which could delay an interrupt for 4 cycles. One way to avoid this is to put the CPU into idle so it will be in the same state each time the interrupt comes in.</p></li>
+<li><p>Is code execution in wait stated memory</p></li>
+<li><p>Is stack in wait stated memory. It is rare to have data memory with a wait state in c2000 but say, just as an example, the stack was in external memory (XINTF).</p></li>
+<li><p>Is the stack and the code in the same physical memory block</p></li>
+<li><p>If the interrupt source is from an external pin, then any qualification on the pin will add to the delay.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<div class="figure align-center" id="c28-isr-latency">
+<a class="reference internal image-reference" href="_images/C28x_Isr_Latency.jpg"><img alt="_images/C28x_Isr_Latency.jpg" src="_images/C28x_Isr_Latency.jpg" style="width: 410.5px; height: 261.5px;" /></a>
+</div>
+</div>
+<div class="section" id="setting-up-the-pie-vector-table">
+<h3>Setting up the PIE vector table<a class="headerlink" href="#setting-up-the-pie-vector-table" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>Q: How do I link my ISR function to the corresponding interrupt flag bit?</strong></dt><dd><p>The C/C++ Header Files and Peripheral Examples are a great place to start as they provide peripheral examples with the interrupts already configured. No matter if you are using SPI, SCI, ADC, etc. this software package has interrupt examples.
+In controlSUITE these examples can be found in the device_support directory for your particular device.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="the-itrap-interrupt">
+<h3>The ITRAP Interrupt<a class="headerlink" href="#the-itrap-interrupt" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>Q: What causes an illegal (ITRAP) interrupt?</strong></dt><dd><ul class="simple">
+<li><p>An invalid instruction is decoded (this includes invalid addressing modes).</p></li>
+<li><p>The opcode value 0x0000 is decoded. This opcode corresponds to the ITRAP0 instruction.</p></li>
+<li><p>The opcode value 0xFFFF is decoded. This opcode corresponds to the ITRAP1 instruction.</p></li>
+<li><p>A 32-bit operation attempts to use the &#64;SP register addressing mode.</p></li>
+<li><p>Address mode setting AMODE=1 and PAGE0=1which is an illegal combination.</p></li>
+</ul>
+</dd>
+<dt><strong>Q: How can I debug an ITRAP?</strong></dt><dd><ul class="simple">
+<li><p>An ITRAP is often a sign of stack overflowing or a buffer overflowing. To quickly see if it is the stack you can fill the region with a known value and then run the application. By the addresses written to you will be able to see how big the stack grew.</p></li>
+<li><p>This application note has a method for using on-chip resources to detect when a stack overflow occurs: Online Stack Overflow Detection on the <a class="reference external" href="http://www.ti.com/lit/pdf/spra820">TMS320C28x DSP (spra820).</a></p></li>
+<li><p>Make sure code isn’t getting too close to the end of a valid memory block (which is followed by invalid memory). This is explained in the device errata.</p></li>
+<li><p>Make sure that if any code is being loaded into flash and run from RAM that it is properly copied to RAM before the function is called.</p></li>
+<li><p>Make sure the CPU is not pre-fetching into the code security password location.</p></li>
+<li><p>Insert a return instruction into the ISR. Set a breakpoint on this instruction and then step to see where the code came from.</p></li>
+<li><p>Another option is to look at the stack. When you take an illegal instruction trap, registers are automatically pushed on the stack, including the return address. By looking at the return address value on the stack, you can find out where the ITRAP occurred.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">2020, Texas Instruments Incorporated</a>, Texas Instruments Incorporated. All rights reserved. <br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+      <span class="lastupdated">
+        Last updated on Feb 12, 2021.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+    <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+
+        $('body').on("mousewheel", function () {
+            // Remove default behavior
+            event.preventDefault();
+            // Scroll without smoothing
+            var wheelDelta = event.wheelDelta;
+            var currentScrollPosition = window.pageYOffset;
+            window.scrollTo(0, currentScrollPosition - wheelDelta);
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+% var module = system.modules['/driverlib/epwmxbar.js'];
+% let Common   = system.getScript("/driverlib/Common.js");
+% var nameOfModule = "epwmxbar";
+% var nameOfPeripheral = module.peripheralName;
+void `nameOfPeripheral`_init(){
+%if (module != null)
+%{
+	% for(var i = 0; i < module.$instances.length; i++) {
+		% var instance = module.$instances[i];
+		% let instancePinmux = instance[nameOfModule];
+		% let driverlibName = instance.tripInput
+	//`instance.$name` initialization
+		% if(instance.invertMode){
+	XBAR_invertEPWMSignal(`driverlibName`, true);
+		%}
+		%%{
+			var muxConfigurationOutput = "\n";
+			var muxesUsed = instance.muxesUsed;
+			var enabledMuxesUsed = "";
+			for (var muxesUsedIndex in muxesUsed)
+			{
+				var usedMuxName = muxesUsed[muxesUsedIndex];
+				//console.log(usedMuxName);
+				var usedMuxNumber = parseInt(usedMuxName.replace("XBAR_MUX", ""))
+				var muxConfigName = "mux" + usedMuxNumber + "Config"
+
+				if (instance[muxConfigName])
+				{            	
+					enabledMuxesUsed += Common.stringOrEmpty(enabledMuxesUsed, " | ");
+					enabledMuxesUsed += usedMuxName;
+					var muxSource = instance[muxConfigName]
+					muxConfigurationOutput += "\tXBAR_setEPWMMuxConfig(" + driverlibName + ", " + muxSource + ");\n"
+				}
+			}
+			if (enabledMuxesUsed != "")
+			{
+				muxConfigurationOutput += "\tXBAR_enableEPWMMux(" + driverlibName + ", " + enabledMuxesUsed + ");"
+			}
+		%%}
+`muxConfigurationOutput`
+
+	%}
+%}
+}

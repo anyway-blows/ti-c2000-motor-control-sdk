@@ -1,0 +1,31 @@
+% var module = system.modules['/driverlib/usb.js'];
+% let Common   = system.getScript("/driverlib/Common.js");
+% var nameOfModule = "usb";
+% var nameOfPeripheral = module.peripheralName;
+void `nameOfPeripheral`_init(){
+%if (module != null)
+%{
+	% for(var i = 0; i < module.$instances.length; i++) {
+	    % var instance = module.$instances[i];
+	
+	//`instance.$name` initialization 
+		% let instancePinmux = instance[nameOfModule];
+		% let solution    = instancePinmux.$solution;
+		% let peripheral  = system.deviceData.peripherals[solution.peripheralName];
+	    % var InterfaceNames = Object.keys(system.deviceData.interfaces[nameOfPeripheral].interfacePins);
+	    % for (var interfaceNumber in InterfaceNames)
+    	% {
+        %	var interfaceName = InterfaceNames[interfaceNumber];
+        %	let pinName =  interfaceName.toLowerCase().replace("#", "").replace("@", "") + "Pin";
+        %	// Common.printDebugObject(instance[nameOfModule][pinName]);
+        %	if (instance[nameOfModule][pinName] != null){
+	        % 	//Common.printDebugObject(instance[nameOfModule][pinName].$solution);
+			% 	var gpioName = instance[nameOfModule][pinName].$solution.devicePinName;
+			% 	var gpioNumber = gpioName.substring(4);
+			%	var gpioNumber = Common.gpioNameToNumber(gpioNumber);
+	%//GPIO_setAnalogMode(`gpioNumber`, GPIO_ANALOG_ENABLED);
+			%}
+		%}
+	%}
+%}
+}

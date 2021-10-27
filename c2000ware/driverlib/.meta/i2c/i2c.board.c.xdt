@@ -1,0 +1,72 @@
+% var module = system.modules['/driverlib/i2c.js'];
+void `module.peripheralName`_init(){
+%if (module != null)
+%{
+	%console.log()
+	% for(var i = 0; i < module.$instances.length; i++) {
+		% var instance = module.$instances[i];
+	//`instance.$name` initialization
+	
+	I2C_disableModule(`instance.$name`_BASE);
+		% if (instance.mode == "MASTER")
+		%{
+	I2C_initMaster(`instance.$name`_BASE, DEVICE_SYSCLK_FREQ, `parseInt(instance.bitRate)`, `instance.duty`);
+	I2C_setConfig(`instance.$name`_BASE, I2C_MASTER_`instance.initialMode`);
+	I2C_setSlaveAddress(`instance.$name`_BASE, `instance.slaveAddress`);
+			% if (instance.loopback){
+	I2C_enableLoopback(`instance.$name`_BASE);
+	I2C_setOwnSlaveAddress(`instance.$name`_BASE, `instance.ownSlaveAddress`);
+			%} else {
+	I2C_disableLoopback(`instance.$name`_BASE);
+			%}
+		%}
+		% else{
+	I2C_setConfig(`instance.$name`_BASE, I2C_SLAVE_`instance.initialMode`);
+	I2C_setOwnSlaveAddress(`instance.$name`_BASE, `instance.ownSlaveAddress`);
+		%}
+	I2C_setBitCount(`instance.$name`_BASE, `instance.bitCount`);
+	I2C_setDataCount(`instance.$name`_BASE, `instance.dataCount`);
+	I2C_setAddressMode(`instance.$name`_BASE, `instance.addressMode`);
+		% if (instance.useFifo){
+	I2C_enableFIFO(`instance.$name`_BASE);
+			% if (instance.useInterrupts){
+				% var interrupts = "";
+				% for (var int_index in instance.enabledInterrupts)
+				% {
+				%	interrupts += ((interrupts == "")?"":" | ") + instance.enabledInterrupts[int_index];
+				% }
+				% for (var int_index in instance.enabledFIFOInterrupts)
+				% {
+				%	interrupts += ((interrupts == "")?"":" | ") + instance.enabledFIFOInterrupts[int_index];
+				% }
+				% 
+				% if (interrupts != ""){
+	I2C_clearInterruptStatus(`instance.$name`_BASE, `interrupts`);
+				% }
+	I2C_setFIFOInterruptLevel(`instance.$name`_BASE, `instance.txFifo`, `instance.rxFifo`);
+				% if (interrupts != ""){
+	I2C_enableInterrupt(`instance.$name`_BASE, `interrupts`);
+				% }
+			% }
+		%} else {
+	I2C_disableFIFO(`instance.$name`_BASE);
+			% if (instance.useInterrupts){
+				% var interrupts = "";
+				% for (var int_index in instance.enabledInterrupts)
+				% {
+				%	interrupts += ((interrupts == "")?"":" | ") + instance.enabledInterrupts[int_index];
+				% }
+				% if (interrupts != ""){
+	I2C_clearInterruptStatus(`instance.$name`_BASE, `interrupts`);
+				% }
+				% if (interrupts != ""){
+	I2C_enableInterrupt(`instance.$name`_BASE, `interrupts`);
+				% }
+			% }
+		%}
+	I2C_setEmulationMode(`instance.$name`_BASE, `instance.emulationMode`);
+	I2C_enableModule(`instance.$name`_BASE);
+	%}
+%}
+
+}

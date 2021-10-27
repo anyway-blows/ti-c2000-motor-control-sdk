@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExportImportMemento.1>
+<VarMeta IMemento.internal.id="enableFlag"/>
+<VarMeta IMemento.internal.id="isrTicker"/>
+<VarMeta IMemento.internal.id="runMotor"/>
+<VarMeta IMemento.internal.id="lsw"/>
+<VarMeta IMemento.internal.id="VdTesting"/>
+<VarMeta IMemento.internal.id="VqTesting"/>
+<VarMeta IMemento.internal.id="FCL_params.wccD"/>
+<VarMeta IMemento.internal.id="FCL_params.wccQ"/>
+<VarMeta IMemento.internal.id="speedRef"/>
+<VarMeta IMemento.internal.id="speed1.Speed"/>
+<VarMeta IMemento.internal.id="rc1.TargetValue"/>
+<VarMeta IMemento.internal.id="rc1.SetpointValue"/>
+<VarMeta IMemento.internal.id="rg1.Out"/>
+<VarMeta IMemento.internal.id="tripFlagDMC"/>
+<VarMeta IMemento.internal.id="clearTripFlagDMC"/>
+<VarMeta IMemento.internal.id="clkPrescale"/>
+<VarMeta IMemento.internal.id="sampWin"/>
+<VarMeta IMemento.internal.id="thresh"/>
+<VarMeta IMemento.internal.id="curLimit"/>
+<VarMeta IMemento.internal.id="FCL_params.Vdcbus"/>
+<VarMeta IMemento.internal.id="qep1.ElecTheta"/>
+<VarMeta IMemento.internal.id="maxModIndex"/>
+<VarMeta IMemento.internal.id="fclLatencyInMicroSec"/>
+<VarMeta IMemento.internal.id="FCL_params.wccD/(2*3.14)"/>
+<VarMeta IMemento.internal.id="FCL_params.wccQ/(2*3.14)"/>
+<VarMeta IMemento.internal.id="fclClrCntr"/>
+<VarMeta IMemento.internal.id="position"/>
+<VarMeta IMemento.internal.id="turns"/>
+<VarMeta IMemento.internal.id="tFormat.ElecTheta"/>
+<VarMeta IMemento.internal.id="tFormat.InitTheta"/>
+<VarMeta IMemento.internal.id="tFormat.MechTheta"/>
+<VarMeta IMemento.internal.id="speedWe"/>
+<VarMeta IMemento.internal.id="pangle"/>
+<VarMeta IMemento.internal.id="spdObs.Kp"/>
+<VarMeta IMemento.internal.id="spdObs.Ki"/>
+</ExportImportMemento.1>

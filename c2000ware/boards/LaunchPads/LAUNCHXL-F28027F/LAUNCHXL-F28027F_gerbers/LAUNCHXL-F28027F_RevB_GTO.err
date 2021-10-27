@@ -1,0 +1,51 @@
+Cannot convert the following lines in file "F:\2019\eagle改版加丝印X1_SS_C2000_Launchpad_LAUNCHXL-F28027F\SS_C2000_Launchpad_LAUNCHXL-F28027F_V07_20190524\LAUNCHXL-F28027F-0101-01_制板Gerber0527\GTO.gpi":
+Line 3: No Matching Format Found 
+Photoplotter Info F le: C:/Users/Adm n strator/Desktop/0527mzj/GTO.gp 
+Line 5: No Matching Format Found 
+ Date              : 2019/5/27 星期一 11:29
+Line 6: No Matching Format Found 
+ Plotf le          : C:/Users/Adm n strator/Desktop/0527mzj/GTO.plc
+Line 7: No Matching Format Found 
+ Apertures         : generated: 
+Line 8: No Matching Format Found 
+ Dev ce            : Gerber RS-274-X photoplotter, coord nate format 2.5  nch
+Line 10: No Matching Format Found 
+Parameter sett ngs:
+Line 12: No Matching Format Found 
+ Emulate Apertures : no
+Line 13: No Matching Format Found 
+ Tolerance Draw  + :  0.00 %
+Line 14: No Matching Format Found 
+ Tolerance Draw  - :  0.00 %
+Line 15: No Matching Format Found 
+ Tolerance Flash + :  0.00 %
+Line 16: No Matching Format Found 
+ Tolerance Flash - :  0.00 %
+Line 17: No Matching Format Found 
+ Rotate            : no
+Line 18: No Matching Format Found 
+ M rror            : no
+Line 19: No Matching Format Found 
+ Opt m ze          : yes
+Line 20: No Matching Format Found 
+ Auto f t          : yes
+Line 21: No Matching Format Found 
+ OffsetX           : 0 nch
+Line 22: No Matching Format Found 
+ OffsetY           : 0 nch
+Line 24: No Matching Format Found 
+Plotf le Info:
+Line 26: No Matching Format Found 
+ Coord nate Format : 2.5
+Line 27: No Matching Format Found 
+ Coord nate Un ts  : Inch
+Line 28: No Matching Format Found 
+ Data Mode         : Absolute
+Line 29: No Matching Format Found 
+ Zero Suppress on  : None
+Line 30: No Matching Format Found 
+ End Of Block      : *
+Line 32: No Matching Format Found 
+Apertures used:
+Line 34: No Matching Format Found 
+ Code     Shape     S ze                  used

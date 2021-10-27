@@ -1,0 +1,11 @@
+% var module = system.modules['/driverlib/cmi2c.js'];
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% let cmi2c        	= instance.cmi2c;
+	% let solution    		= cmi2c.$solution;
+	%let peripheral 	 	= system.deviceData.peripherals[solution.peripheralName];
+% }
+%}
+%

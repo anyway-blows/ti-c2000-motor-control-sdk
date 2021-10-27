@@ -1,0 +1,11 @@
+% var module = system.modules['/driverlib/ssi.js'];
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% let ssi        	= instance.ssi;
+	% let solution    		= ssi.$solution;
+	% let peripheral 	 	= system.deviceData.peripherals[solution.peripheralName];
+% }
+%}
+%

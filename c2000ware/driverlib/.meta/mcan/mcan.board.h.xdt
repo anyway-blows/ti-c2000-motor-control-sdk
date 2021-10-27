@@ -1,0 +1,11 @@
+% var module = system.modules['/driverlib/mcan.js'];
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% let mcan        	= instance.mcan;
+	% let solution    		= mcan.$solution;
+	%let peripheral 	 	= system.deviceData.peripherals[solution.peripheralName];
+% }
+%}
+%

@@ -1,0 +1,13 @@
+% var module = system.modules['/driverlib/gpio.js'];
+% let Common   = system.getScript("/driverlib/Common.js");
+%if (module != null)
+%{
+% for(var i = 0; i < module.$instances.length; i++) {
+	% var instance = module.$instances[i];
+	% var gpioName = instance.gpioPin.$solution.devicePinName;
+	% var gpioNumber = gpioName.substring(4);
+	% gpioNumber = Common.gpioNameToNumber(gpioNumber);
+#define `instance.$name` `gpioNumber`
+% }
+%}
+%

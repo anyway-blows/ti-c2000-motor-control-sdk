@@ -1,0 +1,55 @@
+<projectSpec>
+  <project
+        name="pto_abs2qep_f28004x_launchpad"
+        device="TMS320F280049C"
+        cgtVersion="20.2.1.LTS"
+        launchWizard="False"
+        outputFormat="ELF"
+        linkerCommandFile=""
+        >
+  
+    <configuration
+        name="F28004x_RAM"
+        compilerBuildOptions="-v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --vcu_support=vcu2 -O3 --opt_for_speed=5 
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/common/include/ 
+							-I${C2000WARE_DEVICE_SUPPORT_ROOT}/headers/include/ 
+							-I${C2000WARE_DLIB_ROOT} -I${C2000WARE_LIB_ROOT}/math/IQmath/c28/include/ 
+							-I${SDK_ROOT}/libraries/position_sensing/pto/include 
+							-I${SDK_ROOT}/solutions/boostxl_posmgr/f28004x/include
+                            -I${SDK_ROOT}/solutions/boostxl_posmgr/shared/include                             
+							--define=_DEBUG --define=CPU1 --define=LARGE_MODEL --define=_F28004x --fp_mode=relaxed
+							--abi=eabi --float_operations_allowed=32 -g --diag_warning=225 --quiet -k --asm_listing"
+							
+        linkerBuildOptions="--stack_size=0x380 
+							-I${SDK_ROOT}/libraries/position_sensing/pto/lib 
+							-I${C2000WARE_LIB_ROOT}/math/IQmath/c28/lib
+                            -I${C2000WARE_LIB_ROOT}/math/FPUfastRTS/c28/lib                             
+							-I${C2000WARE_DLIB_ROOT}/ccs/Release 
+							-ldriverlib.lib -lpto_abs2qep_f28004x.lib -lIQmath_fpu32.lib
+                            -lrts2800_fpu32_fast_supplement.lib -llibc.a"
+        />
+    
+    <pathVariable name="C2000WARE_DEVICE_SUPPORT_ROOT" path="../../../../../c2000ware/device_support/f28004x" scope="project" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../c2000ware/driverlib/f28004x/driverlib/" scope="project" />
+    <pathVariable name="C2000WARE_LIB_ROOT" path="../../../../../c2000ware/libraries" scope="project" />
+    <pathVariable name="SDK_ROOT" path="../../../../../" scope="project" />
+
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/targetConfigs/TMS320F280049C_LaunchPad.ccxml" targetDirectory="" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/source/f28004x_globalvariabledefs.c" targetDirectory="common" />
+
+    <file action="copy" path="C2000WARE_DEVICE_SUPPORT_ROOT/common/source/device.c" targetDirectory="device" />
+
+    <file action="link" path="C2000WARE_DLIB_ROOT/ccs/Release/driverlib.lib" targetDirectory="src" />
+    
+    <file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/f28004x/cmd/280049C_RAM_lnk.cmd" targetDirectory="cmd" applicableConfigurations="F28004x_RAM" />
+    <file action="link" path="C2000WARE_DEVICE_SUPPORT_ROOT/headers/cmd/f28004x_headers_nonbios.cmd" targetDirectory="common" />
+    
+    <file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/shared/source/abs2qep.c" targetDirectory="source" />
+    <file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/shared/source/pto_abs2qep_main.c" targetDirectory="source"/>  
+	<file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/shared/include/abs2qep.h" targetDirectory="include" />
+	<file action="link" path="SDK_ROOT/libraries/position_sensing/pto/include/pto_abs2qep.h" targetDirectory="library_include" />    
+    <file action="link" path="SDK_ROOT/solutions/boostxl_posmgr/f28004x/source/abs2qep_gpio.c" targetDirectory="source"/> 
+      
+  </project>
+</projectSpec>  
+    

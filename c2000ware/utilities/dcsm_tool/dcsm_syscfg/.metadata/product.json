@@ -1,0 +1,45 @@
+{
+    "name"       : "DCSM Tool",
+    "displayName": "DCSM Tool",
+    "version"    : "3.0.0",
+    "documentationPath": "../doc",
+
+    "includePaths":
+    [
+        "../../../.."
+    ],
+
+    "templates":
+    [
+        {
+            "name"      : "/utilities/dcsm_tool/dcsm_syscfg/source/templates/dcsm.asm.xdt",
+            "outputPath": "dcsm.asm"
+        },
+        {
+            "name"      : "/utilities/dcsm_tool/dcsm_syscfg/source/templates/dcsm.cmd.xdt",
+            "outputPath": "dcsm.cmd"
+        }
+    ],
+
+    "topModules":
+    [
+        {
+            "displayName": "DCSM Configuration",
+            "description": "Configure secure zones.",
+            "modules":
+            [
+                "/utilities/dcsm_tool/dcsm_syscfg/source/DCSM"
+            ]
+        }
+    ],
+
+    "devices":
+    [
+        "F2837xD",
+        "F2837xS",
+        "F2807x",
+        "F28004x",
+        "F28002x",
+        "F2838x"
+    ]
+}

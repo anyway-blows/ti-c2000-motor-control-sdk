@@ -1,0 +1,26 @@
+<projectSpec>
+  <project
+        name="flashapi_ex1_programming"
+        device="TMS320F280025C"
+        cgtVersion="20.2.1.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <configuration name="CPU1_RAM" compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT}/device -I${C2000WARE_DLIB_ROOT} -I${FlashAPI_INCLUDE_ROOT} -v28 -ml -mt --define=DEBUG --float_support=fpu32 --tmu_support=tmu0 --diag_warning=225  --diag_suppress=10063 --display_error_number" linkerBuildOptions="-I${FlashAPI_LIB_ROOT} --entry_point code_start --stack_size=0x100 --heap_size=0x200 --define RAM" />
+    <pathVariable name="C2000WARE_DLIB_ROOT" path="../../../../../driverlib/f28002x/driverlib/" scope="project" />
+    <pathVariable name="FlashAPI_INCLUDE_ROOT" path="../../../../../libraries/flash_api/f28002x/include/FlashAPI/" scope="project" />
+    <pathVariable name="FlashAPI_LIB_ROOT" path="../../../../../libraries/flash_api/f28002x/lib/" scope="project" />
+    <file action="copy" path="../../../../../libraries/flash_api/f28002x/lib/FlashAPI_ROM_F28002x_FPU32.lib" targetDirectory="" />
+    <file action="copy" path="../flash_programming_f28002x.h" targetDirectory="" />
+    <file action="copy" path="../../../../../device_support/f28002x/common/include/driverlib.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../device_support/f28002x/common/include/device.h" targetDirectory="device" />
+    <file action="copy" path="../../../../../device_support/f28002x/common/source/device.c" targetDirectory="device" />
+    <file action="copy" path="../../../../../device_support/f28002x/common/source/f28002x_codestartbranch.asm" targetDirectory="device" />
+    <file action="copy" path="../../../../../device_support/f28002x/common/targetConfigs/TMS320F280025C.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../../../../../device_support/f28002x/common/cmd/28002x_flash_api_lnk.cmd" targetDirectory="" />
+    <file action="copy" path="../../../../../driverlib/f28002x/driverlib/" targetDirectory="device" excludeFromBuild="True" />
+    <file action="copy" path="../../../../../driverlib/f28002x/driverlib/ccs/Debug/driverlib.lib" targetDirectory="" />
+    <file action="copy" path="../flashapi_ex1_programming.c" targetDirectory="" />
+  </project>
+</projectSpec>

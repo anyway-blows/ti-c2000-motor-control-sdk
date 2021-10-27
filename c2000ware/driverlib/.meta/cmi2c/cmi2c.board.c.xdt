@@ -1,0 +1,17 @@
+% var module = system.modules['/driverlib/cmi2c.js'];
+% let Common   = system.getScript("/driverlib/Common.js");
+% var nameOfModule = "cmi2c";
+% var nameOfPeripheral = module.peripheralName;
+void `nameOfPeripheral.replace("-","_")`_init(){
+%if (module != null)
+%{
+	% for(var i = 0; i < module.$instances.length; i++) {
+	    % var instance = module.$instances[i];
+	//`instance.$name` initialization
+	    
+		% let instancePinmux = instance[nameOfModule];
+		% let solution    = instancePinmux.$solution;
+		% let peripheral  = system.deviceData.peripherals[solution.peripheralName];
+	%}
+%}
+}
